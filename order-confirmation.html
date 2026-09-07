@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Order Confirmed | Mbogafreshi</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            background: #f7f8f5;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 19px;
+            top: 40px;
+            bottom: 40px;
+            width: 2px;
+            background: #e5e7eb;
+        }
+
+        .timeline-step {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body class="text-gray-800">
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header class="bg-white border-b sticky top-0 z-50">
+
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+
+        <a href="index.html" class="flex items-center gap-2">
+
+            <span class="text-2xl">🌱</span>
+
+            <div>
+                <h1 class="font-bold text-xl text-green-700">
+                    Mbogafreshi
+                </h1>
+
+                <p class="text-xs text-gray-500">
+                    Fresh groceries delivered
+                </p>
+            </div>
+
+        </a>
+
+        <a
+            href="products.html"
+            class="text-sm font-medium text-green-700 hover:text-green-800"
+        >
+            Continue Shopping
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<main class="max-w-4xl mx-auto px-4 py-10">
+
+
+    <!-- =====================================================
+         SUCCESS MESSAGE
+    ====================================================== -->
+
+    <section class="text-center mb-10">
+
+        <div
+            class="w-20 h-20 mx-auto rounded-full bg-green-100 flex items-center justify-center mb-5"
+        >
+
+            <div class="w-12 h-12 rounded-full bg-green-600 text-white flex items-center justify-center text-2xl">
+                ✓
+            </div>
+
+        </div>
+
+
+        <h2 class="text-3xl font-bold text-gray-900">
+            Order Confirmed!
+        </h2>
+
+
+        <p class="text-gray-500 mt-3 max-w-lg mx-auto">
+            Thank you for ordering from Mbogafreshi.
+            We have received your order and will now begin sourcing
+            your groceries.
+        </p>
+
+
+        <!-- ORDER NUMBER -->
+
+        <div class="inline-block mt-5 bg-white border rounded-xl px-6 py-3">
+
+            <p class="text-xs text-gray-500">
+                Order Number
+            </p>
+
+            <p
+                id="orderNumber"
+                class="font-bold text-green-700 text-lg"
+            >
+                Loading...
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         ORDER STATUS
+    ====================================================== -->
+
+    <section class="bg-white rounded-2xl shadow-sm p-6 md:p-8 mb-6">
+
+        <div class="flex items-center justify-between mb-8">
+
+            <div>
+
+                <h3 class="text-xl font-bold">
+                    Order Status
+                </h3>
+
+                <p class="text-sm text-gray-500 mt-1">
+                    We'll update your order as it moves through the process.
+                </p>
+
+            </div>
+
+            <span
+                id="statusBadge"
+                class="bg-green-100 text-green-700 px-3 py-1.5 rounded-full text-xs font-semibold"
+            >
+                CONFIRMED
+            </span>
+
+        </div>
+
+
+        <!-- TIMELINE -->
+
+        <div class="relative">
+
+            <div class="timeline-line"></div>
+
+
+            <!-- STEP 1 -->
+
+            <div class="timeline-step flex gap-4 mb-8">
+
+                <div
+                    class="status-circle w-10 h-10 rounded-full bg-green-600 text-white flex items-center justify-center shrink-0"
+                >
+                    ✓
+                </div>
+
+
+                <div>
+
+                    <h4 class="font-semibold text-gray-900">
+                        Order Confirmed
+                    </h4>
+
+                    <p class="text-sm text-gray-500 mt-1">
+                        Your order has been received.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- STEP 2 -->
+
+            <div class="timeline-step flex gap-4 mb-8">
+
+                <div
+                    class="status-circle w-10 h-10 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center shrink-0"
+                >
+                    2
+                </div>
+
+
+                <div>
+
+                    <h4 class="font-semibold text-gray-700">
+                        Sourcing Groceries
+                    </h4>
+
+                    <p class="text-sm text-gray-500 mt-1">
+                        We are getting your groceries from local markets.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- STEP 3 -->
+
+            <div class="timeline-step flex gap-4 mb-8">
+
+                <div
+                    class="status-circle w-10 h-10 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center shrink-0"
+                >
+                    3
+                </div>
+
+
+                <div>
+
+                    <h4 class="font-semibold text-gray-700">
+                        Rider Assigned
+                    </h4>
+
+                    <p class="text-sm text-gray-500 mt-1">
+                        A delivery rider will be assigned to your order.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- STEP 4 -->
+
+            <div class="timeline-step flex gap-4 mb-8">
+
+                <div
+                    class="status-circle w-10 h-10 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center shrink-0"
+                >
+                    4
+                </div>
+
+
+                <div>
+
+                    <h4 class="font-semibold text-gray-700">
+                        Out for Delivery
+                    </h4>
+
+                    <p class="text-sm text-gray-500 mt-1">
+                        Your groceries are on the way.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- STEP 5 -->
+
+            <div class="timeline-step flex gap-4">
+
+                <div
+                    class="status-circle w-10 h-10 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center shrink-0"
+                >
+                    5
+                </div>
+
+
+                <div>
+
+                    <h4 class="font-semibold text-gray-700">
+                        Delivered
+                    </h4>
+
+                    <p class="text-sm text-gray-500 mt-1">
+                        Your order has arrived.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         ORDER DETAILS
+    ====================================================== -->
+
+    <section class="grid md:grid-cols-2 gap-6 mb-6">
+
+
+        <!-- CUSTOMER DETAILS -->
+
+        <div class="bg-white rounded-2xl shadow-sm p-6">
+
+            <h3 class="font-bold text-lg mb-5">
+                Delivery Details
+            </h3>
+
+
+            <div class="space-y-4 text-sm">
+
+                <div>
+
+                    <p class="text-gray-400 text-xs">
+                        Customer
+                    </p>
+
+                    <p
+                        id="customerName"
+                        class="font-medium mt-1"
+                    >
+                        -
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <p class="text-gray-400 text-xs">
+                        Phone
+                    </p>
+
+                    <p
+                        id="customerPhone"
+                        class="font-medium mt-1"
+                    >
+                        -
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <p class="text-gray-400 text-xs">
+                        Area
+                    </p>
+
+                    <p
+                        id="customerArea"
+                        class="font-medium mt-1"
+                    >
+                        -
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <p class="text-gray-400 text-xs">
+                        Location
+                    </p>
+
+                    <p
+                        id="customerLocation"
+                        class="font-medium mt-1"
+                    >
+                        -
+                    </p>
+
+                </div>
+
+
+                <div id="landmarkContainer">
+
+                    <p class="text-gray-400 text-xs">
+                        Landmark
+                    </p>
+
+                    <p
+                        id="customerLandmark"
+                        class="font-medium mt-1"
+                    >
+                        -
+                    </p>
+
+                </div>
+
+
+                <div id="instructionsContainer">
+
+                    <p class="text-gray-400 text-xs">
+                        Delivery Instructions
+                    </p>
+
+                    <p
+                        id="customerInstructions"
+                        class="font-medium mt-1"
+                    >
+                        -
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PAYMENT DETAILS -->
+
+        <div class="bg-white rounded-2xl shadow-sm p-6">
+
+            <h3 class="font-bold text-lg mb-5">
+                Payment Summary
+            </h3>
+
+
+            <div class="space-y-4">
+
+
+                <div class="flex justify-between text-sm">
+
+                    <span class="text-gray-500">
+                        Groceries
+                    </span>
+
+                    <span
+                        id="grocerySubtotal"
+                        class="font-medium"
+                    >
+                        KSh 0
+                    </span>
+
+                </div>
+
+
+                <div class="flex justify-between text-sm">
+
+                    <span class="text-gray-500">
+                        Delivery
+                    </span>
+
+                    <span
+                        id="deliveryFee"
+                        class="font-medium"
+                    >
+                        KSh 0
+                    </span>
+
+                </div>
+
+
+                <div class="border-t pt-4 flex justify-between">
+
+                    <span class="font-bold">
+                        Total
+                    </span>
+
+                    <span
+                        id="orderTotal"
+                        class="font-bold text-green-700"
+                    >
+                        KSh 0
+                    </span>
+
+                </div>
+
+
+                <div class="border-t pt-4">
+
+                    <p class="text-xs text-gray-400">
+                        Grocery Payment
+                    </p>
+
+                    <p
+                        id="paymentMethod"
+                        class="font-semibold mt-1"
+                    >
+                        -
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <p class="text-xs text-gray-400">
+                        Delivery Fee
+                    </p>
+
+                    <p class="text-sm font-semibold text-green-700 mt-1">
+                        Paid before dispatch
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         WHAT HAPPENS NEXT
+    ====================================================== -->
+
+    <section class="bg-green-50 border border-green-100 rounded-2xl p-6 mb-6">
+
+        <h3 class="font-bold text-green-900 text-lg">
+            What happens next?
+        </h3>
+
+
+        <div class="mt-4 space-y-3 text-sm text-green-800">
+
+            <p>
+                <strong>1.</strong>
+                We source your groceries from local markets.
+            </p>
+
+            <p>
+                <strong>2.</strong>
+                Your groceries are checked and prepared.
+            </p>
+
+            <p>
+                <strong>3.</strong>
+                We assign an available delivery rider.
+            </p>
+
+            <p>
+                <strong>4.</strong>
+                Your rider picks up the package and delivers it to you.
+            </p>
+
+            <p>
+                <strong>5.</strong>
+                If you selected pay-on-delivery, you pay the grocery amount
+                when your order arrives.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         BUTTONS
+    ====================================================== -->
+
+    <div class="flex flex-col sm:flex-row gap-3">
+
+        <a
+            href="products.html"
+            class="flex-1 text-center bg-green-600 hover:bg-green-700 text-white font-semibold py-3.5 rounded-xl transition"
+        >
+            Continue Shopping
+        </a>
+
+
+        <a
+            href="orders.html"
+            class="flex-1 text-center bg-white border border-gray-200 hover:border-green-500 text-gray-700 font-semibold py-3.5 rounded-xl transition"
+        >
+            View My Orders
+        </a>
+
+    </div>
+
+</main>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+    /*
+    ============================================================
+    LOAD LATEST ORDER
+    ============================================================
+    */
+
+    const order = JSON.parse(
+        localStorage.getItem(
+            "mbogafreshiLatestOrder"
+        )
+    );
+
+
+    /*
+    ============================================================
+    CHECK WHETHER ORDER EXISTS
+    ============================================================
+    */
+
+    if (!order) {
+
+        document.querySelector("main").innerHTML = `
+
+            <div class="text-center py-20">
+
+                <div class="text-5xl mb-5">
+                    🛒
+                </div>
+
+                <h2 class="text-2xl font-bold">
+                    No order found
+                </h2>
+
+                <p class="text-gray-500 mt-2">
+                    We couldn't find a recent Mbogafreshi order.
+                </p>
+
+                <a
+                    href="products.html"
+                    class="inline-block mt-6 bg-green-600 text-white px-6 py-3 rounded-xl font-semibold"
+                >
+                    Start Shopping
+                </a>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /*
+    ============================================================
+    FORMAT MONEY
+    ============================================================
+    */
+
+    function money(amount) {
+
+        return `KSh ${Number(amount).toLocaleString()}`;
+
+    }
+
+
+    /*
+    ============================================================
+    DISPLAY ORDER NUMBER
+    ============================================================
+    */
+
+    document.getElementById(
+        "orderNumber"
+    ).textContent =
+        order.orderNumber;
+
+
+    /*
+    ============================================================
+    CUSTOMER INFORMATION
+    ============================================================
+    */
+
+    document.getElementById(
+        "customerName"
+    ).textContent =
+        order.customer.name;
+
+
+    document.getElementById(
+        "customerPhone"
+    ).textContent =
+        order.customer.phone;
+
+
+    document.getElementById(
+        "customerArea"
+    ).textContent =
+        order.customer.area;
+
+
+    document.getElementById(
+        "customerLocation"
+    ).textContent =
+        order.customer.location;
+
+
+    /*
+    ============================================================
+    OPTIONAL LANDMARK
+    ============================================================
+    */
+
+    if (order.customer.landmark) {
+
+        document.getElementById(
+            "customerLandmark"
+        ).textContent =
+            order.customer.landmark;
+
+    } else {
+
+        document.getElementById(
+            "landmarkContainer"
+        ).style.display = "none";
+
+    }
+
+
+    /*
+    ============================================================
+    OPTIONAL INSTRUCTIONS
+    ============================================================
+    */
+
+    if (order.customer.instructions) {
+
+        document.getElementById(
+            "customerInstructions"
+        ).textContent =
+            order.customer.instructions;
+
+    } else {
+
+        document.getElementById(
+            "instructionsContainer"
+        ).style.display = "none";
+
+    }
+
+
+    /*
+    ============================================================
+    PAYMENT INFORMATION
+    ============================================================
+    */
+
+    document.getElementById(
+        "grocerySubtotal"
+    ).textContent =
+        money(order.grocerySubtotal);
+
+
+    document.getElementById(
+        "deliveryFee"
+    ).textContent =
+        money(order.deliveryFee);
+
+
+    document.getElementById(
+        "orderTotal"
+    ).textContent =
+        money(order.total);
+
+
+    /*
+    ============================================================
+    PAYMENT METHOD
+    ============================================================
+    */
+
+    if (
+        order.groceryPaymentMethod === "prepaid"
+    ) {
+
+        document.getElementById(
+            "paymentMethod"
+        ).textContent =
+            "Groceries paid in advance";
+
+    } else {
+
+        document.getElementById(
+            "paymentMethod"
+        ).textContent =
+            "Pay groceries on delivery";
+
+    }
+
+
+    /*
+    ============================================================
+    STATUS
+    ============================================================
+    */
+
+    document.getElementById(
+        "statusBadge"
+    ).textContent =
+        order.status.replace(
+            "_",
+            " "
+        );
+
+
+</script>
+
+</body>
+</html>

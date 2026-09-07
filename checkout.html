@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Checkout | Mbogafreshi</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            background: #f7f8f5;
+        }
+
+        .input-field {
+            width: 100%;
+            border: 1px solid #d1d5db;
+            border-radius: 12px;
+            padding: 12px 14px;
+            outline: none;
+            transition: 0.2s;
+            background: white;
+        }
+
+        .input-field:focus {
+            border-color: #16a34a;
+            box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
+        }
+
+        .payment-option {
+            border: 2px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .payment-option:hover {
+            border-color: #86efac;
+        }
+
+        .payment-option.selected {
+            border-color: #16a34a;
+            background: #f0fdf4;
+        }
+    </style>
+</head>
+
+<body class="text-gray-800">
+
+<!-- ================= HEADER ================= -->
+
+<header class="bg-white border-b sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+
+        <a href="index.html" class="flex items-center gap-2">
+            <span class="text-2xl">🌱</span>
+
+            <div>
+                <h1 class="font-bold text-xl text-green-700">
+                    Mbogafreshi
+                </h1>
+
+                <p class="text-xs text-gray-500">
+                    Fresh groceries delivered
+                </p>
+            </div>
+        </a>
+
+        <a href="cart.html"
+           class="text-sm font-medium text-gray-600 hover:text-green-700">
+            ← Back to Cart
+        </a>
+
+    </div>
+</header>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="max-w-6xl mx-auto px-4 py-8">
+
+    <!-- Page heading -->
+
+    <div class="mb-8">
+
+        <h2 class="text-3xl font-bold text-gray-900">
+            Checkout
+        </h2>
+
+        <p class="text-gray-500 mt-2">
+            Tell us where you'd like your groceries delivered.
+        </p>
+
+    </div>
+
+
+    <!-- ================= DELIVERY NOTICE ================= -->
+
+    <div class="bg-green-50 border border-green-200 rounded-2xl p-5 mb-8">
+
+        <div class="flex gap-3">
+
+            <div class="text-xl">
+                🚚
+            </div>
+
+            <div>
+
+                <h3 class="font-semibold text-green-800">
+                    Delivery fee must be paid before dispatch
+                </h3>
+
+                <p class="text-sm text-green-700 mt-1">
+                    Your groceries are sourced after you place your order.
+                    The delivery fee must be paid before we begin dispatching
+                    your order to the rider.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= GRID ================= -->
+
+    <div class="grid lg:grid-cols-3 gap-8">
+
+        <!-- ================= LEFT SIDE ================= -->
+
+        <section class="lg:col-span-2 space-y-6">
+
+
+            <!-- DELIVERY DETAILS -->
+
+            <div class="bg-white rounded-2xl shadow-sm p-6">
+
+                <h3 class="text-xl font-bold mb-6">
+                    Delivery Details
+                </h3>
+
+
+                <form id="checkoutForm" class="space-y-5">
+
+
+                    <!-- NAME -->
+
+                    <div>
+
+                        <label class="block text-sm font-medium mb-2">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="customerName"
+                            class="input-field"
+                            placeholder="Enter your full name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- PHONE -->
+
+                    <div>
+
+                        <label class="block text-sm font-medium mb-2">
+                            Phone Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="customerPhone"
+                            class="input-field"
+                            placeholder="e.g. 0712 345 678"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- DELIVERY AREA -->
+
+                    <div>
+
+                        <label class="block text-sm font-medium mb-2">
+                            Delivery Area
+                        </label>
+
+                        <select
+                            id="deliveryArea"
+                            class="input-field"
+                            required
+                        >
+
+                            <option value="">
+                                Select your area
+                            </option>
+
+                            <!--
+                                DEMO DELIVERY FEES
+
+                                These are sample prices.
+                                Change them later.
+                            -->
+
+                            <option value="Malindi" data-fee="100">
+                                Malindi — KSh 100
+                            </option>
+
+                            <option value="Watamu" data-fee="200">
+                                Watamu — KSh 200
+                            </option>
+
+                            <option value="Gede" data-fee="250">
+                                Gede — KSh 250
+                            </option>
+
+                            <option value="Mida" data-fee="250">
+                                Mida — KSh 250
+                            </option>
+
+                        </select>
+
+                        <p class="text-xs text-gray-500 mt-2">
+                            Delivery charges shown are sample/demo prices.
+                        </p>
+
+                    </div>
+
+
+                    <!-- SPECIFIC LOCATION -->
+
+                    <div>
+
+                        <label class="block text-sm font-medium mb-2">
+                            Specific Location
+                        </label>
+
+                        <input
+                            type="text"
+                            id="customerLocation"
+                            class="input-field"
+                            placeholder="Estate, street, building, etc."
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- LANDMARK -->
+
+                    <div>
+
+                        <label class="block text-sm font-medium mb-2">
+                            Nearby Landmark
+                        </label>
+
+                        <input
+                            type="text"
+                            id="landmark"
+                            class="input-field"
+                            placeholder="e.g. Near the market"
+                        >
+
+                    </div>
+
+
+                    <!-- DELIVERY INSTRUCTIONS -->
+
+                    <div>
+
+                        <label class="block text-sm font-medium mb-2">
+                            Delivery Instructions
+                            <span class="text-gray-400">
+                                (Optional)
+                            </span>
+                        </label>
+
+                        <textarea
+                            id="deliveryInstructions"
+                            class="input-field"
+                            rows="3"
+                            placeholder="Any instructions for the rider?"
+                        ></textarea>
+
+                    </div>
+
+
+                </form>
+
+            </div>
+
+
+            <!-- ================= PAYMENT ================= -->
+
+            <div class="bg-white rounded-2xl shadow-sm p-6">
+
+                <h3 class="text-xl font-bold mb-2">
+                    Grocery Payment
+                </h3>
+
+                <p class="text-sm text-gray-500 mb-6">
+                    Choose how you want to pay for your groceries.
+                </p>
+
+
+                <div class="space-y-4">
+
+
+                    <!-- PAY NOW -->
+
+                    <label
+                        class="payment-option block"
+                        id="payNowOption"
+                    >
+
+                        <div class="flex items-start gap-3">
+
+                            <input
+                                type="radio"
+                                name="groceryPayment"
+                                value="prepaid"
+                                class="mt-1"
+                            >
+
+                            <div>
+
+                                <h4 class="font-semibold">
+                                    Pay groceries now
+                                </h4>
+
+                                <p class="text-sm text-gray-500 mt-1">
+                                    Pay the grocery amount before delivery.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </label>
+
+
+                    <!-- PAY ON DELIVERY -->
+
+                    <label
+                        class="payment-option block"
+                        id="codOption"
+                    >
+
+                        <div class="flex items-start gap-3">
+
+                            <input
+                                type="radio"
+                                name="groceryPayment"
+                                value="cod"
+                                class="mt-1"
+                                checked
+                            >
+
+                            <div>
+
+                                <h4 class="font-semibold">
+                                    Pay groceries on delivery
+                                </h4>
+
+                                <p class="text-sm text-gray-500 mt-1">
+                                    Pay the grocery amount when your order arrives.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </label>
+
+
+                </div>
+
+
+                <!-- DELIVERY FEE MESSAGE -->
+
+                <div class="mt-6 bg-yellow-50 border border-yellow-200 rounded-xl p-4">
+
+                    <p class="text-sm text-yellow-800">
+
+                        <strong>Important:</strong>
+                        Regardless of your grocery payment choice,
+                        the delivery fee must be paid before dispatch.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= ORDER SUMMARY ================= -->
+
+        <aside>
+
+            <div class="bg-white rounded-2xl shadow-sm p-6 lg:sticky lg:top-24">
+
+                <h3 class="text-xl font-bold mb-6">
+                    Order Summary
+                </h3>
+
+
+                <!-- ITEMS -->
+
+                <div id="orderItems" class="space-y-3 mb-6">
+                    <!-- Products inserted by JavaScript -->
+                </div>
+
+
+                <div class="border-t pt-5 space-y-3">
+
+                    <!-- GROCERY SUBTOTAL -->
+
+                    <div class="flex justify-between text-sm">
+
+                        <span class="text-gray-500">
+                            Groceries
+                        </span>
+
+                        <span id="grocerySubtotal" class="font-medium">
+                            KSh 0
+                        </span>
+
+                    </div>
+
+
+                    <!-- DELIVERY -->
+
+                    <div class="flex justify-between text-sm">
+
+                        <span class="text-gray-500">
+                            Delivery
+                        </span>
+
+                        <span id="deliveryFee" class="font-medium">
+                            Select area
+                        </span>
+
+                    </div>
+
+
+                    <!-- TOTAL -->
+
+                    <div class="border-t pt-4 flex justify-between">
+
+                        <span class="font-bold text-lg">
+                            Total
+                        </span>
+
+                        <span
+                            id="orderTotal"
+                            class="font-bold text-lg text-green-700"
+                        >
+                            KSh 0
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PLACE ORDER -->
+
+                <button
+                    type="button"
+                    onclick="placeOrder()"
+                    class="w-full mt-6 bg-green-600 hover:bg-green-700 text-white font-semibold py-3.5 rounded-xl transition"
+                >
+
+                    Pay Delivery Fee & Place Order
+
+                </button>
+
+
+                <p class="text-xs text-gray-400 text-center mt-4">
+                    Payment simulation for now. M-Pesa integration will be added later.
+                </p>
+
+            </div>
+
+        </aside>
+
+    </div>
+
+</main>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+    /*
+    ============================================================
+    MBogafreshi CHECKOUT
+    ============================================================
+    */
+
+
+    // ----------------------------------------------------------
+    // CART
+    // ----------------------------------------------------------
+
+    let cart = JSON.parse(
+        localStorage.getItem("mbogafreshiCart")
+    ) || [];
+
+
+    // ----------------------------------------------------------
+    // SAMPLE PRODUCT DATA
+    // ----------------------------------------------------------
+
+    /*
+        This currently matches the products used
+        on products.html and product.html.
+
+        Later we will move this into a shared
+        JavaScript file or database.
+    */
+
+    const products = [
+
+        {
+            id: 1,
+            name: "Fresh Tomatoes",
+            price: 150,
+            unit: "kg"
+        },
+
+        {
+            id: 2,
+            name: "Red Onions",
+            price: 120,
+            unit: "kg"
+        },
+
+        {
+            id: 3,
+            name: "Potatoes",
+            price: 150,
+            unit: "kg"
+        },
+
+        {
+            id: 4,
+            name: "Fresh Bananas",
+            price: 100,
+            unit: "bunch"
+        },
+
+        {
+            id: 5,
+            name: "Carrots",
+            price: 100,
+            unit: "kg"
+        },
+
+        {
+            id: 6,
+            name: "Cabbage",
+            price: 80,
+            unit: "piece"
+        },
+
+        {
+            id: 7,
+            name: "Mangoes",
+            price: 80,
+            unit: "piece"
+        },
+
+        {
+            id: 8,
+            name: "Avocado",
+            price: 50,
+            unit: "piece"
+        },
+
+        {
+            id: 9,
+            name: "Garlic",
+            price: 300,
+            unit: "kg"
+        },
+
+        {
+            id: 10,
+            name: "Ginger",
+            price: 250,
+            unit: "kg"
+        },
+
+        {
+            id: 11,
+            name: "Coriander",
+            price: 30,
+            unit: "bunch"
+        },
+
+        {
+            id: 12,
+            name: "Sweet Potatoes",
+            price: 120,
+            unit: "kg"
+        }
+
+    ];
+
+
+    // ----------------------------------------------------------
+    // CALCULATE GROCERY SUBTOTAL
+    // ----------------------------------------------------------
+
+    function calculateSubtotal() {
+
+        let subtotal = 0;
+
+        cart.forEach(item => {
+
+            const product = products.find(
+                p => p.id === item.id
+            );
+
+            if (!product) return;
+
+            subtotal += product.price * item.quantity;
+
+        });
+
+        return subtotal;
+
+    }
+
+
+    // ----------------------------------------------------------
+    // DISPLAY ORDER ITEMS
+    // ----------------------------------------------------------
+
+    function displayOrderItems() {
+
+        const container =
+            document.getElementById("orderItems");
+
+        container.innerHTML = "";
+
+
+        if (cart.length === 0) {
+
+            container.innerHTML = `
+                <div class="text-center py-4">
+
+                    <p class="text-gray-500">
+                        Your cart is empty.
+                    </p>
+
+                    <a
+                        href="products.html"
+                        class="text-green-600 font-medium text-sm"
+                    >
+                        Start shopping
+                    </a>
+
+                </div>
+            `;
+
+            return;
+
+        }
+
+
+        cart.forEach(item => {
+
+            const product = products.find(
+                p => p.id === item.id
+            );
+
+            if (!product) return;
+
+
+            const itemTotal =
+                product.price * item.quantity;
+
+
+            const row = document.createElement("div");
+
+            row.className =
+                "flex justify-between items-start text-sm";
+
+
+            row.innerHTML = `
+
+                <div>
+
+                    <p class="font-medium">
+                        ${product.name}
+                    </p>
+
+                    <p class="text-gray-400">
+                        ${item.quantity} × KSh ${product.price}
+                    </p>
+
+                </div>
+
+                <span class="font-medium">
+                    KSh ${itemTotal.toLocaleString()}
+                </span>
+
+            `;
+
+
+            container.appendChild(row);
+
+        });
+
+    }
+
+
+    // ----------------------------------------------------------
+    // GET DELIVERY FEE
+    // ----------------------------------------------------------
+
+    function getDeliveryFee() {
+
+        const select =
+            document.getElementById("deliveryArea");
+
+        const selectedOption =
+            select.options[select.selectedIndex];
+
+
+        if (
+            !selectedOption ||
+            !selectedOption.dataset.fee
+        ) {
+
+            return 0;
+
+        }
+
+
+        return Number(
+            selectedOption.dataset.fee
+        );
+
+    }
+
+
+    // ----------------------------------------------------------
+    // UPDATE SUMMARY
+    // ----------------------------------------------------------
+
+    function updateSummary() {
+
+        const subtotal =
+            calculateSubtotal();
+
+        const deliveryFee =
+            getDeliveryFee();
+
+        const total =
+            subtotal + deliveryFee;
+
+
+        document.getElementById(
+            "grocerySubtotal"
+        ).textContent =
+            `KSh ${subtotal.toLocaleString()}`;
+
+
+        if (deliveryFee > 0) {
+
+            document.getElementById(
+                "deliveryFee"
+            ).textContent =
+                `KSh ${deliveryFee.toLocaleString()}`;
+
+        } else {
+
+            document.getElementById(
+                "deliveryFee"
+            ).textContent =
+                "Select area";
+
+        }
+
+
+        document.getElementById(
+            "orderTotal"
+        ).textContent =
+            `KSh ${total.toLocaleString()}`;
+
+    }
+
+
+    // ----------------------------------------------------------
+    // DELIVERY AREA CHANGE
+    // ----------------------------------------------------------
+
+    document
+        .getElementById("deliveryArea")
+        .addEventListener(
+            "change",
+            updateSummary
+        );
+
+
+    // ----------------------------------------------------------
+    // PAYMENT OPTION UI
+    // ----------------------------------------------------------
+
+    const paymentOptions =
+        document.querySelectorAll(
+            'input[name="groceryPayment"]'
+        );
+
+
+    paymentOptions.forEach(input => {
+
+        input.addEventListener(
+            "change",
+            updatePaymentUI
+        );
+
+    });
+
+
+    function updatePaymentUI() {
+
+        document
+            .getElementById("payNowOption")
+            .classList.remove("selected");
+
+        document
+            .getElementById("codOption")
+            .classList.remove("selected");
+
+
+        const selected =
+            document.querySelector(
+                'input[name="groceryPayment"]:checked'
+            );
+
+
+        if (!selected) return;
+
+
+        if (selected.value === "prepaid") {
+
+            document
+                .getElementById("payNowOption")
+                .classList.add("selected");
+
+        }
+
+
+        if (selected.value === "cod") {
+
+            document
+                .getElementById("codOption")
+                .classList.add("selected");
+
+        }
+
+    }
+
+
+    // ----------------------------------------------------------
+    // PLACE ORDER
+    // ----------------------------------------------------------
+
+    function placeOrder() {
+
+
+        // Check cart
+
+        if (cart.length === 0) {
+
+            alert(
+                "Your cart is empty. Please add groceries first."
+            );
+
+            window.location.href =
+                "products.html";
+
+            return;
+
+        }
+
+
+        // Validate form
+
+        const form =
+            document.getElementById(
+                "checkoutForm"
+            );
+
+
+        if (!form.checkValidity()) {
+
+            form.reportValidity();
+
+            return;
+
+        }
+
+
+        // Delivery area
+
+        const area =
+            document.getElementById(
+                "deliveryArea"
+            ).value;
+
+
+        if (!area) {
+
+            alert(
+                "Please select your delivery area."
+            );
+
+            return;
+
+        }
+
+
+        // Payment method
+
+        const paymentMethod =
+            document.querySelector(
+                'input[name="groceryPayment"]:checked'
+            );
+
+
+        if (!paymentMethod) {
+
+            alert(
+                "Please select a grocery payment method."
+            );
+
+            return;
+
+        }
+
+
+        // Calculate money
+
+        const grocerySubtotal =
+            calculateSubtotal();
+
+        const deliveryFee =
+            getDeliveryFee();
+
+        const total =
+            grocerySubtotal + deliveryFee;
+
+
+        // ------------------------------------------------------
+        // CREATE ORDER NUMBER
+        // ------------------------------------------------------
+
+        const orderNumber =
+            "MBG-" +
+            Date.now()
+                .toString()
+                .slice(-6);
+
+
+        // ------------------------------------------------------
+        // CREATE ORDER OBJECT
+        // ------------------------------------------------------
+
+        const order = {
+
+            orderNumber: orderNumber,
+
+
+            customer: {
+
+                name:
+                    document.getElementById(
+                        "customerName"
+                    ).value.trim(),
+
+                phone:
+                    document.getElementById(
+                        "customerPhone"
+                    ).value.trim(),
+
+                area:
+                    area,
+
+                location:
+                    document.getElementById(
+                        "customerLocation"
+                    ).value.trim(),
+
+                landmark:
+                    document.getElementById(
+                        "landmark"
+                    ).value.trim(),
+
+                instructions:
+                    document.getElementById(
+                        "deliveryInstructions"
+                    ).value.trim()
+
+            },
+
+
+            items: cart,
+
+
+            grocerySubtotal:
+                grocerySubtotal,
+
+
+            deliveryFee:
+                deliveryFee,
+
+
+            total:
+                total,
+
+
+            groceryPaymentMethod:
+                paymentMethod.value,
+
+
+            deliveryFeePaid:
+                true,
+
+
+            status:
+                "CONFIRMED",
+
+
+            createdAt:
+                new Date().toISOString()
+
+        };
+
+
+        // ------------------------------------------------------
+        // SAVE ORDER
+        // ------------------------------------------------------
+
+        localStorage.setItem(
+            "mbogafreshiLatestOrder",
+            JSON.stringify(order)
+        );
+
+
+        // Save to order history
+
+        let orders =
+            JSON.parse(
+                localStorage.getItem(
+                    "mbogafreshiOrders"
+                )
+            ) || [];
+
+
+        orders.push(order);
+
+
+        localStorage.setItem(
+            "mbogafreshiOrders",
+            JSON.stringify(orders)
+        );
+
+
+        // ------------------------------------------------------
+        // CLEAR CART
+        // ------------------------------------------------------
+
+        localStorage.removeItem(
+            "mbogafreshiCart"
+        );
+
+
+        // ------------------------------------------------------
+        // GO TO CONFIRMATION
+        // ------------------------------------------------------
+
+        window.location.href =
+            "order-confirmation.html";
+
+    }
+
+
+    // ----------------------------------------------------------
+    // INITIAL LOAD
+    // ----------------------------------------------------------
+
+    displayOrderItems();
+
+    updateSummary();
+
+    updatePaymentUI();
+
+</script>
+
+</body>
+</html>

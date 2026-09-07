@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mbogafreshi | Fresh Groceries Delivered</title>
+
+    <meta name="description"
+          content="Mbogafreshi delivers fresh vegetables, fruits and groceries to your doorstep around Malindi and Watamu.">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#16a34a',
+                        darkgreen: '#166534',
+                        lightgreen: '#f0fdf4'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm">
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="flex items-center justify-between h-16">
+
+                <!-- LOGO -->
+                <a href="index.html" class="flex items-center gap-2">
+
+                    <div class="w-10 h-10 bg-green-600 rounded-xl flex items-center justify-center text-white text-xl">
+                        🌱
+                    </div>
+
+                    <div>
+                        <h1 class="font-bold text-xl text-green-700 leading-none">
+                            Mbogafreshi
+                        </h1>
+
+                        <p class="text-[10px] text-gray-500">
+                            Fresh. Local. Delivered.
+                        </p>
+                    </div>
+
+                </a>
+
+
+                <!-- DESKTOP NAVIGATION -->
+                <nav class="hidden md:flex items-center gap-7">
+
+                    <a href="index.html"
+                       class="text-green-600 font-semibold">
+                        Home
+                    </a>
+
+                    <a href="products.html"
+                       class="text-gray-600 hover:text-green-600 transition">
+                        Shop
+                    </a>
+
+                    <a href="#how-it-works"
+                       class="text-gray-600 hover:text-green-600 transition">
+                        How It Works
+                    </a>
+
+                    <a href="#delivery"
+                       class="text-gray-600 hover:text-green-600 transition">
+                        Delivery
+                    </a>
+
+                </nav>
+
+
+                <!-- HEADER ACTIONS -->
+                <div class="flex items-center gap-3">
+
+                    <!-- Search -->
+                    <button
+                        onclick="openSearch()"
+                        class="w-10 h-10 rounded-full bg-gray-100 hover:bg-green-50 flex items-center justify-center transition">
+
+                        🔍
+
+                    </button>
+
+
+                    <!-- Cart -->
+                    <a href="cart.html"
+                       class="relative w-10 h-10 rounded-full bg-gray-100 hover:bg-green-50 flex items-center justify-center transition">
+
+                        🛒
+
+                        <span id="cart-count"
+                              class="absolute -top-1 -right-1 bg-green-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+
+                            0
+
+                        </span>
+
+                    </a>
+
+
+                    <!-- Mobile menu -->
+                    <button
+                        onclick="toggleMenu()"
+                        class="md:hidden w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
+
+                        ☰
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- MOBILE MENU -->
+        <div id="mobile-menu"
+             class="hidden md:hidden border-t bg-white">
+
+            <div class="px-5 py-4 space-y-4">
+
+                <a href="index.html"
+                   class="block text-green-600 font-semibold">
+                    Home
+                </a>
+
+                <a href="products.html"
+                   class="block text-gray-700">
+                    Shop
+                </a>
+
+                <a href="#how-it-works"
+                   class="block text-gray-700">
+                    How It Works
+                </a>
+
+                <a href="#delivery"
+                   class="block text-gray-700">
+                    Delivery
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================
+         SEARCH OVERLAY
+    ========================== -->
+
+    <div id="search-overlay"
+         class="hidden fixed inset-0 z-[100] bg-black/50 px-4 pt-24">
+
+        <div class="max-w-2xl mx-auto bg-white rounded-2xl p-5 shadow-xl">
+
+            <div class="flex items-center gap-3">
+
+                <input
+                    id="search-input"
+                    type="text"
+                    placeholder="Search for tomatoes, onions, fruits..."
+                    class="flex-1 border rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-green-500">
+
+                <button
+                    onclick="closeSearch()"
+                    class="w-10 h-10 rounded-full bg-gray-100">
+
+                    ✕
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         HERO SECTION
+    ========================== -->
+
+    <section class="relative min-h-[650px] flex items-center pt-16 overflow-hidden">
+
+        <!-- Background -->
+        <div class="absolute inset-0">
+
+            <img
+                src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1800&q=80"
+                alt="Fresh vegetables"
+                class="w-full h-full object-cover">
+
+            <div class="absolute inset-0 bg-black/50"></div>
+
+        </div>
+
+
+        <!-- Hero Content -->
+        <div class="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 w-full">
+
+            <div class="max-w-2xl text-white">
+
+                <div class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md px-4 py-2 rounded-full text-sm mb-6">
+
+                    🌿 Fresh produce from local markets
+
+                </div>
+
+
+                <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+
+                    Fresh groceries,
+                    <span class="text-green-400">
+                        delivered to you.
+                    </span>
+
+                </h2>
+
+
+                <p class="mt-6 text-lg text-gray-200 max-w-xl">
+
+                    Order your vegetables, fruits and everyday groceries online.
+                    We source them fresh from local markets and deliver them
+                    straight to your doorstep.
+
+                </p>
+
+
+                <div class="flex flex-col sm:flex-row gap-4 mt-8">
+
+                    <a href="products.html"
+                       class="bg-green-600 hover:bg-green-700 text-white font-semibold px-7 py-4 rounded-xl text-center transition shadow-lg">
+
+                        Start Shopping
+
+                    </a>
+
+
+                    <a href="#how-it-works"
+                       class="bg-white/15 hover:bg-white/25 backdrop-blur-md border border-white/30 text-white font-semibold px-7 py-4 rounded-xl text-center transition">
+
+                        How It Works
+
+                    </a>
+
+                </div>
+
+
+                <!-- Trust points -->
+                <div class="flex flex-wrap gap-5 mt-8 text-sm text-gray-200">
+
+                    <span>✓ Locally sourced</span>
+
+                    <span>✓ Convenient ordering</span>
+
+                    <span>✓ Doorstep delivery</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         SEARCH / QUICK SHOP
+    ========================== -->
+
+    <section class="relative -mt-10 z-20 px-4">
+
+        <div class="max-w-5xl mx-auto bg-white rounded-2xl shadow-xl p-4">
+
+            <div class="flex items-center gap-3">
+
+                <span class="text-xl">
+                    🔍
+                </span>
+
+                <input
+                    type="text"
+                    placeholder="What are you looking for?"
+                    class="flex-1 outline-none text-gray-700">
+
+                <a href="products.html"
+                   class="hidden sm:block bg-green-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-green-700">
+
+                    Search
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         CATEGORIES
+    ========================== -->
+
+    <section class="py-16">
+
+        <div class="max-w-7xl mx-auto px-5">
+
+            <div class="flex items-end justify-between mb-8">
+
+                <div>
+
+                    <p class="text-green-600 font-semibold text-sm uppercase tracking-wide">
+                        Shop by category
+                    </p>
+
+                    <h2 class="text-3xl font-bold mt-2">
+                        What are you looking for?
+                    </h2>
+
+                </div>
+
+                <a href="products.html"
+                   class="hidden sm:block text-green-600 font-semibold">
+                    View all →
+                </a>
+
+            </div>
+
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+
+                <!-- Category -->
+                <a href="products.html?category=vegetables"
+                   class="group bg-white rounded-2xl p-5 shadow-sm hover:shadow-lg transition text-center">
+
+                    <div class="text-5xl mb-4">
+                        🥬
+                    </div>
+
+                    <h3 class="font-semibold">
+                        Vegetables
+                    </h3>
+
+                    <p class="text-xs text-gray-500 mt-1">
+                        Fresh greens
+                    </p>
+
+                </a>
+
+
+                <a href="products.html?category=fruits"
+                   class="group bg-white rounded-2xl p-5 shadow-sm hover:shadow-lg transition text-center">
+
+                    <div class="text-5xl mb-4">
+                        🍌
+                    </div>
+
+                    <h3 class="font-semibold">
+                        Fruits
+                    </h3>
+
+                    <p class="text-xs text-gray-500 mt-1">
+                        Fresh & juicy
+                    </p>
+
+                </a>
+
+
+                <a href="products.html?category=tubers"
+                   class="group bg-white rounded-2xl p-5 shadow-sm hover:shadow-lg transition text-center">
+
+                    <div class="text-5xl mb-4">
+                        🥔
+                    </div>
+
+                    <h3 class="font-semibold">
+                        Tubers
+                    </h3>
+
+                    <p class="text-xs text-gray-500 mt-1">
+                        Potatoes & more
+                    </p>
+
+                </a>
+
+
+                <a href="products.html?category=herbs"
+                   class="group bg-white rounded-2xl p-5 shadow-sm hover:shadow-lg transition text-center">
+
+                    <div class="text-5xl mb-4">
+                        🌿
+                    </div>
+
+                    <h3 class="font-semibold">
+                        Herbs
+                    </h3>
+
+                    <p class="text-xs text-gray-500 mt-1">
+                        Fresh herbs
+                    </p>
+
+                </a>
+
+
+                <a href="products.html?category=spices"
+                   class="group bg-white rounded-2xl p-5 shadow-sm hover:shadow-lg transition text-center">
+
+                    <div class="text-5xl mb-4">
+                        🧄
+                    </div>
+
+                    <h3 class="font-semibold">
+                        Spices
+                    </h3>
+
+                    <p class="text-xs text-gray-500 mt-1">
+                        Everyday spices
+                    </p>
+
+                </a>
+
+
+                <a href="products.html?category=other"
+                   class="group bg-white rounded-2xl p-5 shadow-sm hover:shadow-lg transition text-center">
+
+                    <div class="text-5xl mb-4">
+                        🛒
+                    </div>
+
+                    <h3 class="font-semibold">
+                        Groceries
+                    </h3>
+
+                    <p class="text-xs text-gray-500 mt-1">
+                        Everyday needs
+                    </p>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         POPULAR PRODUCTS
+    ========================== -->
+
+    <section class="py-16 bg-white">
+
+        <div class="max-w-7xl mx-auto px-5">
+
+            <div class="flex items-end justify-between mb-8">
+
+                <div>
+
+                    <p class="text-green-600 font-semibold text-sm uppercase tracking-wide">
+                        Popular
+                    </p>
+
+                    <h2 class="text-3xl font-bold mt-2">
+                        Fresh picks
+                    </h2>
+
+                </div>
+
+                <a href="products.html"
+                   class="text-green-600 font-semibold">
+                    Shop all →
+                </a>
+
+            </div>
+
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+
+
+                <!-- PRODUCT 1 -->
+
+                <div class="bg-gray-50 rounded-2xl overflow-hidden group">
+
+                    <div class="relative">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337?auto=format&fit=crop&w=600&q=80"
+                            alt="Tomatoes"
+                            class="w-full h-48 object-cover group-hover:scale-105 transition duration-500">
+
+                        <span class="absolute top-3 left-3 bg-white px-3 py-1 rounded-full text-xs font-semibold">
+                            Popular
+                        </span>
+
+                    </div>
+
+
+                    <div class="p-4">
+
+                        <p class="text-xs text-gray-500">
+                            Vegetables
+                        </p>
+
+                        <h3 class="font-bold mt-1">
+                            Fresh Tomatoes
+                        </h3>
+
+                        <div class="flex items-center justify-between mt-4">
+
+                            <p class="font-bold text-green-600">
+                                KSh 150
+                                <span class="text-xs text-gray-500 font-normal">
+                                    / kg
+                                </span>
+                            </p>
+
+                            <button
+                                onclick="addToCart('Fresh Tomatoes', 150)"
+                                class="w-9 h-9 bg-green-600 hover:bg-green-700 text-white rounded-full">
+
+                                +
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PRODUCT 2 -->
+
+                <div class="bg-gray-50 rounded-2xl overflow-hidden group">
+
+                    <div>
+
+                        <img
+                            src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=600&q=80"
+                            alt="Potatoes"
+                            class="w-full h-48 object-cover group-hover:scale-105 transition duration-500">
+
+                    </div>
+
+
+                    <div class="p-4">
+
+                        <p class="text-xs text-gray-500">
+                            Tubers
+                        </p>
+
+                        <h3 class="font-bold mt-1">
+                            Potatoes
+                        </h3>
+
+                        <div class="flex items-center justify-between mt-4">
+
+                            <p class="font-bold text-green-600">
+                                KSh 150
+                                <span class="text-xs text-gray-500 font-normal">
+                                    / kg
+                                </span>
+                            </p>
+
+                            <button
+                                onclick="addToCart('Potatoes', 150)"
+                                class="w-9 h-9 bg-green-600 hover:bg-green-700 text-white rounded-full">
+
+                                +
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PRODUCT 3 -->
+
+                <div class="bg-gray-50 rounded-2xl overflow-hidden group">
+
+                    <div>
+
+                        <img
+                            src="https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=600&q=80"
+                            alt="Onions"
+                            class="w-full h-48 object-cover group-hover:scale-105 transition duration-500">
+
+                    </div>
+
+
+                    <div class="p-4">
+
+                        <p class="text-xs text-gray-500">
+                            Vegetables
+                        </p>
+
+                        <h3 class="font-bold mt-1">
+                            Red Onions
+                        </h3>
+
+                        <div class="flex items-center justify-between mt-4">
+
+                            <p class="font-bold text-green-600">
+                                KSh 120
+                                <span class="text-xs text-gray-500 font-normal">
+                                    / kg
+                                </span>
+                            </p>
+
+                            <button
+                                onclick="addToCart('Red Onions', 120)"
+                                class="w-9 h-9 bg-green-600 hover:bg-green-700 text-white rounded-full">
+
+                                +
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PRODUCT 4 -->
+
+                <div class="bg-gray-50 rounded-2xl overflow-hidden group">
+
+                    <div>
+
+                        <img
+                            src="https://images.unsplash.com/photo-1582515073490-39981397c445?auto=format&fit=crop&w=600&q=80"
+                            alt="Bananas"
+                            class="w-full h-48 object-cover group-hover:scale-105 transition duration-500">
+
+                    </div>
+
+
+                    <div class="p-4">
+
+                        <p class="text-xs text-gray-500">
+                            Fruits
+                        </p>
+
+                        <h3 class="font-bold mt-1">
+                            Fresh Bananas
+                        </h3>
+
+                        <div class="flex items-center justify-between mt-4">
+
+                            <p class="font-bold text-green-600">
+                                KSh 100
+                                <span class="text-xs text-gray-500 font-normal">
+                                    / bunch
+                                </span>
+                            </p>
+
+                            <button
+                                onclick="addToCart('Fresh Bananas', 100)"
+                                class="w-9 h-9 bg-green-600 hover:bg-green-700 text-white rounded-full">
+
+                                +
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         HOW IT WORKS
+    ========================== -->
+
+    <section id="how-it-works"
+             class="py-20 bg-green-50">
+
+        <div class="max-w-7xl mx-auto px-5">
+
+            <div class="text-center max-w-2xl mx-auto mb-12">
+
+                <p class="text-green-600 font-semibold uppercase text-sm">
+                    Simple process
+                </p>
+
+                <h2 class="text-3xl sm:text-4xl font-bold mt-2">
+                    How Mbogafreshi works
+                </h2>
+
+                <p class="text-gray-600 mt-4">
+                    Getting fresh groceries delivered doesn't have to be complicated.
+                </p>
+
+            </div>
+
+
+            <div class="grid md:grid-cols-4 gap-8">
+
+
+                <div class="text-center">
+
+                    <div class="w-16 h-16 mx-auto bg-white rounded-2xl shadow-sm flex items-center justify-center text-2xl font-bold text-green-600">
+                        1
+                    </div>
+
+                    <h3 class="font-bold text-lg mt-5">
+                        Place your order
+                    </h3>
+
+                    <p class="text-gray-600 text-sm mt-2">
+                        Choose the groceries you want from our online shop.
+                    </p>
+
+                </div>
+
+
+                <div class="text-center">
+
+                    <div class="w-16 h-16 mx-auto bg-white rounded-2xl shadow-sm flex items-center justify-center text-2xl font-bold text-green-600">
+                        2
+                    </div>
+
+                    <h3 class="font-bold text-lg mt-5">
+                        We source them
+                    </h3>
+
+                    <p class="text-gray-600 text-sm mt-2">
+                        We go to local markets and source the items in your order.
+                    </p>
+
+                </div>
+
+
+                <div class="text-center">
+
+                    <div class="w-16 h-16 mx-auto bg-white rounded-2xl shadow-sm flex items-center justify-center text-2xl font-bold text-green-600">
+                        3
+                    </div>
+
+                    <h3 class="font-bold text-lg mt-5">
+                        We prepare your order
+                    </h3>
+
+                    <p class="text-gray-600 text-sm mt-2">
+                        Your groceries are gathered and prepared for delivery.
+                    </p>
+
+                </div>
+
+
+                <div class="text-center">
+
+                    <div class="w-16 h-16 mx-auto bg-white rounded-2xl shadow-sm flex items-center justify-center text-2xl font-bold text-green-600">
+                        4
+                    </div>
+
+                    <h3 class="font-bold text-lg mt-5">
+                        Delivered to you
+                    </h3>
+
+                    <p class="text-gray-600 text-sm mt-2">
+                        A delivery rider brings your order directly to your location.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         DELIVERY
+    ========================== -->
+
+    <section id="delivery"
+             class="py-20 bg-white">
+
+        <div class="max-w-6xl mx-auto px-5">
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+
+                <div>
+
+                    <p class="text-green-600 font-semibold uppercase text-sm">
+                        Delivery
+                    </p>
+
+                    <h2 class="text-3xl sm:text-4xl font-bold mt-2">
+                        Groceries from the market to your doorstep.
+                    </h2>
+
+                    <p class="text-gray-600 mt-5 leading-relaxed">
+
+                        Mbogafreshi connects you with the convenience of
+                        online ordering while we handle the work of sourcing
+                        your groceries from local markets.
+
+                    </p>
+
+
+                    <div class="mt-7 space-y-4">
+
+                        <div class="flex gap-4">
+
+                            <div class="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center">
+                                ✓
+                            </div>
+
+                            <div>
+
+                                <h3 class="font-semibold">
+                                    Local sourcing
+                                </h3>
+
+                                <p class="text-sm text-gray-500">
+                                    We source your groceries locally after receiving your order.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="flex gap-4">
+
+                            <div class="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center">
+                                ✓
+                            </div>
+
+                            <div>
+
+                                <h3 class="font-semibold">
+                                    Convenient delivery
+                                </h3>
+
+                                <p class="text-sm text-gray-500">
+                                    Your order is delivered by a local rider.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="flex gap-4">
+
+                            <div class="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center">
+                                ✓
+                            </div>
+
+                            <div>
+
+                                <h3 class="font-semibold">
+                                    Flexible payment
+                                </h3>
+
+                                <p class="text-sm text-gray-500">
+                                    Pay for groceries now or choose to pay on delivery.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="bg-green-50 rounded-3xl p-8">
+
+                    <h3 class="text-2xl font-bold">
+                        Current delivery areas
+                    </h3>
+
+                    <p class="text-gray-600 mt-2">
+                        We're starting locally and growing from there.
+                    </p>
+
+
+                    <div class="mt-6 space-y-3">
+
+                        <div class="bg-white rounded-xl p-4 flex justify-between">
+                            <span>Malindi</span>
+                            <span class="text-green-600 font-semibold">
+                                Available
+                            </span>
+                        </div>
+
+                        <div class="bg-white rounded-xl p-4 flex justify-between">
+                            <span>Watamu</span>
+                            <span class="text-green-600 font-semibold">
+                                Available
+                            </span>
+                        </div>
+
+                        <div class="bg-white rounded-xl p-4 flex justify-between">
+                            <span>Gede</span>
+                            <span class="text-green-600 font-semibold">
+                                Coming soon
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <a href="checkout.html"
+                       class="block text-center bg-green-600 hover:bg-green-700 text-white font-semibold py-4 rounded-xl mt-6">
+
+                        Start an order
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         CTA
+    ========================== -->
+
+    <section class="py-20 px-5">
+
+        <div class="max-w-6xl mx-auto bg-green-700 rounded-3xl p-8 sm:p-12 text-center text-white">
+
+            <h2 class="text-3xl sm:text-4xl font-bold">
+                Your next grocery run starts here.
+            </h2>
+
+            <p class="text-green-100 mt-4 max-w-xl mx-auto">
+                Browse fresh produce and everyday groceries from the comfort of your home.
+            </p>
+
+            <a href="products.html"
+               class="inline-block bg-white text-green-700 font-bold px-8 py-4 rounded-xl mt-7 hover:bg-gray-100 transition">
+
+                Shop Fresh Groceries
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer class="bg-gray-950 text-gray-300">
+
+        <div class="max-w-7xl mx-auto px-5 py-12">
+
+            <div class="grid md:grid-cols-4 gap-10">
+
+                <div>
+
+                    <div class="flex items-center gap-2">
+
+                        <div class="w-10 h-10 bg-green-600 rounded-xl flex items-center justify-center">
+                            🌱
+                        </div>
+
+                        <span class="text-xl font-bold text-white">
+                            Mbogafreshi
+                        </span>
+
+                    </div>
+
+                    <p class="text-sm mt-4 leading-relaxed">
+                        Fresh groceries sourced locally and delivered conveniently to your doorstep.
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <h3 class="text-white font-semibold mb-4">
+                        Shop
+                    </h3>
+
+                    <div class="space-y-3 text-sm">
+
+                        <a href="products.html?category=vegetables"
+                           class="block hover:text-green-400">
+                            Vegetables
+                        </a>
+
+                        <a href="products.html?category=fruits"
+                           class="block hover:text-green-400">
+                            Fruits
+                        </a>
+
+                        <a href="products.html?category=tubers"
+                           class="block hover:text-green-400">
+                            Tubers
+                        </a>
+
+                        <a href="products.html"
+                           class="block hover:text-green-400">
+                            All groceries
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div>
+
+                    <h3 class="text-white font-semibold mb-4">
+                        Company
+                    </h3>
+
+                    <div class="space-y-3 text-sm">
+
+                        <a href="#how-it-works"
+                           class="block hover:text-green-400">
+                            How It Works
+                        </a>
+
+                        <a href="#delivery"
+                           class="block hover:text-green-400">
+                            Delivery
+                        </a>
+
+                        <a href="#"
+                           class="block hover:text-green-400">
+                            Contact
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div>
+
+                    <h3 class="text-white font-semibold mb-4">
+                        Need help?
+                    </h3>
+
+                    <p class="text-sm">
+                        Contact Mbogafreshi for assistance with your order.
+                    </p>
+
+                    <button
+                        class="mt-4 bg-green-600 hover:bg-green-700 text-white px-5 py-3 rounded-xl text-sm font-semibold">
+
+                        Contact Us
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="border-t border-gray-800 mt-10 pt-6 text-sm text-gray-500 text-center">
+
+                © 2026 Mbogafreshi. All rights reserved.
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        // -------------------------
+        // MOBILE MENU
+        // -------------------------
+
+        function toggleMenu() {
+
+            const menu = document.getElementById("mobile-menu");
+
+            menu.classList.toggle("hidden");
+
+        }
+
+
+        // -------------------------
+        // SEARCH
+        // -------------------------
+
+        function openSearch() {
+
+            const overlay = document.getElementById("search-overlay");
+
+            overlay.classList.remove("hidden");
+
+            document.getElementById("search-input").focus();
+
+        }
+
+
+        function closeSearch() {
+
+            document.getElementById("search-overlay")
+                .classList.add("hidden");
+
+        }
+
+
+        // -------------------------
+        // CART
+        // -------------------------
+
+        let cart = JSON.parse(localStorage.getItem("mbogafreshiCart")) || [];
+
+
+        function addToCart(name, price) {
+
+            const existingProduct = cart.find(
+                item => item.name === name
+            );
+
+
+            if (existingProduct) {
+
+                existingProduct.quantity++;
+
+            } else {
+
+                cart.push({
+                    name: name,
+                    price: price,
+                    quantity: 1
+                });
+
+            }
+
+
+            localStorage.setItem(
+                "mbogafreshiCart",
+                JSON.stringify(cart)
+            );
+
+
+            updateCartCount();
+
+            alert(name + " added to cart.");
+
+        }
+
+
+        function updateCartCount() {
+
+            const count = cart.reduce(
+                (total, item) => total + item.quantity,
+                0
+            );
+
+
+            const cartCount =
+                document.getElementById("cart-count");
+
+
+            if (cartCount) {
+
+                cartCount.textContent = count;
+
+            }
+
+        }
+
+
+        // Load cart count when page opens
+        updateCartCount();
+
+    </script>
+
+</body>
+</html>

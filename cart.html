@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Your Basket | Mbogafreshi</title>
+
+    <meta name="description"
+          content="Review your Mbogafreshi grocery order before checkout.">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+
+<body class="bg-gray-50 text-gray-800">
+
+
+<!-- =====================================================
+     HEADER
+====================================================== -->
+
+<header class="sticky top-0 z-50 bg-white border-b">
+
+    <div class="max-w-7xl mx-auto px-4">
+
+        <div class="h-16 flex items-center justify-between">
+
+
+            <!-- LOGO -->
+
+            <a href="index.html"
+               class="flex items-center gap-2">
+
+                <div class="w-10 h-10 bg-green-600 rounded-xl
+                            flex items-center justify-center text-white">
+
+                    🌱
+
+                </div>
+
+                <div>
+
+                    <h1 class="font-bold text-lg text-green-700">
+                        Mbogafreshi
+                    </h1>
+
+                    <p class="text-[10px] text-gray-500">
+                        Fresh. Local. Delivered.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- NAVIGATION -->
+
+            <nav class="hidden md:flex items-center gap-7">
+
+                <a href="index.html"
+                   class="text-gray-600 hover:text-green-600">
+
+                    Home
+
+                </a>
+
+                <a href="products.html"
+                   class="text-gray-600 hover:text-green-600">
+
+                    Shop
+
+                </a>
+
+                <a href="index.html#how-it-works"
+                   class="text-gray-600 hover:text-green-600">
+
+                    How It Works
+
+                </a>
+
+                <a href="index.html#delivery"
+                   class="text-gray-600 hover:text-green-600">
+
+                    Delivery
+
+                </a>
+
+            </nav>
+
+
+
+            <!-- CART -->
+
+            <a href="cart.html"
+               class="relative w-11 h-11 bg-green-50
+                      rounded-full flex items-center justify-center">
+
+                🛒
+
+                <span id="cart-count"
+                      class="absolute -top-1 -right-1
+                             w-5 h-5 bg-green-600
+                             text-white text-xs rounded-full
+                             flex items-center justify-center">
+
+                    0
+
+                </span>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     PAGE HEADER
+====================================================== -->
+
+<section class="bg-green-700 text-white">
+
+    <div class="max-w-7xl mx-auto px-5 py-10">
+
+        <p class="text-green-200 text-sm font-semibold uppercase">
+            Your basket
+        </p>
+
+        <h1 class="text-3xl md:text-4xl font-bold mt-2">
+            Review your groceries
+        </h1>
+
+        <p class="text-green-100 mt-2">
+            Check your items before continuing to delivery.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     MAIN
+====================================================== -->
+
+<main class="max-w-7xl mx-auto px-5 py-10">
+
+
+    <!-- =================================================
+         EMPTY CART
+    ================================================== -->
+
+    <div id="empty-cart"
+         class="hidden text-center py-20">
+
+        <div class="text-6xl">
+            🛒
+        </div>
+
+        <h2 class="text-2xl font-bold mt-5">
+            Your basket is empty
+        </h2>
+
+        <p class="text-gray-500 mt-2">
+            You haven't added any groceries yet.
+        </p>
+
+        <a href="products.html"
+           class="inline-block mt-7
+                  bg-green-600 hover:bg-green-700
+                  text-white font-semibold
+                  px-7 py-3 rounded-xl">
+
+            Start Shopping
+
+        </a>
+
+    </div>
+
+
+
+    <!-- =================================================
+         CART CONTENT
+    ================================================== -->
+
+    <div id="cart-content"
+         class="grid lg:grid-cols-3 gap-8">
+
+
+        <!-- =============================================
+             ITEMS
+        ============================================== -->
+
+        <section class="lg:col-span-2">
+
+            <div class="flex items-center justify-between mb-5">
+
+                <div>
+
+                    <h2 class="text-xl font-bold">
+                        Your groceries
+                    </h2>
+
+                    <p id="items-summary"
+                       class="text-sm text-gray-500 mt-1">
+
+                    </p>
+
+                </div>
+
+
+                <button
+                    onclick="clearCart()"
+                    class="text-sm text-red-500
+                           hover:text-red-700">
+
+                    Clear basket
+
+                </button>
+
+            </div>
+
+
+
+            <div id="cart-items"
+                 class="space-y-4">
+
+                <!-- Items inserted here -->
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =============================================
+             ORDER SUMMARY
+        ============================================== -->
+
+        <aside>
+
+            <div class="bg-white rounded-2xl border
+                        p-6 sticky top-24">
+
+                <h2 class="text-xl font-bold">
+                    Order summary
+                </h2>
+
+
+
+                <!-- GROCERY SUBTOTAL -->
+
+                <div class="flex justify-between
+                            mt-6">
+
+                    <span class="text-gray-600">
+                        Groceries
+                    </span>
+
+                    <span id="subtotal"
+                          class="font-semibold">
+
+                        KSh 0
+
+                    </span>
+
+                </div>
+
+
+
+                <!-- DELIVERY -->
+
+                <div class="flex justify-between
+                            mt-4">
+
+                    <span class="text-gray-600">
+                        Delivery
+                    </span>
+
+                    <span class="text-gray-500 text-sm">
+                        Calculated at checkout
+                    </span>
+
+                </div>
+
+
+
+                <div class="border-t my-5"></div>
+
+
+
+                <!-- CURRENT TOTAL -->
+
+                <div class="flex justify-between">
+
+                    <span class="font-bold">
+                        Grocery total
+                    </span>
+
+                    <span id="total"
+                          class="font-bold text-green-600
+                                 text-xl">
+
+                        KSh 0
+
+                    </span>
+
+                </div>
+
+
+
+                <!-- IMPORTANT NOTICE -->
+
+                <div class="mt-6 bg-green-50
+                            border border-green-100
+                            rounded-xl p-4">
+
+                    <p class="text-sm text-green-800">
+
+                        <strong>Delivery fee:</strong>
+
+                        Your delivery fee will be calculated
+                        after you provide your delivery area.
+
+                    </p>
+
+                </div>
+
+
+
+                <!-- CHECKOUT -->
+
+                <button
+                    id="checkout-button"
+                    onclick="goToCheckout()"
+                    class="w-full mt-6
+                           bg-green-600 hover:bg-green-700
+                           text-white font-bold
+                           py-4 rounded-xl
+                           transition">
+
+                    Continue to Delivery
+
+                </button>
+
+
+
+                <!-- CONTINUE SHOPPING -->
+
+                <a href="products.html"
+                   class="block text-center
+                          text-green-600 font-semibold
+                          mt-4">
+
+                    ← Continue Shopping
+
+                </a>
+
+            </div>
+
+        </aside>
+
+    </div>
+
+</main>
+
+
+
+<!-- =====================================================
+     MOBILE BOTTOM BAR
+====================================================== -->
+
+<div id="mobile-checkout-bar"
+     class="hidden lg:hidden fixed bottom-0
+            left-0 right-0 bg-white border-t
+            shadow-xl p-4 z-50">
+
+    <div class="flex items-center gap-4">
+
+        <div class="flex-1">
+
+            <p class="text-xs text-gray-500">
+                Grocery total
+            </p>
+
+            <p id="mobile-total"
+               class="font-bold text-green-600">
+
+                KSh 0
+
+            </p>
+
+        </div>
+
+
+        <button
+            onclick="goToCheckout()"
+            class="bg-green-600 text-white
+                   font-bold px-6 py-3
+                   rounded-xl">
+
+            Checkout
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     FOOTER
+====================================================== -->
+
+<footer class="bg-gray-950 text-gray-400">
+
+    <div class="max-w-7xl mx-auto px-5 py-10">
+
+        <div class="flex flex-col md:flex-row
+                    justify-between gap-6">
+
+
+            <div>
+
+                <div class="flex items-center gap-2">
+
+                    <div class="w-9 h-9 bg-green-600 rounded-lg
+                                flex items-center justify-center">
+
+                        🌱
+
+                    </div>
+
+                    <span class="text-white font-bold text-lg">
+                        Mbogafreshi
+                    </span>
+
+                </div>
+
+                <p class="text-sm mt-3 max-w-sm">
+
+                    Fresh groceries sourced locally and
+                    delivered conveniently to your doorstep.
+
+                </p>
+
+            </div>
+
+
+            <div class="text-sm">
+
+                <p class="text-white font-semibold mb-2">
+                    Delivery areas
+                </p>
+
+                <p>Malindi</p>
+                <p>Watamu</p>
+
+            </div>
+
+        </div>
+
+
+        <div class="border-t border-gray-800
+                    mt-8 pt-6 text-center text-xs">
+
+            © 2026 Mbogafreshi. All rights reserved.
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script>
+
+
+/* =====================================================
+   LOAD CART
+====================================================== */
+
+let cart =
+    JSON.parse(
+        localStorage.getItem("mbogafreshiCart")
+    ) || [];
+
+
+
+/* =====================================================
+   DISPLAY CART
+====================================================== */
+
+function displayCart() {
+
+    const cartItems =
+        document.getElementById("cart-items");
+
+    const emptyCart =
+        document.getElementById("empty-cart");
+
+    const cartContent =
+        document.getElementById("cart-content");
+
+    const mobileBar =
+        document.getElementById("mobile-checkout-bar");
+
+
+    /* ================================================
+       EMPTY CART
+    ================================================ */
+
+    if (cart.length === 0) {
+
+        emptyCart.classList.remove("hidden");
+
+        cartContent.classList.add("hidden");
+
+        mobileBar.classList.add("hidden");
+
+        updateCartCount();
+
+        return;
+
+    }
+
+
+    /* ================================================
+       SHOW CART
+    ================================================ */
+
+    emptyCart.classList.add("hidden");
+
+    cartContent.classList.remove("hidden");
+
+    mobileBar.classList.remove("hidden");
+
+
+    cartItems.innerHTML = "";
+
+
+
+    /* ================================================
+       CREATE EACH CART ITEM
+    ================================================ */
+
+    cart.forEach(item => {
+
+        const itemTotal =
+            item.price * item.quantity;
+
+
+        cartItems.innerHTML += `
+
+            <div class="bg-white border rounded-2xl p-4
+                        flex gap-4">
+
+
+                <!-- PRODUCT IMAGE -->
+
+                <div class="w-24 h-24 sm:w-28 sm:h-28
+                            rounded-xl overflow-hidden
+                            bg-gray-100 flex-shrink-0">
+
+                    <img
+                        src="${getProductImage(item.id)}"
+                        alt="${item.name}"
+                        class="w-full h-full object-cover">
+
+                </div>
+
+
+
+                <!-- PRODUCT INFO -->
+
+                <div class="flex-1 min-w-0">
+
+                    <div class="flex justify-between gap-3">
+
+                        <div>
+
+                            <p class="font-bold truncate">
+
+                                ${item.name}
+
+                            </p>
+
+                            <p class="text-sm text-gray-500 mt-1">
+
+                                KSh ${item.price.toLocaleString()}
+                                / ${item.unit}
+
+                            </p>
+
+                        </div>
+
+
+                        <button
+                            onclick="removeItem(${item.id})"
+                            class="text-gray-400 hover:text-red-500">
+
+                            ✕
+
+                        </button>
+
+                    </div>
+
+
+
+                    <div class="flex items-center
+                                justify-between mt-5">
+
+
+                        <!-- QUANTITY -->
+
+                        <div class="flex items-center
+                                    border rounded-xl
+                                    overflow-hidden">
+
+
+                            <button
+                                onclick="decreaseQuantity(${item.id})"
+                                class="w-9 h-9
+                                       hover:bg-gray-100">
+
+                                −
+
+                            </button>
+
+
+                            <span class="w-10 text-center
+                                         font-semibold">
+
+                                ${item.quantity}
+
+                            </span>
+
+
+                            <button
+                                onclick="increaseQuantity(${item.id})"
+                                class="w-9 h-9
+                                       hover:bg-gray-100">
+
+                                +
+
+                            </button>
+
+                        </div>
+
+
+
+                        <!-- ITEM TOTAL -->
+
+                        <p class="font-bold">
+
+                            KSh ${itemTotal.toLocaleString()}
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+
+    calculateTotals();
+
+    updateCartCount();
+
+}
+
+
+
+/* =====================================================
+   GET PRODUCT IMAGE
+====================================================== */
+
+function getProductImage(id) {
+
+    const images = {
+
+        1: "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?auto=format&fit=crop&w=300&q=80",
+
+        2: "https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=300&q=80",
+
+        3: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=300&q=80",
+
+        4: "https://images.unsplash.com/photo-1587334206596-c0f9f193b6d8?auto=format&fit=crop&w=300&q=80",
+
+        5: "https://images.unsplash.com/photo-1445282768818-728615cc910a?auto=format&fit=crop&w=300&q=80",
+
+        6: "https://images.unsplash.com/photo-1594282486552-05b4d80fbb9f?auto=format&fit=crop&w=300&q=80",
+
+        7: "https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=300&q=80",
+
+        8: "https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?auto=format&fit=crop&w=300&q=80",
+
+        9: "https://images.unsplash.com/photo-1540148426945-6cf22a6b2383?auto=format&fit=crop&w=300&q=80",
+
+        10: "https://images.unsplash.com/photo-1615485500704-8e990f9900f7?auto=format&fit=crop&w=300&q=80",
+
+        11: "https://images.unsplash.com/photo-1588879460618-9247e5d5e9a0?auto=format&fit=crop&w=300&q=80",
+
+        12: "https://images.unsplash.com/photo-1596097635121-14b63b7a7f4b?auto=format&fit=crop&w=300&q=80"
+
+    };
+
+
+    return images[id] || "";
+
+}
+
+
+
+/* =====================================================
+   INCREASE QUANTITY
+====================================================== */
+
+function increaseQuantity(id) {
+
+    const item =
+        cart.find(item => item.id === id);
+
+
+    if (item) {
+
+        item.quantity++;
+
+    }
+
+
+    saveCart();
+
+    displayCart();
+
+}
+
+
+
+/* =====================================================
+   DECREASE QUANTITY
+====================================================== */
+
+function decreaseQuantity(id) {
+
+    const item =
+        cart.find(item => item.id === id);
+
+
+    if (!item) return;
+
+
+    if (item.quantity > 1) {
+
+        item.quantity--;
+
+    } else {
+
+        removeItem(id);
+
+        return;
+
+    }
+
+
+    saveCart();
+
+    displayCart();
+
+}
+
+
+
+/* =====================================================
+   REMOVE ITEM
+====================================================== */
+
+function removeItem(id) {
+
+    cart =
+        cart.filter(item => item.id !== id);
+
+
+    saveCart();
+
+    displayCart();
+
+}
+
+
+
+/* =====================================================
+   CLEAR CART
+====================================================== */
+
+function clearCart() {
+
+    if (cart.length === 0) return;
+
+
+    const confirmed =
+        confirm(
+            "Are you sure you want to clear your basket?"
+        );
+
+
+    if (!confirmed) return;
+
+
+    cart = [];
+
+
+    saveCart();
+
+    displayCart();
+
+}
+
+
+
+/* =====================================================
+   CALCULATE TOTALS
+====================================================== */
+
+function calculateTotals() {
+
+    let subtotal = 0;
+
+    let totalItems = 0;
+
+
+    cart.forEach(item => {
+
+        subtotal +=
+            item.price * item.quantity;
+
+        totalItems +=
+            item.quantity;
+
+    });
+
+
+    document.getElementById("subtotal")
+        .textContent =
+        `KSh ${subtotal.toLocaleString()}`;
+
+
+    document.getElementById("total")
+        .textContent =
+        `KSh ${subtotal.toLocaleString()}`;
+
+
+    document.getElementById("mobile-total")
+        .textContent =
+        `KSh ${subtotal.toLocaleString()}`;
+
+
+    document.getElementById("items-summary")
+        .textContent =
+        `${totalItems} item${totalItems === 1 ? "" : "s"} in your basket`;
+
+}
+
+
+
+/* =====================================================
+   UPDATE CART COUNT
+====================================================== */
+
+function updateCartCount() {
+
+    const count =
+        cart.reduce(
+            (total, item) =>
+                total + item.quantity,
+            0
+        );
+
+
+    document.getElementById("cart-count")
+        .textContent = count;
+
+}
+
+
+
+/* =====================================================
+   SAVE CART
+====================================================== */
+
+function saveCart() {
+
+    localStorage.setItem(
+        "mbogafreshiCart",
+        JSON.stringify(cart)
+    );
+
+}
+
+
+
+/* =====================================================
+   GO TO CHECKOUT
+====================================================== */
+
+function goToCheckout() {
+
+    if (cart.length === 0) {
+
+        alert(
+            "Your basket is empty. Add some groceries first."
+        );
+
+        return;
+
+    }
+
+
+    window.location.href =
+        "checkout.html";
+
+}
+
+
+
+/* =====================================================
+   INITIALIZE
+====================================================== */
+
+displayCart();
+
+</script>
+
+
+</body>
+
+</html>

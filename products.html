@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Shop | Mbogafreshi</title>
+
+    <meta name="description"
+          content="Shop fresh vegetables, fruits and groceries from Mbogafreshi.">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+
+<body class="bg-gray-50 text-gray-800">
+
+
+<!-- =====================================================
+     HEADER
+====================================================== -->
+
+<header class="sticky top-0 z-50 bg-white border-b">
+
+    <div class="max-w-7xl mx-auto px-4">
+
+        <div class="h-16 flex items-center justify-between">
+
+
+            <!-- LOGO -->
+
+            <a href="index.html"
+               class="flex items-center gap-2">
+
+                <div class="w-10 h-10 bg-green-600 rounded-xl
+                            flex items-center justify-center text-white">
+
+                    🌱
+
+                </div>
+
+                <div>
+
+                    <h1 class="font-bold text-lg text-green-700">
+                        Mbogafreshi
+                    </h1>
+
+                    <p class="text-[10px] text-gray-500">
+                        Fresh. Local. Delivered.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- DESKTOP NAV -->
+
+            <nav class="hidden md:flex items-center gap-7">
+
+                <a href="index.html"
+                   class="text-gray-600 hover:text-green-600">
+
+                    Home
+
+                </a>
+
+                <a href="products.html"
+                   class="text-green-600 font-semibold">
+
+                    Shop
+
+                </a>
+
+                <a href="index.html#how-it-works"
+                   class="text-gray-600 hover:text-green-600">
+
+                    How It Works
+
+                </a>
+
+                <a href="index.html#delivery"
+                   class="text-gray-600 hover:text-green-600">
+
+                    Delivery
+
+                </a>
+
+            </nav>
+
+
+
+            <!-- CART -->
+
+            <a href="cart.html"
+               class="relative w-11 h-11 bg-gray-100 rounded-full
+                      flex items-center justify-center">
+
+                🛒
+
+                <span id="cart-count"
+                      class="absolute -top-1 -right-1
+                             w-5 h-5 bg-green-600 text-white
+                             text-xs rounded-full
+                             flex items-center justify-center">
+
+                    0
+
+                </span>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     PAGE HEADER
+====================================================== -->
+
+<section class="bg-green-700 text-white">
+
+    <div class="max-w-7xl mx-auto px-5 py-12">
+
+        <p class="text-green-200 text-sm font-semibold uppercase">
+
+            Mbogafreshi Shop
+
+        </p>
+
+
+        <h2 class="text-3xl md:text-4xl font-bold mt-2">
+
+            Fresh groceries, your way.
+
+        </h2>
+
+
+        <p class="text-green-100 mt-3 max-w-xl">
+
+            Choose what you need and add it to your basket.
+            We'll source your groceries locally and deliver them to you.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SEARCH + FILTER
+====================================================== -->
+
+<section class="max-w-7xl mx-auto px-5 py-8">
+
+
+    <!-- SEARCH -->
+
+    <div class="relative max-w-2xl">
+
+        <input
+            id="search-input"
+            type="text"
+            placeholder="Search tomatoes, onions, potatoes..."
+            class="w-full bg-white border rounded-2xl
+                   px-5 py-4 pl-12 outline-none
+                   focus:ring-2 focus:ring-green-500">
+
+
+        <span class="absolute left-4 top-4 text-gray-400">
+
+            🔍
+
+        </span>
+
+    </div>
+
+
+
+    <!-- CATEGORIES -->
+
+    <div class="flex gap-3 overflow-x-auto mt-6 pb-2">
+
+        <button
+            onclick="filterProducts('all')"
+            data-category="all"
+            class="category-btn whitespace-nowrap
+                   bg-green-600 text-white
+                   px-5 py-2.5 rounded-full
+                   text-sm font-semibold">
+
+            All
+
+        </button>
+
+
+        <button
+            onclick="filterProducts('vegetables')"
+            data-category="vegetables"
+            class="category-btn whitespace-nowrap
+                   bg-white border px-5 py-2.5
+                   rounded-full text-sm">
+
+            Vegetables
+
+        </button>
+
+
+        <button
+            onclick="filterProducts('fruits')"
+            data-category="fruits"
+            class="category-btn whitespace-nowrap
+                   bg-white border px-5 py-2.5
+                   rounded-full text-sm">
+
+            Fruits
+
+        </button>
+
+
+        <button
+            onclick="filterProducts('tubers')"
+            data-category="tubers"
+            class="category-btn whitespace-nowrap
+                   bg-white border px-5 py-2.5
+                   rounded-full text-sm">
+
+            Tubers
+
+        </button>
+
+
+        <button
+            onclick="filterProducts('herbs')"
+            data-category="herbs"
+            class="category-btn whitespace-nowrap
+                   bg-white border px-5 py-2.5
+                   rounded-full text-sm">
+
+            Herbs
+
+        </button>
+
+
+        <button
+            onclick="filterProducts('spices')"
+            data-category="spices"
+            class="category-btn whitespace-nowrap
+                   bg-white border px-5 py-2.5
+                   rounded-full text-sm">
+
+            Spices
+
+        </button>
+
+
+        <button
+            onclick="filterProducts('other')"
+            data-category="other"
+            class="category-btn whitespace-nowrap
+                   bg-white border px-5 py-2.5
+                   rounded-full text-sm">
+
+            Groceries
+
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PRODUCTS
+====================================================== -->
+
+<main class="max-w-7xl mx-auto px-5 pb-20">
+
+
+    <div class="flex items-center justify-between mb-6">
+
+        <div>
+
+            <h2 class="text-2xl font-bold">
+
+                Fresh produce
+
+            </h2>
+
+            <p id="product-count"
+               class="text-sm text-gray-500 mt-1">
+
+                Showing all products
+
+            </p>
+
+        </div>
+
+
+        <!-- SORT -->
+
+        <select
+            id="sort-select"
+            onchange="sortProducts()"
+            class="bg-white border rounded-xl
+                   px-4 py-2.5 text-sm outline-none">
+
+            <option value="default">
+                Sort
+            </option>
+
+            <option value="low">
+                Price: Low to High
+            </option>
+
+            <option value="high">
+                Price: High to Low
+            </option>
+
+            <option value="name">
+                Name: A-Z
+            </option>
+
+        </select>
+
+    </div>
+
+
+
+    <!-- PRODUCT GRID -->
+
+    <div id="product-grid"
+         class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+
+    </div>
+
+
+
+    <!-- NO RESULTS -->
+
+    <div id="no-results"
+         class="hidden text-center py-20">
+
+        <div class="text-5xl">
+            🛒
+        </div>
+
+        <h3 class="text-xl font-bold mt-4">
+
+            No products found
+
+        </h3>
+
+        <p class="text-gray-500 mt-2">
+
+            Try searching for something else.
+
+        </p>
+
+    </div>
+
+</main>
+
+
+
+<!-- =====================================================
+     MOBILE CART BAR
+====================================================== -->
+
+<div id="mobile-cart-bar"
+     class="hidden fixed bottom-4 left-4 right-4 z-40">
+
+    <a href="cart.html"
+       class="bg-green-600 text-white
+              rounded-2xl shadow-xl
+              px-5 py-4 flex items-center
+              justify-between">
+
+        <div>
+
+            <p class="text-sm text-green-100">
+                Your basket
+            </p>
+
+            <p id="mobile-cart-items"
+               class="font-bold">
+
+                0 items
+
+            </p>
+
+        </div>
+
+
+        <div class="font-bold">
+
+            View Cart →
+
+        </div>
+
+    </a>
+
+</div>
+
+
+
+<!-- =====================================================
+     FOOTER
+====================================================== -->
+
+<footer class="bg-gray-950 text-gray-400">
+
+    <div class="max-w-7xl mx-auto px-5 py-10">
+
+        <div class="flex flex-col md:flex-row
+                    justify-between gap-6">
+
+            <div>
+
+                <div class="flex items-center gap-2">
+
+                    <div class="w-9 h-9 bg-green-600 rounded-lg
+                                flex items-center justify-center">
+
+                        🌱
+
+                    </div>
+
+                    <span class="text-white font-bold text-lg">
+
+                        Mbogafreshi
+
+                    </span>
+
+                </div>
+
+                <p class="text-sm mt-3 max-w-sm">
+
+                    Fresh groceries sourced locally and
+                    delivered conveniently to your doorstep.
+
+                </p>
+
+            </div>
+
+
+            <div class="text-sm">
+
+                <p class="text-white font-semibold mb-2">
+                    Delivery areas
+                </p>
+
+                <p>Malindi</p>
+                <p>Watamu</p>
+
+            </div>
+
+        </div>
+
+
+        <div class="border-t border-gray-800 mt-8 pt-6
+                    text-center text-xs">
+
+            © 2026 Mbogafreshi. All rights reserved.
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script>
+
+
+/* =====================================================
+   PRODUCT DATA
+
+   Later this data will come from our DATABASE.
+
+====================================================== */
+
+const products = [
+
+    {
+        id: 1,
+        name: "Fresh Tomatoes",
+        category: "vegetables",
+        price: 150,
+        unit: "kg",
+        image: "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?auto=format&fit=crop&w=600&q=80",
+        description: "Fresh locally sourced tomatoes."
+    },
+
+    {
+        id: 2,
+        name: "Red Onions",
+        category: "vegetables",
+        price: 120,
+        unit: "kg",
+        image: "https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=600&q=80",
+        description: "Fresh red onions."
+    },
+
+    {
+        id: 3,
+        name: "Potatoes",
+        category: "tubers",
+        price: 150,
+        unit: "kg",
+        image: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=600&q=80",
+        description: "Fresh potatoes."
+    },
+
+    {
+        id: 4,
+        name: "Fresh Bananas",
+        category: "fruits",
+        price: 100,
+        unit: "bunch",
+        image: "https://images.unsplash.com/photo-1587334206596-c0f9f193b6d8?auto=format&fit=crop&w=600&q=80",
+        description: "Fresh bananas."
+    },
+
+    {
+        id: 5,
+        name: "Carrots",
+        category: "vegetables",
+        price: 100,
+        unit: "kg",
+        image: "https://images.unsplash.com/photo-1445282768818-728615cc910a?auto=format&fit=crop&w=600&q=80",
+        description: "Fresh crunchy carrots."
+    },
+
+    {
+        id: 6,
+        name: "Cabbage",
+        category: "vegetables",
+        price: 80,
+        unit: "piece",
+        image: "https://images.unsplash.com/photo-1594282486552-05b4d80fbb9f?auto=format&fit=crop&w=600&q=80",
+        description: "Fresh green cabbage."
+    },
+
+    {
+        id: 7,
+        name: "Mangoes",
+        category: "fruits",
+        price: 80,
+        unit: "piece",
+        image: "https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=600&q=80",
+        description: "Fresh ripe mangoes."
+    },
+
+    {
+        id: 8,
+        name: "Avocado",
+        category: "fruits",
+        price: 50,
+        unit: "piece",
+        image: "https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?auto=format&fit=crop&w=600&q=80",
+        description: "Fresh creamy avocado."
+    },
+
+    {
+        id: 9,
+        name: "Garlic",
+        category: "spices",
+        price: 300,
+        unit: "kg",
+        image: "https://images.unsplash.com/photo-1540148426945-6cf22a6b2383?auto=format&fit=crop&w=600&q=80",
+        description: "Fresh garlic."
+    },
+
+    {
+        id: 10,
+        name: "Ginger",
+        category: "spices",
+        price: 250,
+        unit: "kg",
+        image: "https://images.unsplash.com/photo-1615485500704-8e990f9900f7?auto=format&fit=crop&w=600&q=80",
+        description: "Fresh ginger."
+    },
+
+    {
+        id: 11,
+        name: "Coriander",
+        category: "herbs",
+        price: 30,
+        unit: "bunch",
+        image: "https://images.unsplash.com/photo-1588879460618-9247e5d5e9a0?auto=format&fit=crop&w=600&q=80",
+        description: "Fresh coriander."
+    },
+
+    {
+        id: 12,
+        name: "Sweet Potatoes",
+        category: "tubers",
+        price: 120,
+        unit: "kg",
+        image: "https://images.unsplash.com/photo-1596097635121-14b63b7a7f4b?auto=format&fit=crop&w=600&q=80",
+        description: "Fresh sweet potatoes."
+    }
+
+];
+
+
+
+/* =====================================================
+   CART
+====================================================== */
+
+let cart =
+    JSON.parse(localStorage.getItem("mbogafreshiCart")) || [];
+
+
+
+/* =====================================================
+   DISPLAY PRODUCTS
+====================================================== */
+
+let currentProducts = [...products];
+
+
+
+function displayProducts(items) {
+
+    const grid =
+        document.getElementById("product-grid");
+
+    const noResults =
+        document.getElementById("no-results");
+
+    const count =
+        document.getElementById("product-count");
+
+
+    grid.innerHTML = "";
+
+
+    if (items.length === 0) {
+
+        noResults.classList.remove("hidden");
+
+        count.textContent = "No products found";
+
+        return;
+
+    }
+
+
+    noResults.classList.add("hidden");
+
+
+    count.textContent =
+        `Showing ${items.length} product${items.length === 1 ? "" : "s"}`;
+
+
+    items.forEach(product => {
+
+        grid.innerHTML += `
+
+            <div class="bg-white rounded-2xl overflow-hidden
+                        shadow-sm hover:shadow-lg transition group">
+
+
+                <!-- IMAGE -->
+
+                <a href="product.html?id=${product.id}"
+                   class="block overflow-hidden">
+
+                    <img
+                        src="${product.image}"
+                        alt="${product.name}"
+                        class="w-full h-44 object-cover
+                               group-hover:scale-105
+                               transition duration-500">
+
+                </a>
+
+
+                <!-- INFO -->
+
+                <div class="p-4">
+
+                    <p class="text-xs text-gray-500 capitalize">
+
+                        ${product.category}
+
+                    </p>
+
+
+                    <a href="product.html?id=${product.id}">
+
+                        <h3 class="font-bold mt-1 hover:text-green-600">
+
+                            ${product.name}
+
+                        </h3>
+
+                    </a>
+
+
+                    <p class="text-xs text-gray-500 mt-1">
+
+                        ${product.description}
+
+                    </p>
+
+
+                    <div class="flex items-center
+                                justify-between mt-4">
+
+
+                        <div>
+
+                            <p class="font-bold text-green-600">
+
+                                KSh ${product.price}
+
+                            </p>
+
+                            <p class="text-xs text-gray-500">
+
+                                per ${product.unit}
+
+                            </p>
+
+                        </div>
+
+
+                        <button
+                            onclick="addToCart(${product.id})"
+                            class="w-10 h-10 bg-green-600
+                                   hover:bg-green-700
+                                   text-white rounded-full
+                                   text-xl">
+
+                            +
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+}
+
+
+
+/* =====================================================
+   ADD TO CART
+====================================================== */
+
+function addToCart(productId) {
+
+    const product =
+        products.find(item => item.id === productId);
+
+
+    const existing =
+        cart.find(item => item.id === productId);
+
+
+    if (existing) {
+
+        existing.quantity++;
+
+    } else {
+
+        cart.push({
+
+            id: product.id,
+
+            name: product.name,
+
+            price: product.price,
+
+            unit: product.unit,
+
+            quantity: 1
+
+        });
+
+    }
+
+
+    saveCart();
+
+
+    updateCart();
+
+
+    // Small feedback
+
+    alert(`${product.name} added to your basket.`);
+
+}
+
+
+
+/* =====================================================
+   SAVE CART
+====================================================== */
+
+function saveCart() {
+
+    localStorage.setItem(
+        "mbogafreshiCart",
+        JSON.stringify(cart)
+    );
+
+}
+
+
+
+/* =====================================================
+   UPDATE CART COUNT
+====================================================== */
+
+function updateCart() {
+
+    const totalItems =
+        cart.reduce(
+            (total, item) => total + item.quantity,
+            0
+        );
+
+
+    document.getElementById("cart-count")
+        .textContent = totalItems;
+
+
+    const mobileBar =
+        document.getElementById("mobile-cart-bar");
+
+
+    const mobileItems =
+        document.getElementById("mobile-cart-items");
+
+
+    if (totalItems > 0) {
+
+        mobileBar.classList.remove("hidden");
+
+        mobileItems.textContent =
+            `${totalItems} item${totalItems === 1 ? "" : "s"}`;
+
+    } else {
+
+        mobileBar.classList.add("hidden");
+
+    }
+
+}
+
+
+
+/* =====================================================
+   CATEGORY FILTER
+====================================================== */
+
+function filterProducts(category) {
+
+    if (category === "all") {
+
+        currentProducts = [...products];
+
+    } else {
+
+        currentProducts =
+            products.filter(
+                product => product.category === category
+            );
+
+    }
+
+
+    displayProducts(currentProducts);
+
+
+    // Update active button
+
+    document.querySelectorAll(".category-btn")
+        .forEach(button => {
+
+            button.classList.remove(
+                "bg-green-600",
+                "text-white"
+            );
+
+            button.classList.add(
+                "bg-white"
+            );
+
+        });
+
+
+    const activeButton =
+        document.querySelector(
+            `[data-category="${category}"]`
+        );
+
+
+    if (activeButton) {
+
+        activeButton.classList.remove(
+            "bg-white"
+        );
+
+        activeButton.classList.add(
+            "bg-green-600",
+            "text-white"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   SEARCH
+====================================================== */
+
+document
+    .getElementById("search-input")
+    .addEventListener("input", function () {
+
+        const search =
+            this.value.toLowerCase().trim();
+
+
+        const filtered =
+            currentProducts.filter(product =>
+
+                product.name
+                    .toLowerCase()
+                    .includes(search)
+
+            );
+
+
+        displayProducts(filtered);
+
+    });
+
+
+
+/* =====================================================
+   SORT
+====================================================== */
+
+function sortProducts() {
+
+    const sort =
+        document.getElementById("sort-select").value;
+
+
+    let sorted =
+        [...currentProducts];
+
+
+    if (sort === "low") {
+
+        sorted.sort(
+            (a, b) => a.price - b.price
+        );
+
+    }
+
+
+    if (sort === "high") {
+
+        sorted.sort(
+            (a, b) => b.price - a.price
+        );
+
+    }
+
+
+    if (sort === "name") {
+
+        sorted.sort(
+            (a, b) =>
+                a.name.localeCompare(b.name)
+        );
+
+    }
+
+
+    displayProducts(sorted);
+
+}
+
+
+
+/* =====================================================
+   INITIALIZE
+====================================================== */
+
+displayProducts(products);
+
+updateCart();
+
+</script>
+
+
+</body>
+
+</html>
