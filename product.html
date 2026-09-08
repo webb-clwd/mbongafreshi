@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Product | Mbogafreshi</title>
+
+    <meta name="description"
+          content="View product details and order fresh groceries from Mbogafreshi.">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+
+<body class="bg-gray-50 text-gray-800">
+
+
+<!-- =====================================================
+     HEADER
+====================================================== -->
+
+<header class="sticky top-0 z-50 bg-white border-b">
+
+    <div class="max-w-7xl mx-auto px-4">
+
+        <div class="h-16 flex items-center justify-between">
+
+
+            <!-- LOGO -->
+
+            <a href="index.html"
+               class="flex items-center gap-2">
+
+                <div class="w-10 h-10 bg-green-600 rounded-xl
+                            flex items-center justify-center text-white">
+
+                    🌱
+
+                </div>
+
+                <div>
+
+                    <h1 class="font-bold text-lg text-green-700">
+                        Mbogafreshi
+                    </h1>
+
+                    <p class="text-[10px] text-gray-500">
+                        Fresh. Local. Delivered.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- NAVIGATION -->
+
+            <nav class="hidden md:flex items-center gap-7">
+
+                <a href="index.html"
+                   class="text-gray-600 hover:text-green-600">
+
+                    Home
+
+                </a>
+
+                <a href="products.html"
+                   class="text-green-600 font-semibold">
+
+                    Shop
+
+                </a>
+
+                <a href="index.html#how-it-works"
+                   class="text-gray-600 hover:text-green-600">
+
+                    How It Works
+
+                </a>
+
+                <a href="index.html#delivery"
+                   class="text-gray-600 hover:text-green-600">
+
+                    Delivery
+
+                </a>
+
+            </nav>
+
+
+
+            <!-- CART -->
+
+            <a href="cart.html"
+               class="relative w-11 h-11 bg-gray-100 rounded-full
+                      flex items-center justify-center">
+
+                🛒
+
+                <span id="cart-count"
+                      class="absolute -top-1 -right-1
+                             w-5 h-5 bg-green-600 text-white
+                             text-xs rounded-full
+                             flex items-center justify-center">
+
+                    0
+
+                </span>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     BREADCRUMB
+====================================================== -->
+
+<div class="max-w-7xl mx-auto px-5 pt-7">
+
+    <div class="text-sm text-gray-500">
+
+        <a href="index.html"
+           class="hover:text-green-600">
+
+            Home
+
+        </a>
+
+        <span class="mx-2">
+            /
+        </span>
+
+        <a href="products.html"
+           class="hover:text-green-600">
+
+            Shop
+
+        </a>
+
+        <span class="mx-2">
+            /
+        </span>
+
+        <span id="breadcrumb-product">
+            Product
+        </span>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     PRODUCT SECTION
+====================================================== -->
+
+<main class="max-w-7xl mx-auto px-5 py-8 pb-20">
+
+    <div id="product-container">
+
+        <!-- Product will be inserted by JavaScript -->
+
+    </div>
+
+
+    <!-- =================================================
+         PRODUCT INFORMATION
+    ================================================== -->
+
+    <section class="mt-16 grid md:grid-cols-3 gap-5">
+
+
+        <!-- LOCAL SOURCING -->
+
+        <div class="bg-white rounded-2xl p-6 border">
+
+            <div class="w-11 h-11 bg-green-100 rounded-xl
+                        flex items-center justify-center text-xl">
+
+                🌱
+
+            </div>
+
+            <h3 class="font-bold mt-4">
+
+                Locally sourced
+
+            </h3>
+
+            <p class="text-sm text-gray-500 mt-2">
+
+                We source your groceries from local markets
+                after receiving your order.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- FRESHNESS -->
+
+        <div class="bg-white rounded-2xl p-6 border">
+
+            <div class="w-11 h-11 bg-green-100 rounded-xl
+                        flex items-center justify-center text-xl">
+
+                ✓
+
+            </div>
+
+            <h3 class="font-bold mt-4">
+
+                Fresh produce
+
+            </h3>
+
+            <p class="text-sm text-gray-500 mt-2">
+
+                We select produce according to your order
+                instead of keeping large amounts in storage.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- DELIVERY -->
+
+        <div class="bg-white rounded-2xl p-6 border">
+
+            <div class="w-11 h-11 bg-green-100 rounded-xl
+                        flex items-center justify-center text-xl">
+
+                🛵
+
+            </div>
+
+            <h3 class="font-bold mt-4">
+
+                Doorstep delivery
+
+            </h3>
+
+            <p class="text-sm text-gray-500 mt-2">
+
+                Once your order is prepared, a local rider
+                delivers it to your location.
+
+            </p>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+====================================================== -->
+
+<footer class="bg-gray-950 text-gray-400">
+
+    <div class="max-w-7xl mx-auto px-5 py-10">
+
+        <div class="flex flex-col md:flex-row
+                    justify-between gap-6">
+
+
+            <div>
+
+                <div class="flex items-center gap-2">
+
+                    <div class="w-9 h-9 bg-green-600 rounded-lg
+                                flex items-center justify-center">
+
+                        🌱
+
+                    </div>
+
+                    <span class="text-white font-bold text-lg">
+
+                        Mbogafreshi
+
+                    </span>
+
+                </div>
+
+                <p class="text-sm mt-3 max-w-sm">
+
+                    Fresh groceries sourced locally and
+                    delivered conveniently to your doorstep.
+
+                </p>
+
+            </div>
+
+
+            <div class="text-sm">
+
+                <p class="text-white font-semibold mb-2">
+                    Delivery areas
+                </p>
+
+                <p>Malindi</p>
+                <p>Watamu</p>
+
+            </div>
+
+        </div>
+
+
+        <div class="border-t border-gray-800 mt-8 pt-6
+                    text-center text-xs">
+
+            © 2026 Mbogafreshi. All rights reserved.
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script>
+
+
+/* =====================================================
+   PRODUCT DATA
+
+   This is temporary.
+
+   Later this will come from our backend/database.
+====================================================== */
+
+const products =
+    JSON.parse(
+        localStorage.getItem("mbogafreshiProducts")
+    ) || [];
+
+
+/* =====================================================
+   GET PRODUCT ID FROM URL
+
+   Example:
+
+   product.html?id=1
+
+   JavaScript reads the "1".
+====================================================== */
+
+const urlParams =
+    new URLSearchParams(window.location.search);
+
+
+const productId =
+    Number(urlParams.get("id"));
+
+
+
+/* =====================================================
+   FIND PRODUCT
+====================================================== */
+
+const product =
+    products.find(item => item.id === productId);
+
+
+
+/* =====================================================
+   DISPLAY PRODUCT
+====================================================== */
+
+function displayProduct() {
+
+    const container =
+        document.getElementById("product-container");
+
+
+    /* Product doesn't exist */
+
+    if (!product) {
+
+        container.innerHTML = `
+
+            <div class="text-center py-20">
+
+                <div class="text-6xl">
+                    🛒
+                </div>
+
+                <h2 class="text-2xl font-bold mt-5">
+                    Product not found
+                </h2>
+
+                <p class="text-gray-500 mt-2">
+                    The product you're looking for doesn't exist.
+                </p>
+
+                <a href="products.html"
+                   class="inline-block mt-6
+                          bg-green-600 text-white
+                          px-6 py-3 rounded-xl
+                          font-semibold">
+
+                    Back to Shop
+
+                </a>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    /* Update browser title */
+
+    document.title =
+        `${product.name} | Mbogafreshi`;
+
+
+    /* Update breadcrumb */
+
+    document.getElementById(
+        "breadcrumb-product"
+    ).textContent = product.name;
+
+
+
+    /* Product HTML */
+
+    container.innerHTML = `
+
+        <div class="grid md:grid-cols-2 gap-10
+                    lg:gap-16 items-start">
+
+
+            <!-- =========================================
+                 IMAGE
+            ========================================== -->
+
+            <div class="bg-white rounded-3xl overflow-hidden">
+
+                <img
+                    src="${product.image}"
+                    alt="${product.name}"
+                    class="w-full h-[350px] md:h-[500px]
+                           object-cover">
+
+            </div>
+
+
+
+            <!-- =========================================
+                 PRODUCT INFORMATION
+            ========================================== -->
+
+            <div>
+
+                <p class="text-green-600 font-semibold
+                          text-sm uppercase">
+
+                    ${product.category}
+
+                </p>
+
+
+                <h1 class="text-4xl font-bold mt-2">
+
+                    ${product.name}
+
+                </h1>
+
+
+                <div class="mt-5">
+
+                    <span class="text-3xl font-bold
+                                 text-green-600">
+
+                        KSh ${product.price}
+
+                    </span>
+
+                    <span class="text-gray-500">
+
+                        / ${product.unit}
+
+                    </span>
+
+                </div>
+
+
+                <p class="text-gray-600 leading-relaxed mt-6">
+
+                    ${product.description}
+
+                </p>
+
+
+
+                <!-- =====================================
+                     DELIVERY NOTICE
+                ====================================== -->
+
+                <div class="mt-6 bg-green-50
+                            border border-green-100
+                            rounded-2xl p-4">
+
+                    <div class="flex gap-3">
+
+                        <div>
+                            🌱
+                        </div>
+
+                        <div>
+
+                            <h3 class="font-semibold">
+                                Sourced after you order
+                            </h3>
+
+                            <p class="text-sm text-gray-600 mt-1">
+
+                                We source your groceries from
+                                local markets after receiving
+                                your order.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =====================================
+                     QUANTITY
+                ====================================== -->
+
+                <div class="mt-8">
+
+                    <p class="font-semibold mb-3">
+                        Quantity
+                    </p>
+
+
+                    <div class="flex items-center gap-4">
+
+
+                        <button
+                            onclick="decreaseQuantity()"
+                            class="w-12 h-12 rounded-xl
+                                   border bg-white
+                                   text-xl font-bold
+                                   hover:bg-gray-100">
+
+                            −
+
+                        </button>
+
+
+                        <div
+                            id="quantity"
+                            class="w-16 text-center
+                                   font-bold text-lg">
+
+                            1
+
+                        </div>
+
+
+                        <button
+                            onclick="increaseQuantity()"
+                            class="w-12 h-12 rounded-xl
+                                   border bg-white
+                                   text-xl font-bold
+                                   hover:bg-gray-100">
+
+                            +
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =====================================
+                     TOTAL
+                ====================================== -->
+
+                <div class="mt-7 p-5 bg-gray-50 rounded-2xl">
+
+                    <div class="flex justify-between">
+
+                        <span class="text-gray-600">
+                            Item total
+                        </span>
+
+                        <span id="item-total"
+                              class="font-bold">
+
+                            KSh ${product.price}
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =====================================
+                     ADD TO CART
+                ====================================== -->
+
+                <button
+                    onclick="addToCart()"
+                    class="w-full mt-5 bg-green-600
+                           hover:bg-green-700
+                           text-white font-bold
+                           py-4 rounded-xl
+                           transition">
+
+                    Add to Basket
+
+                </button>
+
+
+                <a href="cart.html"
+                   class="block text-center
+                          text-green-600
+                          font-semibold mt-4">
+
+                    View Basket →
+
+                </a>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+
+/* =====================================================
+   QUANTITY
+====================================================== */
+
+let quantity = 1;
+
+
+
+function increaseQuantity() {
+
+    quantity++;
+
+    updateQuantity();
+
+}
+
+
+
+function decreaseQuantity() {
+
+    if (quantity > 1) {
+
+        quantity--;
+
+    }
+
+    updateQuantity();
+
+}
+
+
+
+function updateQuantity() {
+
+    document.getElementById(
+        "quantity"
+    ).textContent = quantity;
+
+
+    const total =
+        product.price * quantity;
+
+
+    document.getElementById(
+        "item-total"
+    ).textContent = `KSh ${total.toLocaleString()}`;
+
+}
+
+
+
+/* =====================================================
+   CART
+====================================================== */
+
+let cart =
+    JSON.parse(
+        localStorage.getItem("mbogafreshiCart")
+    ) || [];
+
+
+
+function addToCart() {
+
+    const existing =
+        cart.find(
+            item => item.id === product.id
+        );
+
+
+    if (existing) {
+
+        existing.quantity += quantity;
+
+    } else {
+
+        cart.push({
+
+            id: product.id,
+
+            name: product.name,
+
+            price: product.price,
+
+            unit: product.unit,
+
+            quantity: quantity
+
+        });
+
+    }
+
+
+    localStorage.setItem(
+        "mbogafreshiCart",
+        JSON.stringify(cart)
+    );
+
+
+    updateCartCount();
+
+
+    alert(
+        `${quantity} ${product.unit} of ${product.name} added to your basket.`
+    );
+
+}
+
+
+
+/* =====================================================
+   CART COUNT
+====================================================== */
+
+function updateCartCount() {
+
+    const totalItems =
+        cart.reduce(
+            (total, item) =>
+                total + item.quantity,
+            0
+        );
+
+
+    document.getElementById(
+        "cart-count"
+    ).textContent = totalItems;
+
+}
+
+
+
+/* =====================================================
+   INITIALIZE
+====================================================== */
+
+displayProduct();
+
+updateCartCount();
+
+</script>
+
+
+</body>
+
+</html>

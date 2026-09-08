@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Dashboard | Mbogafreshi</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+
+<body class="bg-gray-100 text-gray-800">
+
+
+<!-- =========================================================
+     SIDEBAR
+========================================================= -->
+
+<aside
+    id="sidebar"
+    class="fixed left-0 top-0 bottom-0 w-64 bg-white border-r z-50 transform -translate-x-full lg:translate-x-0 transition-transform"
+>
+
+    <!-- Logo -->
+
+    <div class="h-20 border-b flex items-center px-6">
+
+        <div class="flex items-center gap-2">
+
+            <span class="text-2xl">
+                🌱
+            </span>
+
+            <div>
+
+                <h1 class="font-bold text-green-700">
+                    Mbogafreshi
+                </h1>
+
+                <p class="text-xs text-gray-400">
+                    Admin
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Navigation -->
+
+    <nav class="p-4 space-y-1">
+
+        <a
+            href="dashboard.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl bg-green-50 text-green-700 font-medium"
+        >
+            <span>▦</span>
+            Dashboard
+        </a>
+
+
+        <a
+            href="orders.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50"
+        >
+            <span>🛒</span>
+            Orders
+
+            <span
+                id="sidebarOrderCount"
+                class="ml-auto text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full"
+            >
+                0
+            </span>
+
+        </a>
+
+
+        <a
+            href="products.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50"
+        >
+            <span>🥬</span>
+            Products
+        </a>
+
+
+        <a
+            href="#"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400"
+        >
+            <span>🏍️</span>
+            Riders
+        </a>
+
+
+        <a
+            href="#"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400"
+        >
+            <span>💳</span>
+            Payments
+        </a>
+
+
+        <a
+            href="#"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400"
+        >
+            <span>⚙️</span>
+            Settings
+        </a>
+
+    </nav>
+
+
+    <!-- Bottom -->
+
+    <div class="absolute bottom-0 left-0 right-0 p-4 border-t">
+
+        <button
+            onclick="logout()"
+            class="w-full text-left px-4 py-3 rounded-xl text-red-600 hover:bg-red-50"
+        >
+            ← Log Out
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- =========================================================
+     MOBILE OVERLAY
+========================================================= -->
+
+<div
+    id="sidebarOverlay"
+    class="hidden fixed inset-0 bg-black/30 z-40 lg:hidden"
+></div>
+
+
+<!-- =========================================================
+     MAIN CONTENT
+========================================================= -->
+
+<div class="lg:ml-64 min-h-screen">
+
+
+    <!-- HEADER -->
+
+    <header class="h-20 bg-white border-b flex items-center justify-between px-4 md:px-8">
+
+        <div class="flex items-center gap-4">
+
+            <button
+                id="menuButton"
+                class="lg:hidden text-2xl"
+            >
+                ☰
+            </button>
+
+
+            <div>
+
+                <h2 class="font-bold text-xl">
+                    Dashboard
+                </h2>
+
+                <p class="text-xs text-gray-400">
+                    Mbogafreshi operations
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="flex items-center gap-3">
+
+            <div class="text-right hidden sm:block">
+
+                <p class="text-sm font-semibold">
+                    Administrator
+                </p>
+
+                <p class="text-xs text-gray-400">
+                    Admin
+                </p>
+
+            </div>
+
+
+            <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-700 font-bold">
+                A
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- CONTENT -->
+
+    <main class="p-4 md:p-8">
+
+
+        <!-- PAGE TITLE -->
+
+        <div class="mb-8">
+
+            <h1 class="text-2xl md:text-3xl font-bold">
+                Good evening
+            </h1>
+
+            <p class="text-gray-500 mt-1">
+                Here's what's happening with Mbogafreshi today.
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+             STAT CARDS
+        ================================================== -->
+
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+
+
+            <!-- ORDERS -->
+
+            <div class="bg-white rounded-2xl p-5 shadow-sm">
+
+                <div class="flex justify-between items-start">
+
+                    <div>
+
+                        <p class="text-sm text-gray-500">
+                            Total Orders
+                        </p>
+
+                        <p
+                            id="totalOrders"
+                            class="text-2xl font-bold mt-2"
+                        >
+                            0
+                        </p>
+
+                    </div>
+
+                    <div class="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center">
+                        🛒
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- AWAITING -->
+
+            <div class="bg-white rounded-2xl p-5 shadow-sm">
+
+                <div class="flex justify-between items-start">
+
+                    <div>
+
+                        <p class="text-sm text-gray-500">
+                            Awaiting Action
+                        </p>
+
+                        <p
+                            id="awaitingOrders"
+                            class="text-2xl font-bold mt-2"
+                        >
+                            0
+                        </p>
+
+                    </div>
+
+                    <div class="w-10 h-10 bg-yellow-100 rounded-xl flex items-center justify-center">
+                        ⏳
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DELIVERY -->
+
+            <div class="bg-white rounded-2xl p-5 shadow-sm">
+
+                <div class="flex justify-between items-start">
+
+                    <div>
+
+                        <p class="text-sm text-gray-500">
+                            Out for Delivery
+                        </p>
+
+                        <p
+                            id="deliveryOrders"
+                            class="text-2xl font-bold mt-2"
+                        >
+                            0
+                        </p>
+
+                    </div>
+
+                    <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
+                        🏍️
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SALES -->
+
+            <div class="bg-white rounded-2xl p-5 shadow-sm">
+
+                <div class="flex justify-between items-start">
+
+                    <div>
+
+                        <p class="text-sm text-gray-500">
+                            Order Value
+                        </p>
+
+                        <p
+                            id="totalSales"
+                            class="text-2xl font-bold mt-2"
+                        >
+                            KSh 0
+                        </p>
+
+                    </div>
+
+                    <div class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center">
+                        💰
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             QUICK ACTIONS
+        ================================================== -->
+
+        <section class="mb-8">
+
+            <h2 class="text-lg font-bold mb-4">
+                Quick Actions
+            </h2>
+
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+
+
+                <a
+                    href="orders.html"
+                    class="bg-green-600 hover:bg-green-700 text-white rounded-2xl p-5 transition"
+                >
+
+                    <div class="text-2xl mb-3">
+                        🛒
+                    </div>
+
+                    <h3 class="font-semibold">
+                        Manage Orders
+                    </h3>
+
+                    <p class="text-sm text-green-100 mt-1">
+                        View and process customer orders.
+                    </p>
+
+                </a>
+
+
+                <a
+                    href="products.html"
+                    class="bg-white hover:border-green-400 border border-transparent rounded-2xl p-5 shadow-sm transition"
+                >
+
+                    <div class="text-2xl mb-3">
+                        🥬
+                    </div>
+
+                    <h3 class="font-semibold">
+                        Manage Products
+                    </h3>
+
+                    <p class="text-sm text-gray-500 mt-1">
+                        Add and update grocery products.
+                    </p>
+
+                </a>
+
+
+                <a
+                    href="#"
+                    class="bg-white border border-transparent rounded-2xl p-5 shadow-sm"
+                >
+
+                    <div class="text-2xl mb-3">
+                        🏍️
+                    </div>
+
+                    <h3 class="font-semibold">
+                        Riders
+                    </h3>
+
+                    <p class="text-sm text-gray-500 mt-1">
+                        Rider management coming next.
+                    </p>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             RECENT ORDERS
+        ================================================== -->
+
+        <section class="bg-white rounded-2xl shadow-sm">
+
+
+            <div class="p-5 border-b flex items-center justify-between">
+
+                <div>
+
+                    <h2 class="font-bold text-lg">
+                        Recent Orders
+                    </h2>
+
+                    <p class="text-sm text-gray-400 mt-1">
+                        Latest customer orders
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="orders.html"
+                    class="text-sm text-green-700 font-medium"
+                >
+                    View all →
+                </a>
+
+            </div>
+
+
+            <div
+                id="recentOrders"
+                class="divide-y"
+            >
+
+                <!-- Orders inserted here -->
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+    /*
+    ============================================================
+    CHECK ADMIN LOGIN
+    ============================================================
+    */
+
+    const loggedIn =
+        sessionStorage.getItem(
+            "mbogafreshiAdmin"
+        );
+
+
+    if (loggedIn !== "true") {
+
+        window.location.href =
+            "login.html";
+
+    }
+
+
+    /*
+    ============================================================
+    LOAD ORDERS
+    ============================================================
+    */
+
+    const orders =
+        JSON.parse(
+            localStorage.getItem(
+                "mbogafreshiOrders"
+            )
+        ) || [];
+
+
+    /*
+    ============================================================
+    BASIC STATISTICS
+    ============================================================
+    */
+
+    const totalOrders =
+        orders.length;
+
+
+    const awaitingOrders =
+        orders.filter(order =>
+            order.status === "CONFIRMED" ||
+            order.status === "PENDING_PAYMENT"
+        ).length;
+
+
+    const deliveryOrders =
+        orders.filter(order =>
+            order.status === "OUT_FOR_DELIVERY"
+        ).length;
+
+
+    const totalSales =
+        orders.reduce(
+            (sum, order) =>
+                sum + Number(order.total || 0),
+            0
+        );
+
+
+    /*
+    ============================================================
+    DISPLAY STATISTICS
+    ============================================================
+    */
+
+    document.getElementById(
+        "totalOrders"
+    ).textContent =
+        totalOrders;
+
+
+    document.getElementById(
+        "awaitingOrders"
+    ).textContent =
+        awaitingOrders;
+
+
+    document.getElementById(
+        "deliveryOrders"
+    ).textContent =
+        deliveryOrders;
+
+
+    document.getElementById(
+        "totalSales"
+    ).textContent =
+        `KSh ${totalSales.toLocaleString()}`;
+
+
+    document.getElementById(
+        "sidebarOrderCount"
+    ).textContent =
+        totalOrders;
+
+
+    /*
+    ============================================================
+    RECENT ORDERS
+    ============================================================
+    */
+
+    const recentOrders =
+        document.getElementById(
+            "recentOrders"
+        );
+
+
+    if (orders.length === 0) {
+
+        recentOrders.innerHTML = `
+
+            <div class="p-10 text-center">
+
+                <div class="text-4xl mb-3">
+                    🛒
+                </div>
+
+                <h3 class="font-semibold">
+                    No orders yet
+                </h3>
+
+                <p class="text-sm text-gray-400 mt-1">
+                    Customer orders will appear here.
+                </p>
+
+            </div>
+
+        `;
+
+    } else {
+
+
+        /*
+        Show newest orders first
+        */
+
+        const latestOrders =
+            [...orders]
+                .reverse()
+                .slice(0, 5);
+
+
+        latestOrders.forEach(order => {
+
+            const row =
+                document.createElement("a");
+
+
+            row.href =
+                `order.html?id=${order.orderNumber}`;
+
+
+            row.className =
+                "block p-5 hover:bg-gray-50 transition";
+
+
+            row.innerHTML = `
+
+                <div class="flex items-center justify-between gap-4">
+
+                    <div class="min-w-0">
+
+                        <div class="flex items-center gap-2">
+
+                            <p class="font-semibold">
+                                ${order.orderNumber}
+                            </p>
+
+                            <span class="text-xs px-2 py-1 rounded-full bg-green-100 text-green-700">
+                                ${order.status.replace("_", " ")}
+                            </span>
+
+                        </div>
+
+
+                        <p class="text-sm text-gray-500 mt-1 truncate">
+                            ${order.customer.name}
+                            ·
+                            ${order.customer.area}
+                        </p>
+
+                    </div>
+
+
+                    <div class="text-right shrink-0">
+
+                        <p class="font-semibold">
+                            KSh ${Number(order.total).toLocaleString()}
+                        </p>
+
+                        <p class="text-xs text-gray-400 mt-1">
+                            ${order.customer.phone}
+                        </p>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            recentOrders.appendChild(row);
+
+        });
+
+    }
+
+
+    /*
+    ============================================================
+    MOBILE SIDEBAR
+    ============================================================
+    */
+
+    const sidebar =
+        document.getElementById("sidebar");
+
+
+    const overlay =
+        document.getElementById("sidebarOverlay");
+
+
+    document
+        .getElementById("menuButton")
+        .addEventListener(
+            "click",
+            () => {
+
+                sidebar.classList.remove(
+                    "-translate-x-full"
+                );
+
+                overlay.classList.remove(
+                    "hidden"
+                );
+
+            }
+        );
+
+
+    overlay.addEventListener(
+        "click",
+        () => {
+
+            sidebar.classList.add(
+                "-translate-x-full"
+            );
+
+            overlay.classList.add(
+                "hidden"
+            );
+
+        }
+    );
+
+
+    /*
+    ============================================================
+    LOGOUT
+    ============================================================
+    */
+
+    function logout() {
+
+        sessionStorage.removeItem(
+            "mbogafreshiAdmin"
+        );
+
+
+        window.location.href =
+            "login.html";
+
+    }
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Order Details | Mbogafreshi Admin</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 text-gray-800">
+
+<!-- =========================
+     MOBILE HEADER
+========================= -->
+<header class="lg:hidden bg-white border-b sticky top-0 z-40">
+    <div class="flex items-center justify-between px-4 py-4">
+
+        <button onclick="toggleSidebar()"
+                class="text-gray-700 text-2xl">
+            ☰
+        </button>
+
+        <h1 class="font-bold text-lg">
+            Mbogafreshi
+        </h1>
+
+        <a href="orders.html"
+           class="text-green-700 text-sm font-medium">
+            Orders
+        </a>
+
+    </div>
+</header>
+
+
+<!-- =========================
+     SIDEBAR
+========================= -->
+<aside id="sidebar"
+       class="fixed inset-y-0 left-0 w-64 bg-white border-r z-50
+              transform -translate-x-full lg:translate-x-0
+              transition-transform duration-300">
+
+    <div class="p-6 border-b">
+        <h1 class="text-2xl font-bold text-green-700">
+            Mbogafreshi
+        </h1>
+
+        <p class="text-sm text-gray-500">
+            Admin Panel
+        </p>
+    </div>
+
+    <nav class="p-4 space-y-2">
+
+        <a href="dashboard.html"
+           class="block px-4 py-3 rounded-lg hover:bg-green-50">
+            Dashboard
+        </a>
+
+        <a href="orders.html"
+           class="block px-4 py-3 rounded-lg bg-green-50 text-green-700 font-semibold">
+            Orders
+        </a>
+
+        <a href="#"
+           class="block px-4 py-3 rounded-lg hover:bg-green-50">
+            Products
+        </a>
+
+        <a href="#"
+           class="block px-4 py-3 rounded-lg hover:bg-green-50">
+            Riders
+        </a>
+
+        <a href="#"
+           class="block px-4 py-3 rounded-lg hover:bg-green-50">
+            Payments
+        </a>
+
+        <a href="#"
+           class="block px-4 py-3 rounded-lg hover:bg-green-50">
+            Settings
+        </a>
+
+        <button onclick="logout()"
+                class="w-full text-left px-4 py-3 rounded-lg
+                       text-red-600 hover:bg-red-50">
+            Logout
+        </button>
+
+    </nav>
+</aside>
+
+
+<!-- =========================
+     MAIN CONTENT
+========================= -->
+<main class="lg:ml-64 min-h-screen">
+
+    <!-- TOP BAR -->
+    <div class="hidden lg:flex bg-white border-b px-8 py-5
+                items-center justify-between">
+
+        <div>
+            <h2 class="text-2xl font-bold">
+                Order Command Center
+            </h2>
+
+            <p class="text-sm text-gray-500">
+                Manage sourcing, payments, riders and delivery
+            </p>
+        </div>
+
+        <a href="orders.html"
+           class="px-4 py-2 border rounded-lg hover:bg-gray-50">
+            ← Back to Orders
+        </a>
+
+    </div>
+
+
+    <!-- PAGE -->
+    <div class="p-4 lg:p-8">
+
+        <!-- ORDER HEADER -->
+        <div id="orderHeader"
+             class="bg-white rounded-2xl shadow-sm p-6 mb-6">
+        </div>
+
+
+        <!-- MAIN GRID -->
+        <div class="grid lg:grid-cols-3 gap-6">
+
+
+            <!-- =====================================
+                 LEFT / MAIN SECTION
+            ====================================== -->
+            <div class="lg:col-span-2 space-y-6">
+
+
+                <!-- =========================
+                     CUSTOMER DETAILS
+                ========================== -->
+                <section class="bg-white rounded-2xl shadow-sm p-6">
+
+                    <h3 class="text-lg font-bold mb-5">
+                        Customer & Delivery
+                    </h3>
+
+                    <div id="customerDetails"
+                         class="grid sm:grid-cols-2 gap-5">
+                    </div>
+
+                </section>
+
+
+                <!-- =========================
+                     ORDER ITEMS
+                ========================== -->
+                <section class="bg-white rounded-2xl shadow-sm p-6">
+
+                    <div class="flex items-center justify-between mb-5">
+
+                        <h3 class="text-lg font-bold">
+                            Grocery Items
+                        </h3>
+
+                        <span id="itemCount"
+                              class="text-sm text-gray-500">
+                        </span>
+
+                    </div>
+
+                    <div id="orderItems"
+                         class="space-y-4">
+                    </div>
+
+                    <div class="border-t mt-6 pt-5">
+
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-500">
+                                Grocery subtotal
+                            </span>
+
+                            <strong id="grocerySubtotal">
+                            </strong>
+                        </div>
+
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-500">
+                                Delivery fee
+                            </span>
+
+                            <strong id="deliveryFee">
+                            </strong>
+                        </div>
+
+                        <div class="flex justify-between text-lg font-bold">
+                            <span>
+                                Customer total
+                            </span>
+
+                            <span id="customerTotal"
+                                  class="text-green-700">
+                            </span>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =========================
+                     SOURCING LIST
+                ========================== -->
+                <section class="bg-white rounded-2xl shadow-sm p-6">
+
+                    <div class="flex justify-between items-center mb-5">
+
+                        <div>
+                            <h3 class="text-lg font-bold">
+                                Market Sourcing
+                            </h3>
+
+                            <p class="text-sm text-gray-500">
+                                Use this list when purchasing the groceries.
+                            </p>
+                        </div>
+
+                        <span id="sourcingProgress"
+                              class="text-sm font-semibold text-green-700">
+                        </span>
+
+                    </div>
+
+                    <div id="sourcingList"
+                         class="space-y-3">
+                    </div>
+
+                </section>
+
+
+                <!-- =========================
+                     INTERNAL COSTS
+                ========================== -->
+                <section class="bg-white rounded-2xl shadow-sm p-6">
+
+                    <div class="mb-5">
+
+                        <h3 class="text-lg font-bold">
+                            Internal Cost Tracking
+                        </h3>
+
+                        <p class="text-sm text-gray-500">
+                            These figures are private and are not shown to customers.
+                        </p>
+
+                    </div>
+
+
+                    <div id="costItems"
+                         class="space-y-4">
+                    </div>
+
+
+                    <div class="border-t mt-6 pt-5 space-y-3">
+
+                        <div class="flex justify-between">
+                            <span>
+                                Customer grocery subtotal
+                            </span>
+
+                            <strong id="costCustomerSubtotal">
+                            </strong>
+                        </div>
+
+                        <div class="flex justify-between">
+                            <span>
+                                Actual market cost
+                            </span>
+
+                            <strong id="actualMarketCost">
+                            </strong>
+                        </div>
+
+                        <div class="flex justify-between">
+                            <span>
+                                Rider cost
+                            </span>
+
+                            <strong id="riderCostDisplay">
+                            </strong>
+                        </div>
+
+                        <div class="border-t pt-3 flex justify-between
+                                    text-lg font-bold">
+
+                            <span>
+                                Estimated gross profit
+                            </span>
+
+                            <span id="estimatedProfit"
+                                  class="text-green-700">
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =========================
+                     INTERNAL NOTES
+                ========================== -->
+                <section class="bg-white rounded-2xl shadow-sm p-6">
+
+                    <h3 class="text-lg font-bold mb-4">
+                        Internal Notes
+                    </h3>
+
+                    <textarea id="internalNotes"
+                              rows="5"
+                              placeholder="Add private notes about this order..."
+                              class="w-full border rounded-xl p-4
+                                     focus:ring-2 focus:ring-green-500
+                                     outline-none"></textarea>
+
+                    <button onclick="saveNotes()"
+                            class="mt-4 bg-green-700 text-white
+                                   px-5 py-2.5 rounded-lg
+                                   hover:bg-green-800">
+                        Save Notes
+                    </button>
+
+                </section>
+
+            </div>
+
+
+            <!-- =====================================
+                 RIGHT SIDEBAR
+            ====================================== -->
+            <div class="space-y-6">
+
+
+                <!-- =========================
+                     ORDER STATUS
+                ========================== -->
+                <section class="bg-white rounded-2xl shadow-sm p-6">
+
+                    <h3 class="text-lg font-bold mb-4">
+                        Order Status
+                    </h3>
+
+                    <select id="statusSelect"
+                            onchange="changeStatus()"
+                            class="w-full border rounded-lg px-4 py-3
+                                   focus:ring-2 focus:ring-green-500
+                                   outline-none">
+
+                        <option value="CONFIRMED">
+                            New Order
+                        </option>
+
+                        <option value="SOURCING">
+                            Sourcing
+                        </option>
+
+                        <option value="READY_FOR_PICKUP">
+                            Ready for Pickup
+                        </option>
+
+                        <option value="RIDER_ASSIGNED">
+                            Rider Assigned
+                        </option>
+
+                        <option value="PICKED_UP">
+                            Picked Up
+                        </option>
+
+                        <option value="OUT_FOR_DELIVERY">
+                            Out for Delivery
+                        </option>
+
+                        <option value="DELIVERED">
+                            Delivered
+                        </option>
+
+                        <option value="CANCELLED">
+                            Cancelled
+                        </option>
+
+                    </select>
+
+                    <p id="statusMessage"
+                       class="text-sm text-gray-500 mt-3">
+                    </p>
+
+                </section>
+
+
+                <!-- =========================
+                     PAYMENT
+                ========================== -->
+                <section class="bg-white rounded-2xl shadow-sm p-6">
+
+                    <h3 class="text-lg font-bold mb-4">
+                        Payment
+                    </h3>
+
+                    <div id="paymentDetails"
+                         class="space-y-3">
+                    </div>
+
+                </section>
+
+
+                <!-- =========================
+                     RIDER ASSIGNMENT
+                ========================== -->
+                <section class="bg-white rounded-2xl shadow-sm p-6">
+
+                    <h3 class="text-lg font-bold mb-2">
+                        Rider Assignment
+                    </h3>
+
+                    <p class="text-sm text-gray-500 mb-4">
+                        Demo riders for V1.
+                    </p>
+
+                    <select id="riderSelect"
+                            class="w-full border rounded-lg px-4 py-3 mb-3">
+
+                        <option value="">
+                            Select rider
+                        </option>
+
+                        <option value="Ali — Malindi">
+                            Ali — Malindi
+                        </option>
+
+                        <option value="Hassan — Watamu">
+                            Hassan — Watamu
+                        </option>
+
+                        <option value="Juma — Gede">
+                            Juma — Gede
+                        </option>
+
+                    </select>
+
+                    <button onclick="assignRider()"
+                            class="w-full bg-green-700 text-white
+                                   py-3 rounded-lg
+                                   hover:bg-green-800">
+
+                        Assign Rider
+
+                    </button>
+
+                    <div id="assignedRider"
+                         class="mt-4">
+                    </div>
+
+                </section>
+
+
+                <!-- =========================
+                     ORDER INFORMATION
+                ========================== -->
+                <section class="bg-white rounded-2xl shadow-sm p-6">
+
+                    <h3 class="text-lg font-bold mb-4">
+                        Order Information
+                    </h3>
+
+                    <div id="orderInformation"
+                         class="space-y-3 text-sm">
+                    </div>
+
+                </section>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<script>
+
+/* =====================================================
+   AUTHENTICATION
+===================================================== */
+
+if (sessionStorage.getItem("mbogafreshiAdmin") !== "true") {
+    window.location.href = "login.html";
+}
+
+
+/* =====================================================
+   GET ORDER NUMBER FROM URL
+===================================================== */
+
+const params = new URLSearchParams(window.location.search);
+
+const orderNumber = params.get("id");
+
+
+/* =====================================================
+   LOAD ORDERS
+===================================================== */
+
+let orders = JSON.parse(
+    localStorage.getItem("mbogafreshiOrders")
+) || [];
+
+
+/* =====================================================
+   FIND ORDER
+===================================================== */
+
+let order = orders.find(
+    item => item.orderNumber === orderNumber
+);
+
+
+/* =====================================================
+   CHECK ORDER
+===================================================== */
+
+if (!order) {
+
+    document.body.innerHTML = `
+        <div class="min-h-screen flex items-center justify-center p-6">
+
+            <div class="bg-white p-8 rounded-2xl shadow text-center">
+
+                <h1 class="text-2xl font-bold mb-3">
+                    Order Not Found
+                </h1>
+
+                <p class="text-gray-500 mb-5">
+                    We could not find order ${orderNumber || ""}.
+                </p>
+
+                <a href="orders.html"
+                   class="inline-block bg-green-700 text-white
+                          px-5 py-3 rounded-lg">
+
+                    Back to Orders
+
+                </a>
+
+            </div>
+
+        </div>
+    `;
+
+    throw new Error("Order not found");
+}
+
+
+/* =====================================================
+   HELPER FUNCTIONS
+===================================================== */
+
+function money(amount) {
+
+    return `KSh ${Number(amount || 0).toLocaleString()}`;
+
+}
+
+
+function escapeHTML(value) {
+
+    return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* =====================================================
+   STATUS LABEL
+===================================================== */
+
+function statusLabel(status) {
+
+    const labels = {
+
+        PENDING_PAYMENT: "Payment Pending",
+
+        CONFIRMED: "New Order",
+
+        SOURCING: "Sourcing",
+
+        READY_FOR_PICKUP: "Ready for Pickup",
+
+        RIDER_ASSIGNED: "Rider Assigned",
+
+        PICKED_UP: "Picked Up",
+
+        OUT_FOR_DELIVERY: "Out for Delivery",
+
+        DELIVERED: "Delivered",
+
+        CANCELLED: "Cancelled"
+
+    };
+
+    return labels[status] || status;
+
+}
+
+
+/* =====================================================
+   STATUS MESSAGE
+===================================================== */
+
+function statusDescription(status) {
+
+    const descriptions = {
+
+        PENDING_PAYMENT:
+            "Waiting for the required payment.",
+
+        CONFIRMED:
+            "Order has been received and is waiting for processing.",
+
+        SOURCING:
+            "Groceries are being purchased from the market.",
+
+        READY_FOR_PICKUP:
+            "All groceries have been sourced and are ready for the rider.",
+
+        RIDER_ASSIGNED:
+            "A rider has been assigned to this order.",
+
+        PICKED_UP:
+            "The rider has picked up the grocery package.",
+
+        OUT_FOR_DELIVERY:
+            "The order is currently on the way to the customer.",
+
+        DELIVERED:
+            "The customer has received the order.",
+
+        CANCELLED:
+            "This order has been cancelled."
+
+    };
+
+    return descriptions[status] || "";
+
+}
+
+
+/* =====================================================
+   RENDER ORDER HEADER
+===================================================== */
+
+function renderOrderHeader() {
+
+    document.getElementById("orderHeader").innerHTML = `
+
+        <div class="flex flex-col md:flex-row
+                    md:items-center md:justify-between gap-4">
+
+            <div>
+
+                <p class="text-sm text-gray-500">
+                    Order Number
+                </p>
+
+                <h2 class="text-2xl font-bold">
+                    ${escapeHTML(order.orderNumber)}
+                </h2>
+
+                <p class="text-sm text-gray-500 mt-1">
+                    ${new Date(order.createdAt).toLocaleString()}
+                </p>
+
+            </div>
+
+            <div>
+
+                <span class="inline-block px-4 py-2
+                             rounded-full bg-green-100
+                             text-green-700 font-semibold">
+
+                    ${statusLabel(order.status)}
+
+                </span>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   CUSTOMER DETAILS
+===================================================== */
+
+function renderCustomerDetails() {
+
+    const customer = order.customer || {};
+
+    document.getElementById("customerDetails").innerHTML = `
+
+        <div>
+
+            <p class="text-xs uppercase text-gray-400 mb-1">
+                Customer
+            </p>
+
+            <p class="font-semibold">
+                ${escapeHTML(customer.name)}
+            </p>
+
+        </div>
+
+        <div>
+
+            <p class="text-xs uppercase text-gray-400 mb-1">
+                Phone
+            </p>
+
+            <p class="font-semibold">
+                ${escapeHTML(customer.phone)}
+            </p>
+
+        </div>
+
+        <div>
+
+            <p class="text-xs uppercase text-gray-400 mb-1">
+                Delivery Area
+            </p>
+
+            <p class="font-semibold">
+                ${escapeHTML(customer.area)}
+            </p>
+
+        </div>
+
+        <div>
+
+            <p class="text-xs uppercase text-gray-400 mb-1">
+                Specific Location
+            </p>
+
+            <p class="font-semibold">
+                ${escapeHTML(customer.location)}
+            </p>
+
+        </div>
+
+        <div>
+
+            <p class="text-xs uppercase text-gray-400 mb-1">
+                Landmark
+            </p>
+
+            <p class="font-semibold">
+                ${escapeHTML(customer.landmark || "Not provided")}
+            </p>
+
+        </div>
+
+        <div>
+
+            <p class="text-xs uppercase text-gray-400 mb-1">
+                Delivery Instructions
+            </p>
+
+            <p class="font-semibold">
+                ${escapeHTML(customer.instructions || "None")}
+            </p>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   ORDER ITEMS
+===================================================== */
+
+function renderOrderItems() {
+
+    const items = order.items || [];
+
+    document.getElementById("itemCount").textContent =
+        `${items.length} item${items.length === 1 ? "" : "s"}`;
+
+
+    document.getElementById("orderItems").innerHTML = items.map(item => {
+
+        const lineTotal =
+            Number(item.price || 0) * Number(item.quantity || 0);
+
+        return `
+
+            <div class="flex items-center justify-between
+                        gap-4 border rounded-xl p-4">
+
+                <div class="flex-1">
+
+                    <h4 class="font-semibold">
+                        ${escapeHTML(item.name)}
+                    </h4>
+
+                    <p class="text-sm text-gray-500">
+                        ${item.quantity} × ${money(item.price)}
+                        ${item.unit ? " / " + escapeHTML(item.unit) : ""}
+                    </p>
+
+                </div>
+
+                <strong>
+                    ${money(lineTotal)}
+                </strong>
+
+            </div>
+
+        `;
+
+    }).join("");
+
+
+    document.getElementById("grocerySubtotal").textContent =
+        money(order.grocerySubtotal);
+
+
+    document.getElementById("deliveryFee").textContent =
+        money(order.deliveryFee);
+
+
+    document.getElementById("customerTotal").textContent =
+        money(order.total);
+
+}
+
+
+/* =====================================================
+   SOURCING DATA
+===================================================== */
+
+if (!order.sourcing) {
+
+    order.sourcing = {};
+
+}
+
+
+if (!order.sourcing.items) {
+
+    order.sourcing.items = {};
+
+}
+
+
+/* =====================================================
+   RENDER SOURCING LIST
+===================================================== */
+
+function renderSourcingList() {
+
+    const items = order.items || [];
+
+    let sourcedCount = 0;
+
+
+    const html = items.map((item, index) => {
+
+        const key = String(index);
+
+        const isSourced =
+            order.sourcing.items[key] === true;
+
+        if (isSourced) {
+            sourcedCount++;
+        }
+
+        return `
+
+            <label class="flex items-center justify-between
+                          gap-4 border rounded-xl p-4
+                          cursor-pointer hover:bg-gray-50">
+
+                <div>
+
+                    <p class="font-semibold">
+                        ${escapeHTML(item.name)}
+                    </p>
+
+                    <p class="text-sm text-gray-500">
+                        ${item.quantity}
+                        ${item.unit || ""}
+                    </p>
+
+                </div>
+
+                <div class="flex items-center gap-2">
+
+                    <span class="text-sm
+                        ${isSourced
+                            ? "text-green-700"
+                            : "text-gray-400"}">
+
+                        ${isSourced ? "Sourced" : "Pending"}
+
+                    </span>
+
+                    <input type="checkbox"
+                           ${isSourced ? "checked" : ""}
+                           onchange="toggleSourced(${index}, this.checked)"
+                           class="w-5 h-5">
+
+                </div>
+
+            </label>
+
+        `;
+
+    }).join("");
+
+
+    document.getElementById("sourcingList").innerHTML = html;
+
+
+    document.getElementById("sourcingProgress").textContent =
+        `${sourcedCount}/${items.length} sourced`;
+
+
+    if (items.length > 0 && sourcedCount === items.length) {
+
+        document.getElementById("sourcingProgress")
+            .classList.add("text-green-700");
+
+    }
+
+}
+
+
+/* =====================================================
+   TOGGLE SOURCED
+===================================================== */
+
+function toggleSourced(index, value) {
+
+    order.sourcing.items[String(index)] = value;
+
+    saveOrder();
+
+    renderSourcingList();
+
+}
+
+
+/* =====================================================
+   INTERNAL COST TRACKING
+===================================================== */
+
+if (!order.costs) {
+
+    order.costs = {
+
+        marketCosts: {},
+
+        riderCost: 0
+
+    };
+
+}
+
+
+if (!order.costs.marketCosts) {
+
+    order.costs.marketCosts = {};
+
+}
+
+
+function renderCostItems() {
+
+    const items = order.items || [];
+
+    document.getElementById("costItems").innerHTML =
+        items.map((item, index) => {
+
+            const key = String(index);
+
+            const marketCost =
+                Number(order.costs.marketCosts[key] || 0);
+
+            const quantity =
+                Number(item.quantity || 0);
+
+            const actualLineCost =
+                marketCost * quantity;
+
+
+            return `
+
+                <div class="border rounded-xl p-4">
+
+                    <div class="flex justify-between mb-3">
+
+                        <div>
+
+                            <p class="font-semibold">
+                                ${escapeHTML(item.name)}
+                            </p>
+
+                            <p class="text-sm text-gray-500">
+                                ${quantity} ${item.unit || ""}
+                            </p>
+
+                        </div>
+
+                        <p class="font-semibold">
+                            ${money(actualLineCost)}
+                        </p>
+
+                    </div>
+
+
+                    <label class="block text-sm text-gray-500 mb-1">
+                        Actual market cost per unit
+                    </label>
+
+                    <input
+                        type="number"
+                        min="0"
+                        step="1"
+                        value="${marketCost}"
+                        onchange="updateMarketCost(${index}, this.value)"
+                        class="w-full border rounded-lg px-4 py-2.5
+                               focus:ring-2 focus:ring-green-500
+                               outline-none">
+
+                </div>
+
+            `;
+
+        }).join("");
+
+
+    calculateCosts();
+
+}
+
+
+/* =====================================================
+   UPDATE MARKET COST
+===================================================== */
+
+function updateMarketCost(index, value) {
+
+    order.costs.marketCosts[String(index)] =
+        Number(value || 0);
+
+    saveOrder();
+
+    renderCostItems();
+
+}
+
+
+/* =====================================================
+   CALCULATE PROFIT
+===================================================== */
+
+function calculateCosts() {
+
+    const items = order.items || [];
+
+    let actualMarketCost = 0;
+
+
+    items.forEach((item, index) => {
+
+        const marketCost =
+            Number(
+                order.costs.marketCosts[String(index)] || 0
+            );
+
+        const quantity =
+            Number(item.quantity || 0);
+
+        actualMarketCost +=
+            marketCost * quantity;
+
+    });
+
+
+    const riderCost =
+        Number(order.costs.riderCost || 0);
+
+
+    /*
+       Product gross margin:
+
+       Customer grocery amount
+       -
+       Actual market cost
+    */
+
+    const productMargin =
+        Number(order.grocerySubtotal || 0)
+        -
+        actualMarketCost;
+
+
+    /*
+       Estimated profit after rider cost:
+
+       Customer grocery amount
+       -
+       Market cost
+       -
+       Rider cost
+    */
+
+    const estimatedProfit =
+        productMargin - riderCost;
+
+
+    document.getElementById("costCustomerSubtotal")
+        .textContent = money(order.grocerySubtotal);
+
+
+    document.getElementById("actualMarketCost")
+        .textContent = money(actualMarketCost);
+
+
+    document.getElementById("riderCostDisplay")
+        .textContent = money(riderCost);
+
+
+    document.getElementById("estimatedProfit")
+        .textContent = money(estimatedProfit);
+
+}
+
+
+/* =====================================================
+   STATUS CONTROL
+===================================================== */
+
+function changeStatus() {
+
+    const newStatus =
+        document.getElementById("statusSelect").value;
+
+
+    order.status = newStatus;
+
+    saveOrder();
+
+    renderOrderHeader();
+
+    document.getElementById("statusMessage")
+        .textContent =
+        statusDescription(newStatus);
+
+
+    /*
+       If all items are sourced and admin manually
+       moves to READY_FOR_PICKUP, that's allowed.
+    */
+
+}
+
+
+/* =====================================================
+   PAYMENT DETAILS
+===================================================== */
+
+function renderPaymentDetails() {
+
+    const groceryMethod =
+        order.groceryPaymentMethod;
+
+
+    const groceryPrepaid =
+        groceryMethod === "prepaid";
+
+
+    document.getElementById("paymentDetails").innerHTML = `
+
+        <div class="flex justify-between">
+
+            <span class="text-gray-500">
+                Delivery fee
+            </span>
+
+            <strong>
+                ${money(order.deliveryFee)}
+            </strong>
+
+        </div>
+
+
+        <div class="flex justify-between">
+
+            <span class="text-gray-500">
+                Delivery payment
+            </span>
+
+            <strong class="text-green-700">
+                ${order.deliveryFeePaid
+                    ? "PAID"
+                    : "NOT PAID"}
+            </strong>
+
+        </div>
+
+
+        <div class="border-t pt-3">
+
+            <p class="text-sm text-gray-500">
+                Grocery payment
+            </p>
+
+            <p class="font-semibold mt-1">
+
+                ${groceryPrepaid
+                    ? "Prepaid"
+                    : "Pay on Delivery"}
+
+            </p>
+
+        </div>
+
+
+        ${!groceryPrepaid ? `
+
+            <div class="bg-yellow-50 border
+                        border-yellow-200 rounded-xl p-4">
+
+                <p class="text-sm font-semibold text-yellow-800">
+                    Amount due on delivery
+                </p>
+
+                <p class="text-xl font-bold text-yellow-900 mt-1">
+                    ${money(order.grocerySubtotal)}
+                </p>
+
+            </div>
+
+        ` : `
+
+            <div class="bg-green-50 border
+                        border-green-200 rounded-xl p-4">
+
+                <p class="text-sm font-semibold text-green-800">
+                    Groceries paid
+                </p>
+
+                <p class="text-sm text-green-700 mt-1">
+                    Customer paid for groceries in advance.
+                </p>
+
+            </div>
+
+        `}
+
+    `;
+
+}
+
+
+/* =====================================================
+   RIDER ASSIGNMENT
+===================================================== */
+
+function assignRider() {
+
+    const rider =
+        document.getElementById("riderSelect").value;
+
+
+    if (!rider) {
+
+        alert("Please select a rider.");
+
+        return;
+
+    }
+
+
+    /*
+       Save rider information
+    */
+
+    order.rider = {
+
+        name: rider,
+
+        assignedAt: new Date().toISOString()
+
+    };
+
+
+    /*
+       If order is still being sourced,
+       assigning a rider doesn't automatically
+       mean the rider has picked it up.
+    */
+
+    if (
+        order.status === "CONFIRMED" ||
+        order.status === "SOURCING"
+    ) {
+
+        order.status = "RIDER_ASSIGNED";
+
+    }
+
+
+    saveOrder();
+
+    renderAll();
+
+
+    alert(`Rider ${rider} assigned successfully.`);
+
+}
+
+
+/* =====================================================
+   DISPLAY ASSIGNED RIDER
+===================================================== */
+
+function renderAssignedRider() {
+
+    const container =
+        document.getElementById("assignedRider");
+
+
+    if (!order.rider) {
+
+        container.innerHTML = `
+
+            <div class="bg-gray-50 rounded-xl p-4 text-sm
+                        text-gray-500">
+
+                No rider assigned yet.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML = `
+
+        <div class="bg-green-50 border
+                    border-green-200 rounded-xl p-4">
+
+            <p class="text-xs uppercase
+                      text-green-700 font-semibold">
+
+                Assigned Rider
+
+            </p>
+
+            <p class="font-bold text-lg mt-1">
+                ${escapeHTML(order.rider.name)}
+            </p>
+
+            <p class="text-xs text-gray-500 mt-1">
+
+                Assigned:
+                ${new Date(order.rider.assignedAt)
+                    .toLocaleString()}
+
+            </p>
+
+        </div>
+
+    `;
+
+
+    /*
+       Set select to current rider
+    */
+
+    document.getElementById("riderSelect").value =
+        order.rider.name;
+
+}
+
+
+/* =====================================================
+   ORDER INFORMATION
+===================================================== */
+
+function renderOrderInformation() {
+
+    document.getElementById("orderInformation").innerHTML = `
+
+        <div class="flex justify-between">
+
+            <span class="text-gray-500">
+                Order
+            </span>
+
+            <strong>
+                ${escapeHTML(order.orderNumber)}
+            </strong>
+
+        </div>
+
+
+        <div class="flex justify-between">
+
+            <span class="text-gray-500">
+                Status
+            </span>
+
+            <strong>
+                ${statusLabel(order.status)}
+            </strong>
+
+        </div>
+
+
+        <div class="flex justify-between">
+
+            <span class="text-gray-500">
+                Created
+            </span>
+
+            <strong>
+                ${new Date(order.createdAt)
+                    .toLocaleDateString()}
+            </strong>
+
+        </div>
+
+
+        <div class="flex justify-between">
+
+            <span class="text-gray-500">
+                Items
+            </span>
+
+            <strong>
+                ${(order.items || []).length}
+            </strong>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   NOTES
+===================================================== */
+
+function saveNotes() {
+
+    order.internalNotes =
+        document.getElementById("internalNotes").value;
+
+
+    saveOrder();
+
+    alert("Internal notes saved.");
+
+}
+
+
+/* =====================================================
+   LOAD NOTES
+===================================================== */
+
+function renderNotes() {
+
+    document.getElementById("internalNotes").value =
+        order.internalNotes || "";
+
+}
+
+
+/* =====================================================
+   SAVE ORDER
+===================================================== */
+
+function saveOrder() {
+
+    /*
+       Find current order again in case array
+       positions have changed.
+    */
+
+    const index =
+        orders.findIndex(
+            item => item.orderNumber === order.orderNumber
+        );
+
+
+    if (index === -1) {
+
+        return;
+
+    }
+
+
+    orders[index] = order;
+
+
+    localStorage.setItem(
+        "mbogafreshiOrders",
+        JSON.stringify(orders)
+    );
+
+}
+
+
+/* =====================================================
+   RENDER EVERYTHING
+===================================================== */
+
+function renderAll() {
+
+    renderOrderHeader();
+
+    renderCustomerDetails();
+
+    renderOrderItems();
+
+    renderSourcingList();
+
+    renderCostItems();
+
+    renderPaymentDetails();
+
+    renderAssignedRider();
+
+    renderOrderInformation();
+
+    renderNotes();
+
+
+    document.getElementById("statusSelect").value =
+        order.status;
+
+
+    document.getElementById("statusMessage")
+        .textContent =
+        statusDescription(order.status);
+
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+function toggleSidebar() {
+
+    document.getElementById("sidebar")
+        .classList.toggle("-translate-x-full");
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+function logout() {
+
+    sessionStorage.removeItem("mbogafreshiAdmin");
+
+    window.location.href = "login.html";
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+renderAll();
+
+</script>
+
+</body>
+</html>

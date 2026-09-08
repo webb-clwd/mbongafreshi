@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Products | Mbogafreshi Admin</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 text-gray-800">
+
+
+<!-- =========================================
+     MOBILE HEADER
+========================================= -->
+
+<header class="lg:hidden bg-white border-b sticky top-0 z-40">
+
+    <div class="flex items-center justify-between px-4 py-4">
+
+        <button onclick="toggleSidebar()"
+                class="text-2xl">
+            ☰
+        </button>
+
+        <h1 class="font-bold text-lg">
+            Mbogafreshi
+        </h1>
+
+        <button onclick="openProductModal()"
+                class="text-green-700 font-bold">
+            +
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================================
+     SIDEBAR
+========================================= -->
+
+<aside id="sidebar"
+       class="fixed inset-y-0 left-0 w-64 bg-white border-r z-50
+              transform -translate-x-full lg:translate-x-0
+              transition-transform duration-300">
+
+    <div class="p-6 border-b">
+
+        <h1 class="text-2xl font-bold text-green-700">
+            Mbogafreshi
+        </h1>
+
+        <p class="text-sm text-gray-500">
+            Admin Panel
+        </p>
+
+    </div>
+
+
+    <nav class="p-4 space-y-2">
+
+        <a href="dashboard.html"
+           class="block px-4 py-3 rounded-lg hover:bg-green-50">
+            Dashboard
+        </a>
+
+        <a href="orders.html"
+           class="block px-4 py-3 rounded-lg hover:bg-green-50">
+            Orders
+        </a>
+
+        <a href="products.html"
+           class="block px-4 py-3 rounded-lg bg-green-50
+                  text-green-700 font-semibold">
+            Products
+        </a>
+
+        <a href="#"
+           class="block px-4 py-3 rounded-lg hover:bg-green-50">
+            Riders
+        </a>
+
+        <a href="#"
+           class="block px-4 py-3 rounded-lg hover:bg-green-50">
+            Payments
+        </a>
+
+        <a href="#"
+           class="block px-4 py-3 rounded-lg hover:bg-green-50">
+            Settings
+        </a>
+
+        <button onclick="logout()"
+                class="w-full text-left px-4 py-3 rounded-lg
+                       text-red-600 hover:bg-red-50">
+            Logout
+        </button>
+
+    </nav>
+
+</aside>
+
+
+
+<!-- =========================================
+     MAIN
+========================================= -->
+
+<main class="lg:ml-64 min-h-screen">
+
+
+    <!-- DESKTOP TOP BAR -->
+
+    <div class="hidden lg:flex bg-white border-b px-8 py-5
+                items-center justify-between">
+
+        <div>
+
+            <h2 class="text-2xl font-bold">
+                Products
+            </h2>
+
+            <p class="text-sm text-gray-500">
+                Manage the groceries available to customers.
+            </p>
+
+        </div>
+
+
+        <button onclick="openProductModal()"
+                class="bg-green-700 text-white px-5 py-3
+                       rounded-lg hover:bg-green-800">
+
+            + Add Product
+
+        </button>
+
+    </div>
+
+
+
+    <!-- CONTENT -->
+
+    <div class="p-4 lg:p-8">
+
+
+        <!-- =========================================
+             SUMMARY
+        ========================================== -->
+
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+
+
+            <div class="bg-white rounded-2xl p-5 shadow-sm">
+
+                <p class="text-sm text-gray-500">
+                    Total Products
+                </p>
+
+                <p id="totalProducts"
+                   class="text-2xl font-bold mt-1">
+                    0
+                </p>
+
+            </div>
+
+
+            <div class="bg-white rounded-2xl p-5 shadow-sm">
+
+                <p class="text-sm text-gray-500">
+                    Available
+                </p>
+
+                <p id="availableProducts"
+                   class="text-2xl font-bold text-green-700 mt-1">
+                    0
+                </p>
+
+            </div>
+
+
+            <div class="bg-white rounded-2xl p-5 shadow-sm">
+
+                <p class="text-sm text-gray-500">
+                    Limited
+                </p>
+
+                <p id="limitedProducts"
+                   class="text-2xl font-bold text-yellow-600 mt-1">
+                    0
+                </p>
+
+            </div>
+
+
+            <div class="bg-white rounded-2xl p-5 shadow-sm">
+
+                <p class="text-sm text-gray-500">
+                    Unavailable
+                </p>
+
+                <p id="unavailableProducts"
+                   class="text-2xl font-bold text-red-600 mt-1">
+                    0
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================================
+             SEARCH + FILTER
+        ========================================== -->
+
+        <div class="bg-white rounded-2xl shadow-sm p-4 mb-6">
+
+            <div class="grid md:grid-cols-3 gap-3">
+
+
+                <div class="md:col-span-2">
+
+                    <input
+                        id="searchInput"
+                        type="text"
+                        placeholder="Search products..."
+                        oninput="renderProducts()"
+                        class="w-full border rounded-lg px-4 py-3
+                               outline-none
+                               focus:ring-2 focus:ring-green-500">
+
+                </div>
+
+
+                <select id="categoryFilter"
+                        onchange="renderProducts()"
+                        class="border rounded-lg px-4 py-3
+                               outline-none">
+
+                    <option value="all">
+                        All Categories
+                    </option>
+
+                    <option value="vegetables">
+                        Vegetables
+                    </option>
+
+                    <option value="fruits">
+                        Fruits
+                    </option>
+
+                    <option value="tubers">
+                        Tubers
+                    </option>
+
+                    <option value="herbs">
+                        Herbs
+                    </option>
+
+                    <option value="spices">
+                        Spices
+                    </option>
+
+                    <option value="other">
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================================
+             PRODUCTS
+        ========================================== -->
+
+        <div id="productsGrid"
+             class="grid sm:grid-cols-2 xl:grid-cols-3 gap-5">
+        </div>
+
+
+    </div>
+
+</main>
+
+
+
+<!-- =========================================
+     PRODUCT MODAL
+========================================= -->
+
+<div id="productModal"
+     class="fixed inset-0 bg-black/50 hidden
+            items-center justify-center p-4 z-[100]">
+
+
+    <div class="bg-white w-full max-w-2xl
+                rounded-2xl shadow-xl
+                max-h-[90vh] overflow-y-auto">
+
+
+        <!-- MODAL HEADER -->
+
+        <div class="flex items-center justify-between
+                    p-6 border-b">
+
+            <div>
+
+                <h2 id="modalTitle"
+                    class="text-xl font-bold">
+
+                    Add Product
+
+                </h2>
+
+                <p class="text-sm text-gray-500">
+                    Product information
+                </p>
+
+            </div>
+
+
+            <button onclick="closeProductModal()"
+                    class="text-2xl text-gray-500">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+
+        <!-- FORM -->
+
+        <form id="productForm"
+              onsubmit="saveProduct(event)"
+              class="p-6 space-y-5">
+
+
+            <!-- PRODUCT NAME -->
+
+            <div>
+
+                <label class="block text-sm font-semibold mb-2">
+                    Product Name
+                </label>
+
+                <input
+                    id="productName"
+                    required
+                    type="text"
+                    placeholder="e.g. Fresh Tomatoes"
+                    class="w-full border rounded-lg px-4 py-3
+                           outline-none
+                           focus:ring-2 focus:ring-green-500">
+
+            </div>
+
+
+
+            <!-- CATEGORY -->
+
+            <div>
+
+                <label class="block text-sm font-semibold mb-2">
+                    Category
+                </label>
+
+                <select id="productCategory"
+                        required
+                        class="w-full border rounded-lg px-4 py-3">
+
+                    <option value="vegetables">
+                        Vegetables
+                    </option>
+
+                    <option value="fruits">
+                        Fruits
+                    </option>
+
+                    <option value="tubers">
+                        Tubers
+                    </option>
+
+                    <option value="herbs">
+                        Herbs
+                    </option>
+
+                    <option value="spices">
+                        Spices
+                    </option>
+
+                    <option value="other">
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- PRICE + UNIT -->
+
+            <div class="grid sm:grid-cols-2 gap-4">
+
+
+                <div>
+
+                    <label class="block text-sm font-semibold mb-2">
+                        Selling Price
+                    </label>
+
+                    <input
+                        id="productPrice"
+                        required
+                        min="0"
+                        step="1"
+                        type="number"
+                        placeholder="150"
+                        class="w-full border rounded-lg px-4 py-3">
+
+                </div>
+
+
+                <div>
+
+                    <label class="block text-sm font-semibold mb-2">
+                        Unit
+                    </label>
+
+                    <select id="productUnit"
+                            required
+                            class="w-full border rounded-lg px-4 py-3">
+
+                        <option value="kg">
+                            kg
+                        </option>
+
+                        <option value="piece">
+                            piece
+                        </option>
+
+                        <option value="bunch">
+                            bunch
+                        </option>
+
+                        <option value="pack">
+                            pack
+                        </option>
+
+                        <option value="litre">
+                            litre
+                        </option>
+
+                        <option value="tray">
+                            tray
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- AVAILABILITY -->
+
+            <div>
+
+                <label class="block text-sm font-semibold mb-2">
+                    Availability
+                </label>
+
+                <select id="productAvailability"
+                        class="w-full border rounded-lg px-4 py-3">
+
+                    <option value="available">
+                        Available
+                    </option>
+
+                    <option value="limited">
+                        Limited
+                    </option>
+
+                    <option value="unavailable">
+                        Unavailable
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- IMAGE -->
+
+            <div>
+
+                <label class="block text-sm font-semibold mb-2">
+                    Image URL
+                </label>
+
+                <input
+                    id="productImage"
+                    type="url"
+                    placeholder="https://example.com/tomatoes.jpg"
+                    class="w-full border rounded-lg px-4 py-3">
+
+                <p class="text-xs text-gray-500 mt-1">
+                    For now, use an image URL. Later we can add
+                    real image uploads.
+                </p>
+
+            </div>
+
+
+
+            <!-- DESCRIPTION -->
+
+            <div>
+
+                <label class="block text-sm font-semibold mb-2">
+                    Description
+                </label>
+
+                <textarea
+                    id="productDescription"
+                    rows="4"
+                    placeholder="Describe the product..."
+                    class="w-full border rounded-lg px-4 py-3
+                           outline-none
+                           focus:ring-2 focus:ring-green-500"></textarea>
+
+            </div>
+
+
+
+            <!-- BUTTONS -->
+
+            <div class="flex gap-3 pt-3">
+
+                <button
+                    type="button"
+                    onclick="closeProductModal()"
+                    class="flex-1 border rounded-lg py-3">
+
+                    Cancel
+
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="flex-1 bg-green-700 text-white
+                           rounded-lg py-3
+                           hover:bg-green-800">
+
+                    Save Product
+
+                </button>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+/* =========================================
+   AUTH CHECK
+========================================= */
+
+if (sessionStorage.getItem("mbogafreshiAdmin") !== "true") {
+
+    window.location.href = "login.html";
+
+}
+
+
+
+/* =========================================
+   DEFAULT PRODUCTS
+========================================= */
+
+const defaultProducts = [
+
+    {
+        id: 1,
+        name: "Fresh Tomatoes",
+        category: "vegetables",
+        price: 150,
+        unit: "kg",
+        availability: "available",
+        image: "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?auto=format&fit=crop&w=600&q=80",
+        description: "Fresh locally sourced tomatoes."
+    },
+
+    {
+        id: 2,
+        name: "Red Onions",
+        category: "vegetables",
+        price: 120,
+        unit: "kg",
+        availability: "available",
+        image: "https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=600&q=80",
+        description: "Fresh red onions."
+    },
+
+    {
+        id: 3,
+        name: "Potatoes",
+        category: "tubers",
+        price: 150,
+        unit: "kg",
+        availability: "available",
+        image: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=600&q=80",
+        description: "Fresh potatoes."
+    },
+
+    {
+        id: 4,
+        name: "Fresh Bananas",
+        category: "fruits",
+        price: 100,
+        unit: "bunch",
+        availability: "available",
+        image: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=600&q=80",
+        description: "Fresh bananas."
+    },
+
+    {
+        id: 5,
+        name: "Carrots",
+        category: "vegetables",
+        price: 100,
+        unit: "kg",
+        availability: "available",
+        image: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?auto=format&fit=crop&w=600&q=80",
+        description: "Fresh carrots."
+    },
+
+    {
+        id: 6,
+        name: "Cabbage",
+        category: "vegetables",
+        price: 80,
+        unit: "piece",
+        availability: "available",
+        image: "https://images.unsplash.com/photo-1594282486552-05b4d80fbb9f?auto=format&fit=crop&w=600&q=80",
+        description: "Fresh cabbage."
+    },
+
+    {
+        id: 7,
+        name: "Mangoes",
+        category: "fruits",
+        price: 80,
+        unit: "piece",
+        availability: "available",
+        image: "https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=600&q=80",
+        description: "Fresh ripe mangoes."
+    },
+
+    {
+        id: 8,
+        name: "Avocado",
+        category: "fruits",
+        price: 50,
+        unit: "piece",
+        availability: "available",
+        image: "https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?auto=format&fit=crop&w=600&q=80",
+        description: "Fresh creamy avocado."
+    },
+
+    {
+        id: 9,
+        name: "Garlic",
+        category: "spices",
+        price: 300,
+        unit: "kg",
+        availability: "available",
+        image: "https://images.unsplash.com/photo-1540148426945-6cf22a6b2383?auto=format&fit=crop&w=600&q=80",
+        description: "Fresh garlic."
+    },
+
+    {
+        id: 10,
+        name: "Ginger",
+        category: "spices",
+        price: 250,
+        unit: "kg",
+        availability: "available",
+        image: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=600&q=80",
+        description: "Fresh ginger."
+    },
+
+    {
+        id: 11,
+        name: "Coriander",
+        category: "herbs",
+        price: 30,
+        unit: "bunch",
+        availability: "available",
+        image: "https://images.unsplash.com/photo-1588879460618-9243e4d8e2e3?auto=format&fit=crop&w=600&q=80",
+        description: "Fresh coriander leaves."
+    },
+
+    {
+        id: 12,
+        name: "Sweet Potatoes",
+        category: "tubers",
+        price: 120,
+        unit: "kg",
+        availability: "available",
+        image: "https://images.unsplash.com/photo-1596097635121-14b38c8f6c1a?auto=format&fit=crop&w=600&q=80",
+        description: "Fresh sweet potatoes."
+    }
+
+];
+
+
+
+/* =========================================
+   LOAD PRODUCTS
+========================================= */
+
+let products =
+    JSON.parse(localStorage.getItem("mbogafreshiProducts"));
+
+
+/*
+   First time opening the page:
+   create our initial product catalogue.
+*/
+
+if (!products) {
+
+    products = defaultProducts;
+
+    localStorage.setItem(
+        "mbogafreshiProducts",
+        JSON.stringify(products)
+    );
+
+}
+
+
+
+/* =========================================
+   CURRENT EDITING PRODUCT
+========================================= */
+
+let editingProductId = null;
+
+
+
+/* =========================================
+   MONEY
+========================================= */
+
+function money(amount) {
+
+    return `KSh ${Number(amount || 0).toLocaleString()}`;
+
+}
+
+
+
+/* =========================================
+   ESCAPE HTML
+========================================= */
+
+function escapeHTML(value) {
+
+    return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+
+/* =========================================
+   CATEGORY LABEL
+========================================= */
+
+function categoryLabel(category) {
+
+    const labels = {
+
+        vegetables: "Vegetables",
+        fruits: "Fruits",
+        tubers: "Tubers",
+        herbs: "Herbs",
+        spices: "Spices",
+        other: "Other"
+
+    };
+
+    return labels[category] || category;
+
+}
+
+
+
+/* =========================================
+   AVAILABILITY LABEL
+========================================= */
+
+function availabilityLabel(status) {
+
+    const labels = {
+
+        available: "Available",
+        limited: "Limited",
+        unavailable: "Unavailable"
+
+    };
+
+    return labels[status] || status;
+
+}
+
+
+
+/* =========================================
+   AVAILABILITY STYLE
+========================================= */
+
+function availabilityClass(status) {
+
+    if (status === "available") {
+
+        return "bg-green-100 text-green-700";
+
+    }
+
+    if (status === "limited") {
+
+        return "bg-yellow-100 text-yellow-700";
+
+    }
+
+    return "bg-red-100 text-red-700";
+
+}
+
+
+
+/* =========================================
+   RENDER PRODUCTS
+========================================= */
+
+function renderProducts() {
+
+    const search =
+        document.getElementById("searchInput")
+            .value
+            .toLowerCase()
+            .trim();
+
+
+    const category =
+        document.getElementById("categoryFilter").value;
+
+
+    const filteredProducts =
+        products.filter(product => {
+
+            const matchesSearch =
+                product.name
+                    .toLowerCase()
+                    .includes(search);
+
+
+            const matchesCategory =
+                category === "all" ||
+                product.category === category;
+
+
+            return matchesSearch && matchesCategory;
+
+        });
+
+
+    const grid =
+        document.getElementById("productsGrid");
+
+
+    if (filteredProducts.length === 0) {
+
+        grid.innerHTML = `
+
+            <div class="sm:col-span-2 xl:col-span-3
+                        bg-white rounded-2xl p-10
+                        text-center">
+
+                <h3 class="text-lg font-bold">
+                    No products found
+                </h3>
+
+                <p class="text-gray-500 mt-1">
+                    Try another search or category.
+                </p>
+
+            </div>
+
+        `;
+
+        updateSummary();
+
+        return;
+
+    }
+
+
+    grid.innerHTML =
+        filteredProducts.map(product => `
+
+            <div class="bg-white rounded-2xl
+                        overflow-hidden shadow-sm">
+
+                <img
+                    src="${escapeHTML(product.image)}"
+                    alt="${escapeHTML(product.name)}"
+                    class="w-full h-48 object-cover"
+                    onerror="this.src='https://via.placeholder.com/600x400?text=Mbogafreshi'">
+
+
+                <div class="p-5">
+
+                    <div class="flex items-start
+                                justify-between gap-3">
+
+                        <div>
+
+                            <h3 class="font-bold text-lg">
+                                ${escapeHTML(product.name)}
+                            </h3>
+
+                            <p class="text-sm text-gray-500">
+                                ${categoryLabel(product.category)}
+                            </p>
+
+                        </div>
+
+
+                        <span class="text-xs font-semibold
+                                     px-2.5 py-1 rounded-full
+                                     ${availabilityClass(product.availability)}">
+
+                            ${availabilityLabel(product.availability)}
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="mt-4">
+
+                        <span class="text-xl font-bold
+                                     text-green-700">
+
+                            ${money(product.price)}
+
+                        </span>
+
+                        <span class="text-sm text-gray-500">
+                            / ${escapeHTML(product.unit)}
+                        </span>
+
+                    </div>
+
+
+                    <p class="text-sm text-gray-500 mt-3
+                              line-clamp-2">
+
+                        ${escapeHTML(product.description)}
+
+                    </p>
+
+
+                    <div class="grid grid-cols-2 gap-2 mt-5">
+
+                        <button
+                            onclick="editProduct(${product.id})"
+                            class="border rounded-lg py-2.5
+                                   hover:bg-gray-50">
+
+                            Edit
+
+                        </button>
+
+
+                        <button
+                            onclick="deleteProduct(${product.id})"
+                            class="border border-red-200
+                                   text-red-600 rounded-lg py-2.5
+                                   hover:bg-red-50">
+
+                            Delete
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `).join("");
+
+
+    updateSummary();
+
+}
+
+
+
+/* =========================================
+   UPDATE SUMMARY
+========================================= */
+
+function updateSummary() {
+
+    document.getElementById("totalProducts")
+        .textContent = products.length;
+
+
+    document.getElementById("availableProducts")
+        .textContent =
+        products.filter(
+            product => product.availability === "available"
+        ).length;
+
+
+    document.getElementById("limitedProducts")
+        .textContent =
+        products.filter(
+            product => product.availability === "limited"
+        ).length;
+
+
+    document.getElementById("unavailableProducts")
+        .textContent =
+        products.filter(
+            product => product.availability === "unavailable"
+        ).length;
+
+}
+
+
+
+/* =========================================
+   OPEN MODAL
+========================================= */
+
+function openProductModal() {
+
+    editingProductId = null;
+
+
+    document.getElementById("modalTitle")
+        .textContent = "Add Product";
+
+
+    document.getElementById("productForm").reset();
+
+
+    document.getElementById("productAvailability")
+        .value = "available";
+
+
+    document.getElementById("productModal")
+        .classList.remove("hidden");
+
+
+    document.getElementById("productModal")
+        .classList.add("flex");
+
+}
+
+
+
+/* =========================================
+   CLOSE MODAL
+========================================= */
+
+function closeProductModal() {
+
+    document.getElementById("productModal")
+        .classList.add("hidden");
+
+
+    document.getElementById("productModal")
+        .classList.remove("flex");
+
+
+    editingProductId = null;
+
+}
+
+
+
+/* =========================================
+   EDIT PRODUCT
+========================================= */
+
+function editProduct(id) {
+
+    const product =
+        products.find(item => item.id === id);
+
+
+    if (!product) {
+        return;
+    }
+
+
+    editingProductId = id;
+
+
+    document.getElementById("modalTitle")
+        .textContent = "Edit Product";
+
+
+    document.getElementById("productName")
+        .value = product.name;
+
+
+    document.getElementById("productCategory")
+        .value = product.category;
+
+
+    document.getElementById("productPrice")
+        .value = product.price;
+
+
+    document.getElementById("productUnit")
+        .value = product.unit;
+
+
+    document.getElementById("productAvailability")
+        .value = product.availability;
+
+
+    document.getElementById("productImage")
+        .value = product.image;
+
+
+    document.getElementById("productDescription")
+        .value = product.description;
+
+
+    document.getElementById("productModal")
+        .classList.remove("hidden");
+
+
+    document.getElementById("productModal")
+        .classList.add("flex");
+
+}
+
+
+
+/* =========================================
+   SAVE PRODUCT
+========================================= */
+
+function saveProduct(event) {
+
+    event.preventDefault();
+
+
+    const productData = {
+
+        name:
+            document.getElementById("productName")
+                .value.trim(),
+
+        category:
+            document.getElementById("productCategory")
+                .value,
+
+        price:
+            Number(
+                document.getElementById("productPrice")
+                    .value
+            ),
+
+        unit:
+            document.getElementById("productUnit")
+                .value,
+
+        availability:
+            document.getElementById("productAvailability")
+                .value,
+
+        image:
+            document.getElementById("productImage")
+                .value.trim(),
+
+        description:
+            document.getElementById("productDescription")
+                .value.trim()
+
+    };
+
+
+    /* =====================================
+       EDIT EXISTING
+    ====================================== */
+
+    if (editingProductId !== null) {
+
+        const index =
+            products.findIndex(
+                product => product.id === editingProductId
+            );
+
+
+        if (index !== -1) {
+
+            products[index] = {
+
+                ...products[index],
+
+                ...productData
+
+            };
+
+        }
+
+    }
+
+
+    /* =====================================
+       ADD NEW
+    ====================================== */
+
+    else {
+
+        const newProduct = {
+
+            id: Date.now(),
+
+            ...productData
+
+        };
+
+
+        products.push(newProduct);
+
+    }
+
+
+    saveProducts();
+
+
+    closeProductModal();
+
+
+    renderProducts();
+
+
+    alert(
+        editingProductId === null
+            ? "Product added successfully."
+            : "Product updated successfully."
+    );
+
+}
+
+
+
+/* =========================================
+   DELETE PRODUCT
+========================================= */
+
+function deleteProduct(id) {
+
+    const product =
+        products.find(item => item.id === id);
+
+
+    if (!product) {
+        return;
+    }
+
+
+    const confirmed =
+        confirm(
+            `Delete "${product.name}"?`
+        );
+
+
+    if (!confirmed) {
+        return;
+    }
+
+
+    products =
+        products.filter(
+            item => item.id !== id
+        );
+
+
+    saveProducts();
+
+
+    renderProducts();
+
+}
+
+
+
+/* =========================================
+   SAVE PRODUCTS
+========================================= */
+
+function saveProducts() {
+
+    localStorage.setItem(
+        "mbogafreshiProducts",
+        JSON.stringify(products)
+    );
+
+}
+
+
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+function toggleSidebar() {
+
+    document.getElementById("sidebar")
+        .classList.toggle("-translate-x-full");
+
+}
+
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+function logout() {
+
+    sessionStorage.removeItem(
+        "mbogafreshiAdmin"
+    );
+
+    window.location.href = "login.html";
+
+}
+
+
+
+/* =========================================
+   INITIAL RENDER
+========================================= */
+
+renderProducts();
+
+</script>
+
+</body>
+</html>

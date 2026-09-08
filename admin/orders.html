@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Orders | Mbogafreshi Admin</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+
+<body class="bg-gray-100 text-gray-800">
+
+
+<!-- =========================================================
+     SIDEBAR
+========================================================= -->
+
+<aside
+    id="sidebar"
+    class="fixed left-0 top-0 bottom-0 w-64 bg-white border-r z-50 transform -translate-x-full lg:translate-x-0 transition-transform"
+>
+
+    <!-- LOGO -->
+
+    <div class="h-20 border-b flex items-center px-6">
+
+        <div class="flex items-center gap-2">
+
+            <span class="text-2xl">
+                🌱
+            </span>
+
+            <div>
+
+                <h1 class="font-bold text-green-700">
+                    Mbogafreshi
+                </h1>
+
+                <p class="text-xs text-gray-400">
+                    Admin
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- NAVIGATION -->
+
+    <nav class="p-4 space-y-1">
+
+        <a
+            href="dashboard.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50"
+        >
+            <span>▦</span>
+            Dashboard
+        </a>
+
+
+        <a
+            href="orders.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl bg-green-50 text-green-700 font-medium"
+        >
+            <span>🛒</span>
+            Orders
+
+            <span
+                id="sidebarOrderCount"
+                class="ml-auto text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full"
+            >
+                0
+            </span>
+
+        </a>
+
+
+        <a
+            href="products.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50"
+        >
+            <span>🥬</span>
+            Products
+        </a>
+
+
+        <a
+            href="#"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400"
+        >
+            <span>🏍️</span>
+            Riders
+        </a>
+
+
+        <a
+            href="#"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400"
+        >
+            <span>💳</span>
+            Payments
+        </a>
+
+
+        <a
+            href="#"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400"
+        >
+            <span>⚙️</span>
+            Settings
+        </a>
+
+    </nav>
+
+
+    <!-- LOGOUT -->
+
+    <div class="absolute bottom-0 left-0 right-0 p-4 border-t">
+
+        <button
+            onclick="logout()"
+            class="w-full text-left px-4 py-3 rounded-xl text-red-600 hover:bg-red-50"
+        >
+            ← Log Out
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- =========================================================
+     MOBILE OVERLAY
+========================================================= -->
+
+<div
+    id="sidebarOverlay"
+    class="hidden fixed inset-0 bg-black/30 z-40 lg:hidden"
+></div>
+
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<div class="lg:ml-64 min-h-screen">
+
+
+    <!-- HEADER -->
+
+    <header
+        class="h-20 bg-white border-b flex items-center justify-between px-4 md:px-8"
+    >
+
+        <div class="flex items-center gap-4">
+
+            <button
+                id="menuButton"
+                class="lg:hidden text-2xl"
+            >
+                ☰
+            </button>
+
+
+            <div>
+
+                <h2 class="font-bold text-xl">
+                    Orders
+                </h2>
+
+                <p class="text-xs text-gray-400">
+                    Manage customer orders
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <a
+            href="../index.html"
+            target="_blank"
+            class="hidden sm:block text-sm text-green-700 font-medium"
+        >
+            View Website ↗
+        </a>
+
+    </header>
+
+
+    <!-- =====================================================
+         PAGE CONTENT
+    ====================================================== -->
+
+    <main class="p-4 md:p-8">
+
+
+        <!-- PAGE HEADING -->
+
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-7">
+
+            <div>
+
+                <h1 class="text-2xl md:text-3xl font-bold">
+                    Customer Orders
+                </h1>
+
+                <p class="text-gray-500 mt-1">
+                    View, process and manage incoming orders.
+                </p>
+
+            </div>
+
+
+            <button
+                onclick="loadOrders()"
+                class="bg-white border border-gray-200 hover:border-green-500 px-4 py-2.5 rounded-xl text-sm font-medium"
+            >
+                ↻ Refresh
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             SEARCH
+        ================================================== -->
+
+        <div class="bg-white rounded-2xl shadow-sm p-4 mb-5">
+
+            <div class="relative">
+
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="Search by order number, customer or phone..."
+                    class="w-full border border-gray-200 rounded-xl px-4 py-3 pl-11 outline-none focus:border-green-500"
+                >
+
+                <span
+                    class="absolute left-4 top-3.5 text-gray-400"
+                >
+                    🔍
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             FILTERS
+        ================================================== -->
+
+        <div class="flex gap-2 overflow-x-auto pb-2 mb-5">
+
+            <button
+                class="filter-btn active-filter whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium bg-green-600 text-white"
+                data-filter="ALL"
+            >
+                All
+            </button>
+
+
+            <button
+                class="filter-btn whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium bg-white text-gray-600"
+                data-filter="CONFIRMED"
+            >
+                New
+            </button>
+
+
+            <button
+                class="filter-btn whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium bg-white text-gray-600"
+                data-filter="SOURCING"
+            >
+                Sourcing
+            </button>
+
+
+            <button
+                class="filter-btn whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium bg-white text-gray-600"
+                data-filter="RIDER_ASSIGNED"
+            >
+                Rider Assigned
+            </button>
+
+
+            <button
+                class="filter-btn whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium bg-white text-gray-600"
+                data-filter="OUT_FOR_DELIVERY"
+            >
+                Out for Delivery
+            </button>
+
+
+            <button
+                class="filter-btn whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium bg-white text-gray-600"
+                data-filter="DELIVERED"
+            >
+                Completed
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             ORDER LIST
+        ================================================== -->
+
+        <section class="bg-white rounded-2xl shadow-sm overflow-hidden">
+
+            <!-- TABLE HEADER -->
+
+            <div class="hidden md:grid grid-cols-12 gap-4 px-6 py-4 bg-gray-50 border-b text-xs font-semibold text-gray-500 uppercase">
+
+                <div class="col-span-3">
+                    Order
+                </div>
+
+                <div class="col-span-3">
+                    Customer
+                </div>
+
+                <div class="col-span-2">
+                    Area
+                </div>
+
+                <div class="col-span-2">
+                    Amount
+                </div>
+
+                <div class="col-span-2">
+                    Status
+                </div>
+
+            </div>
+
+
+            <!-- ORDERS -->
+
+            <div id="ordersList">
+
+                <!-- Orders inserted by JavaScript -->
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+
+/*
+============================================================
+AUTHENTICATION
+============================================================
+*/
+
+const loggedIn =
+    sessionStorage.getItem(
+        "mbogafreshiAdmin"
+    );
+
+
+if (loggedIn !== "true") {
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+/*
+============================================================
+STATE
+============================================================
+*/
+
+let orders = [];
+
+let currentFilter = "ALL";
+
+
+/*
+============================================================
+LOAD ORDERS
+============================================================
+*/
+
+function loadOrders() {
+
+    orders =
+        JSON.parse(
+            localStorage.getItem(
+                "mbogafreshiOrders"
+            )
+        ) || [];
+
+
+    document.getElementById(
+        "sidebarOrderCount"
+    ).textContent =
+        orders.length;
+
+
+    displayOrders();
+
+}
+
+
+/*
+============================================================
+DISPLAY ORDERS
+============================================================
+*/
+
+function displayOrders() {
+
+    const container =
+        document.getElementById(
+            "ordersList"
+        );
+
+
+    const search =
+        document
+            .getElementById("searchInput")
+            .value
+            .toLowerCase()
+            .trim();
+
+
+    let filteredOrders =
+        [...orders];
+
+
+    /*
+    --------------------------------------------------------
+    FILTER BY STATUS
+    --------------------------------------------------------
+    */
+
+    if (currentFilter !== "ALL") {
+
+        filteredOrders =
+            filteredOrders.filter(
+                order =>
+                    order.status === currentFilter
+            );
+
+    }
+
+
+    /*
+    --------------------------------------------------------
+    SEARCH
+    --------------------------------------------------------
+    */
+
+    if (search) {
+
+        filteredOrders =
+            filteredOrders.filter(
+                order => {
+
+                    const orderNumber =
+                        String(
+                            order.orderNumber || ""
+                        ).toLowerCase();
+
+
+                    const name =
+                        String(
+                            order.customer?.name || ""
+                        ).toLowerCase();
+
+
+                    const phone =
+                        String(
+                            order.customer?.phone || ""
+                        ).toLowerCase();
+
+
+                    return (
+                        orderNumber.includes(search) ||
+                        name.includes(search) ||
+                        phone.includes(search)
+                    );
+
+                }
+            );
+
+    }
+
+
+    /*
+    --------------------------------------------------------
+    NEWEST FIRST
+    --------------------------------------------------------
+    */
+
+    filteredOrders =
+        filteredOrders.reverse();
+
+
+    /*
+    --------------------------------------------------------
+    EMPTY STATE
+    --------------------------------------------------------
+    */
+
+    if (filteredOrders.length === 0) {
+
+        container.innerHTML = `
+
+            <div class="p-12 text-center">
+
+                <div class="text-4xl mb-4">
+                    🛒
+                </div>
+
+                <h3 class="font-semibold text-lg">
+                    No orders found
+                </h3>
+
+                <p class="text-sm text-gray-400 mt-1">
+                    Orders matching your search will appear here.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    /*
+    --------------------------------------------------------
+    CREATE ORDER ROWS
+    --------------------------------------------------------
+    */
+
+    container.innerHTML = "";
+
+
+    filteredOrders.forEach(order => {
+
+        const row =
+            document.createElement("a");
+
+
+        row.href =
+            `order.html?id=${encodeURIComponent(
+                order.orderNumber
+            )}`;
+
+
+        row.className =
+            "block border-b last:border-b-0 hover:bg-gray-50 transition";
+
+
+        const status =
+            getStatusInfo(
+                order.status
+            );
+
+
+        row.innerHTML = `
+
+            <div class="grid md:grid-cols-12 gap-3 md:gap-4 px-5 md:px-6 py-5 items-center">
+
+
+                <!-- ORDER -->
+
+                <div class="md:col-span-3">
+
+                    <div class="flex items-center gap-2">
+
+                        <p class="font-semibold">
+                            ${escapeHTML(
+                                order.orderNumber
+                            )}
+                        </p>
+
+                    </div>
+
+
+                    <p class="text-xs text-gray-400 mt-1">
+                        ${formatDate(
+                            order.createdAt
+                        )}
+                    </p>
+
+                </div>
+
+
+                <!-- CUSTOMER -->
+
+                <div class="md:col-span-3">
+
+                    <p class="font-medium">
+                        ${escapeHTML(
+                            order.customer?.name || "Unknown"
+                        )}
+                    </p>
+
+
+                    <p class="text-xs text-gray-400 mt-1">
+                        ${escapeHTML(
+                            order.customer?.phone || ""
+                        )}
+                    </p>
+
+                </div>
+
+
+                <!-- AREA -->
+
+                <div class="md:col-span-2">
+
+                    <p class="text-sm">
+                        ${escapeHTML(
+                            order.customer?.area || "-"
+                        )}
+                    </p>
+
+                </div>
+
+
+                <!-- AMOUNT -->
+
+                <div class="md:col-span-2">
+
+                    <p class="font-semibold">
+                        KSh ${Number(
+                            order.total || 0
+                        ).toLocaleString()}
+                    </p>
+
+
+                    <p class="text-xs text-gray-400 mt-1">
+
+                        ${
+                            order.groceryPaymentMethod ===
+                            "cod"
+                            ? "Grocery COD"
+                            : "Groceries prepaid"
+                        }
+
+                    </p>
+
+                </div>
+
+
+                <!-- STATUS -->
+
+                <div class="md:col-span-2">
+
+                    <span
+                        class="${status.className} inline-block px-3 py-1.5 rounded-full text-xs font-semibold"
+                    >
+                        ${status.label}
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        `;
+
+
+        container.appendChild(row);
+
+    });
+
+}
+
+
+/*
+============================================================
+STATUS INFORMATION
+============================================================
+*/
+
+function getStatusInfo(status) {
+
+    const statuses = {
+
+        PENDING_PAYMENT: {
+
+            label: "Payment Pending",
+
+            className:
+                "bg-yellow-100 text-yellow-700"
+
+        },
+
+        CONFIRMED: {
+
+            label: "New Order",
+
+            className:
+                "bg-blue-100 text-blue-700"
+
+        },
+
+        SOURCING: {
+
+            label: "Sourcing",
+
+            className:
+                "bg-orange-100 text-orange-700"
+
+        },
+
+        READY_FOR_PICKUP: {
+
+            label: "Ready",
+
+            className:
+                "bg-purple-100 text-purple-700"
+
+        },
+
+        RIDER_ASSIGNED: {
+
+            label: "Rider Assigned",
+
+            className:
+                "bg-indigo-100 text-indigo-700"
+
+        },
+
+        PICKED_UP: {
+
+            label: "Picked Up",
+
+            className:
+                "bg-cyan-100 text-cyan-700"
+
+        },
+
+        OUT_FOR_DELIVERY: {
+
+            label: "Out for Delivery",
+
+            className:
+                "bg-blue-100 text-blue-700"
+
+        },
+
+        DELIVERED: {
+
+            label: "Delivered",
+
+            className:
+                "bg-green-100 text-green-700"
+
+        },
+
+        CANCELLED: {
+
+            label: "Cancelled",
+
+            className:
+                "bg-red-100 text-red-700"
+
+        }
+
+    };
+
+
+    return statuses[status] || {
+
+        label:
+            status || "Unknown",
+
+        className:
+            "bg-gray-100 text-gray-600"
+
+    };
+
+}
+
+
+/*
+============================================================
+FORMAT DATE
+============================================================
+*/
+
+function formatDate(date) {
+
+    if (!date) return "-";
+
+
+    const d =
+        new Date(date);
+
+
+    if (isNaN(d)) return "-";
+
+
+    return d.toLocaleString(
+        "en-KE",
+        {
+            dateStyle: "medium",
+            timeStyle: "short"
+        }
+    );
+
+}
+
+
+/*
+============================================================
+SEARCH
+============================================================
+*/
+
+document
+    .getElementById("searchInput")
+    .addEventListener(
+        "input",
+        displayOrders
+    );
+
+
+/*
+============================================================
+FILTER BUTTONS
+============================================================
+*/
+
+document
+    .querySelectorAll(".filter-btn")
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            function() {
+
+                currentFilter =
+                    this.dataset.filter;
+
+
+                /*
+                Remove active styling
+                */
+
+                document
+                    .querySelectorAll(".filter-btn")
+                    .forEach(btn => {
+
+                        btn.classList.remove(
+                            "bg-green-600",
+                            "text-white"
+                        );
+
+                        btn.classList.add(
+                            "bg-white",
+                            "text-gray-600"
+                        );
+
+                    });
+
+
+                /*
+                Add active styling
+                */
+
+                this.classList.remove(
+                    "bg-white",
+                    "text-gray-600"
+                );
+
+                this.classList.add(
+                    "bg-green-600",
+                    "text-white"
+                );
+
+
+                displayOrders();
+
+            }
+        );
+
+    });
+
+
+/*
+============================================================
+ESCAPE HTML
+============================================================
+
+This prevents customer-entered text from being interpreted
+as HTML when displayed in the admin dashboard.
+*/
+
+function escapeHTML(value) {
+
+    return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+
+}
+
+
+/*
+============================================================
+MOBILE SIDEBAR
+============================================================
+*/
+
+const sidebar =
+    document.getElementById(
+        "sidebar"
+    );
+
+
+const overlay =
+    document.getElementById(
+        "sidebarOverlay"
+    );
+
+
+document
+    .getElementById("menuButton")
+    .addEventListener(
+        "click",
+        () => {
+
+            sidebar.classList.remove(
+                "-translate-x-full"
+            );
+
+            overlay.classList.remove(
+                "hidden"
+            );
+
+        }
+    );
+
+
+overlay.addEventListener(
+    "click",
+    () => {
+
+        sidebar.classList.add(
+            "-translate-x-full"
+        );
+
+        overlay.classList.add(
+            "hidden"
+        );
+
+    }
+);
+
+
+/*
+============================================================
+LOGOUT
+============================================================
+*/
+
+function logout() {
+
+    sessionStorage.removeItem(
+        "mbogafreshiAdmin"
+    );
+
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+/*
+============================================================
+INITIAL LOAD
+============================================================
+*/
+
+loadOrders();
+
+</script>
+
+</body>
+</html>

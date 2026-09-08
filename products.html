@@ -497,130 +497,46 @@
 
 ====================================================== */
 
-const products = [
+/* =====================================================
+   PRODUCT DATA
+   Loaded from Admin Product Catalogue
+====================================================== */
 
-    {
-        id: 1,
-        name: "Fresh Tomatoes",
-        category: "vegetables",
-        price: 150,
-        unit: "kg",
-        image: "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?auto=format&fit=crop&w=600&q=80",
-        description: "Fresh locally sourced tomatoes."
-    },
-
-    {
-        id: 2,
-        name: "Red Onions",
-        category: "vegetables",
-        price: 120,
-        unit: "kg",
-        image: "https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=600&q=80",
-        description: "Fresh red onions."
-    },
-
-    {
-        id: 3,
-        name: "Potatoes",
-        category: "tubers",
-        price: 150,
-        unit: "kg",
-        image: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=600&q=80",
-        description: "Fresh potatoes."
-    },
-
-    {
-        id: 4,
-        name: "Fresh Bananas",
-        category: "fruits",
-        price: 100,
-        unit: "bunch",
-        image: "https://images.unsplash.com/photo-1587334206596-c0f9f193b6d8?auto=format&fit=crop&w=600&q=80",
-        description: "Fresh bananas."
-    },
-
-    {
-        id: 5,
-        name: "Carrots",
-        category: "vegetables",
-        price: 100,
-        unit: "kg",
-        image: "https://images.unsplash.com/photo-1445282768818-728615cc910a?auto=format&fit=crop&w=600&q=80",
-        description: "Fresh crunchy carrots."
-    },
-
-    {
-        id: 6,
-        name: "Cabbage",
-        category: "vegetables",
-        price: 80,
-        unit: "piece",
-        image: "https://images.unsplash.com/photo-1594282486552-05b4d80fbb9f?auto=format&fit=crop&w=600&q=80",
-        description: "Fresh green cabbage."
-    },
-
-    {
-        id: 7,
-        name: "Mangoes",
-        category: "fruits",
-        price: 80,
-        unit: "piece",
-        image: "https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=600&q=80",
-        description: "Fresh ripe mangoes."
-    },
-
-    {
-        id: 8,
-        name: "Avocado",
-        category: "fruits",
-        price: 50,
-        unit: "piece",
-        image: "https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?auto=format&fit=crop&w=600&q=80",
-        description: "Fresh creamy avocado."
-    },
-
-    {
-        id: 9,
-        name: "Garlic",
-        category: "spices",
-        price: 300,
-        unit: "kg",
-        image: "https://images.unsplash.com/photo-1540148426945-6cf22a6b2383?auto=format&fit=crop&w=600&q=80",
-        description: "Fresh garlic."
-    },
-
-    {
-        id: 10,
-        name: "Ginger",
-        category: "spices",
-        price: 250,
-        unit: "kg",
-        image: "https://images.unsplash.com/photo-1615485500704-8e990f9900f7?auto=format&fit=crop&w=600&q=80",
-        description: "Fresh ginger."
-    },
-
-    {
-        id: 11,
-        name: "Coriander",
-        category: "herbs",
-        price: 30,
-        unit: "bunch",
-        image: "https://images.unsplash.com/photo-1588879460618-9247e5d5e9a0?auto=format&fit=crop&w=600&q=80",
-        description: "Fresh coriander."
-    },
-
-    {
-        id: 12,
-        name: "Sweet Potatoes",
-        category: "tubers",
-        price: 120,
-        unit: "kg",
-        image: "https://images.unsplash.com/photo-1596097635121-14b63b7a7f4b?auto=format&fit=crop&w=600&q=80",
-        description: "Fresh sweet potatoes."
-    }
-
-];
-
+const products =
+    JSON.parse(
+        localStorage.getItem("mbogafreshiProducts")
+    ) || [
+        {
+            id: 1,
+            name: "Fresh Tomatoes",
+            category: "vegetables",
+            price: 150,
+            unit: "kg",
+            availability: "available",
+            image: "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?auto=format&fit=crop&w=600&q=80",
+            description: "Fresh locally sourced tomatoes."
+        },
+        {
+            id: 2,
+            name: "Red Onions",
+            category: "vegetables",
+            price: 120,
+            unit: "kg",
+            availability: "available",
+            image: "https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=600&q=80",
+            description: "Fresh red onions."
+        },
+        {
+            id: 3,
+            name: "Potatoes",
+            category: "tubers",
+            price: 150,
+            unit: "kg",
+            availability: "available",
+            image: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=600&q=80",
+            description: "Fresh potatoes."
+        }
+    ];
 
 
 /* =====================================================
