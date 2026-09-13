@@ -419,54 +419,47 @@
                 </section>
 
 
-                <!-- =========================
-                     RIDER ASSIGNMENT
-                ========================== -->
-                <section class="bg-white rounded-2xl shadow-sm p-6">
+                
+<!-- =========================
+     RIDER ASSIGNMENT
+========================== -->
 
-                    <h3 class="text-lg font-bold mb-2">
-                        Rider Assignment
-                    </h3>
+<section class="bg-white rounded-2xl shadow-sm p-6">
 
-                    <p class="text-sm text-gray-500 mb-4">
-                        Demo riders for V1.
-                    </p>
+    <h3 class="text-lg font-bold mb-2">
+        Rider Assignment
+    </h3>
 
-                    <select id="riderSelect"
-                            class="w-full border rounded-lg px-4 py-3 mb-3">
+    <p class="text-sm text-gray-500 mb-4">
+        Select an available rider for this delivery.
+    </p>
 
-                        <option value="">
-                            Select rider
-                        </option>
 
-                        <option value="Ali — Malindi">
-                            Ali — Malindi
-                        </option>
+    <select id="riderSelect"
+            class="w-full border rounded-lg px-4 py-3 mb-3">
 
-                        <option value="Hassan — Watamu">
-                            Hassan — Watamu
-                        </option>
+        <option value="">
+            Select rider
+        </option>
 
-                        <option value="Juma — Gede">
-                            Juma — Gede
-                        </option>
+    </select>
 
-                    </select>
 
-                    <button onclick="assignRider()"
-                            class="w-full bg-green-700 text-white
-                                   py-3 rounded-lg
-                                   hover:bg-green-800">
+    <button onclick="assignRider()"
+            class="w-full bg-green-700 text-white
+                   py-3 rounded-lg
+                   hover:bg-green-800">
 
-                        Assign Rider
+        Assign Rider
 
-                    </button>
+    </button>
 
-                    <div id="assignedRider"
-                         class="mt-4">
-                    </div>
 
-                </section>
+    <div id="assignedRider"
+         class="mt-4">
+    </div>
+
+</section>
 
 
                 <!-- =========================
@@ -1166,27 +1159,116 @@ function calculateCosts() {
    STATUS CONTROL
 ===================================================== */
 
-function changeStatus() {
+
+    function changeStatus() {
 
     const newStatus =
         document.getElementById("statusSelect").value;
 
 
+    /*
+       DELIVERY FEE CHECK
+
+       The order cannot go OUT_FOR_DELIVERY
+       until the delivery fee has been paid.
+    */
+
+    if (
+        newStatus === "OUT_FOR_DELIVERY" &&
+        !order.deliveryFeePaid
+    ) {
+
+        alert(
+            "Cannot dispatch this order. The delivery fee has not been paid."
+        );
+
+
+        document.getElementById("statusSelect").value =
+            order.status;
+
+
+        return;
+    }
+
+
+    /*
+       RIDER CHECK
+
+       The order cannot go OUT_FOR_DELIVERY
+       until a rider has been assigned.
+    */
+
+    if (
+        newStatus === "OUT_FOR_DELIVERY" &&
+        !order.rider
+    ) {
+
+        alert(
+            "Cannot dispatch this order. Please assign a rider first."
+        );
+
+
+        document.getElementById("statusSelect").value =
+            order.status;
+
+
+        return;
+    }
+
+
+    /*
+       If the order is being marked as DELIVERED,
+       make the assigned rider available again.
+    */
+
+    if (
+        newStatus === "DELIVERED" &&
+        order.rider
+    ) {
+
+        const riders =
+            JSON.parse(
+                localStorage.getItem("mbogafreshiRiders")
+            ) || [];
+
+
+        const riderIndex =
+            riders.findIndex(
+                rider =>
+                    rider.id === order.rider.id
+            );
+
+
+        if (riderIndex !== -1) {
+
+            riders[riderIndex].status =
+                "AVAILABLE";
+
+
+            localStorage.setItem(
+                "mbogafreshiRiders",
+                JSON.stringify(riders)
+            );
+        }
+    }
+
+
+    /*
+       Save the new order status.
+    */
+
     order.status = newStatus;
+
 
     saveOrder();
 
+
     renderOrderHeader();
+
 
     document.getElementById("statusMessage")
         .textContent =
         statusDescription(newStatus);
-
-
-    /*
-       If all items are sourced and admin manually
-       moves to READY_FOR_PICKUP, that's allowed.
-    */
 
 }
 
@@ -1194,6 +1276,7 @@ function changeStatus() {
 /* =====================================================
    PAYMENT DETAILS
 ===================================================== */
+
 
 function renderPaymentDetails() {
 
@@ -1226,13 +1309,57 @@ function renderPaymentDetails() {
                 Delivery payment
             </span>
 
-            <strong class="text-green-700">
+            <strong class="${
+                order.deliveryFeePaid
+                    ? "text-green-700"
+                    : "text-red-600"
+            }">
+
                 ${order.deliveryFeePaid
                     ? "PAID"
                     : "NOT PAID"}
+
             </strong>
 
         </div>
+
+
+        ${
+            !order.deliveryFeePaid
+                ? `
+                    <button
+                        onclick="markDeliveryFeePaid()"
+                        class="w-full mt-4
+                               bg-green-600
+                               hover:bg-green-700
+                               text-white
+                               font-semibold
+                               py-3
+                               rounded-xl">
+
+                        Mark Delivery Fee as Paid
+
+                    </button>
+                `
+                : `
+                    <div class="mt-4
+                                bg-green-50
+                                border
+                                border-green-200
+                                rounded-xl
+                                p-3">
+
+                        <p class="text-sm
+                                  text-green-700
+                                  font-medium">
+
+                            Delivery fee payment confirmed.
+
+                        </p>
+
+                    </div>
+                `
+        }
 
 
         <div class="border-t pt-3">
@@ -1288,18 +1415,55 @@ function renderPaymentDetails() {
 
 }
 
+    function markDeliveryFeePaid() {
 
-/* =====================================================
+    if (order.deliveryFeePaid) {
+        return;
+    }
+
+
+    const confirmed =
+        confirm(
+            "Confirm that the delivery fee has been paid?"
+        );
+
+
+    if (!confirmed) {
+        return;
+    }
+
+
+    order.deliveryFeePaid = true;
+
+
+    saveOrder();
+
+
+    renderPaymentDetails();
+
+
+    alert(
+        "Delivery fee marked as PAID."
+    );
+
+}
+
+
+
+
+    /* =====================================================
    RIDER ASSIGNMENT
 ===================================================== */
 
 function assignRider() {
 
-    const rider =
-        document.getElementById("riderSelect").value;
+    const riderId =
+        Number(
+            document.getElementById("riderSelect").value
+        );
 
 
-    if (!rider) {
+    if (!riderId) {
 
         alert("Please select a rider.");
 
@@ -1308,24 +1472,100 @@ function assignRider() {
     }
 
 
-    /*
-       Save rider information
-    */
+    /* ================================================
+       LOAD RIDERS
+    ================================================ */
+
+    const riders =
+        JSON.parse(
+            localStorage.getItem("mbogafreshiRiders")
+        ) || [];
+
+
+    /* ================================================
+       FIND SELECTED RIDER
+    ================================================ */
+
+    const rider =
+        riders.find(
+            rider => rider.id === riderId
+        );
+
+
+    if (!rider) {
+
+        alert("Rider could not be found.");
+
+        return;
+
+    }
+
+
+    /* ================================================
+       CHECK RIDER AVAILABILITY
+    ================================================ */
+
+    if (rider.status !== "AVAILABLE") {
+
+        alert(
+            `${rider.name} is not currently available.`
+        );
+
+        return;
+
+    }
+
+
+    /* ================================================
+       SAVE RIDER TO ORDER
+    ================================================ */
 
     order.rider = {
 
-        name: rider,
+        id: rider.id,
+
+        name: rider.name,
+
+        phone: rider.phone,
+
+        area: rider.area,
 
         assignedAt: new Date().toISOString()
 
     };
 
 
-    /*
-       If order is still being sourced,
-       assigning a rider doesn't automatically
-       mean the rider has picked it up.
-    */
+    /* ================================================
+       UPDATE RIDER STATUS
+    ================================================ */
+
+    const riderIndex =
+        riders.findIndex(
+            item => item.id === rider.id
+        );
+
+
+    if (riderIndex !== -1) {
+
+        riders[riderIndex].status = "BUSY";
+
+        riders[riderIndex].deliveriesToday =
+            Number(
+                riders[riderIndex].deliveriesToday || 0
+            ) + 1;
+
+    }
+
+
+    localStorage.setItem(
+        "mbogafreshiRiders",
+        JSON.stringify(riders)
+    );
+
+
+    /* ================================================
+       UPDATE ORDER STATUS
+    ================================================ */
 
     if (
         order.status === "CONFIRMED" ||
@@ -1337,12 +1577,23 @@ function assignRider() {
     }
 
 
+    /* ================================================
+       SAVE ORDER
+    ================================================ */
+
     saveOrder();
+
+
+    /* ================================================
+       REFRESH PAGE CONTENT
+    ================================================ */
 
     renderAll();
 
 
-    alert(`Rider ${rider} assigned successfully.`);
+    alert(
+        `Rider ${rider.name} assigned successfully.`
+    );
 
 }
 
@@ -1408,8 +1659,110 @@ function renderAssignedRider() {
        Set select to current rider
     */
 
-    document.getElementById("riderSelect").value =
-        order.rider.name;
+        document.getElementById("riderSelect").value =
+    String(order.rider.id);
+
+}
+
+    /* =====================================================
+   LOAD AVAILABLE RIDERS
+===================================================== */
+
+function loadRiders() {
+
+    const select =
+        document.getElementById("riderSelect");
+
+    const riders =
+        JSON.parse(
+            localStorage.getItem("mbogafreshiRiders")
+        ) || [];
+
+    select.innerHTML = `
+        <option value="">
+            Select rider
+        </option>
+    `;
+
+    if (riders.length === 0) {
+
+        select.innerHTML = `
+            <option value="">
+                No riders found
+            </option>
+        `;
+
+        return;
+    }
+
+    const availableRiders =
+        riders.filter(
+            rider => rider.status === "AVAILABLE"
+        );
+
+    availableRiders.forEach(rider => {
+
+        select.innerHTML += `
+            <option value="${rider.id}">
+                ${escapeHTML(rider.name)}
+                — ${escapeHTML(rider.area)}
+            </option>
+        `;
+
+    });
+
+    /*
+       If this order already has a rider,
+       show that rider even if they are BUSY.
+    */
+
+    if (order.rider) {
+
+        const assignedExists =
+            riders.some(
+                rider =>
+                    rider.id === order.rider.id
+            );
+
+        if (assignedExists) {
+
+            const alreadyInList =
+                availableRiders.some(
+                    rider =>
+                        rider.id === order.rider.id
+                );
+
+            if (!alreadyInList) {
+
+                select.innerHTML += `
+                    <option value="${order.rider.id}">
+                        ${escapeHTML(order.rider.name)}
+                        — ${escapeHTML(order.rider.area)}
+                        (Assigned)
+                    </option>
+                `;
+
+            }
+
+            select.value =
+                String(order.rider.id);
+
+        }
+
+    }
+
+    if (
+        availableRiders.length === 0 &&
+        !order.rider
+    ) {
+
+        select.innerHTML = `
+            <option value="">
+                No available riders
+            </option>
+        `;
+
+    }
 
 }
 
@@ -1561,6 +1914,8 @@ function renderAll() {
 
     renderPaymentDetails();
 
+    loadRiders();
+
     renderAssignedRider();
 
     renderOrderInformation();
@@ -1577,6 +1932,8 @@ function renderAll() {
         statusDescription(order.status);
 
 }
+
+
 
 
 /* =====================================================

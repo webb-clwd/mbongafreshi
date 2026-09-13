@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Riders | Mbogafreshi Admin</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+
+<body class="bg-gray-100 text-gray-800">
+
+
+<!-- =====================================================
+     HEADER
+====================================================== -->
+
+<header class="bg-white border-b sticky top-0 z-50">
+
+    <div class="max-w-7xl mx-auto px-5">
+
+        <div class="h-16 flex items-center justify-between">
+
+            <div>
+
+                <h1 class="font-bold text-xl text-green-700">
+                    Mbogafreshi
+                </h1>
+
+                <p class="text-xs text-gray-500">
+                    Admin Dashboard
+                </p>
+
+            </div>
+
+
+            <a href="dashboard.html"
+               class="text-sm text-green-600 font-semibold hover:text-green-700">
+
+                ← Dashboard
+
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     PAGE HEADER
+====================================================== -->
+
+<section class="bg-green-700 text-white">
+
+    <div class="max-w-7xl mx-auto px-5 py-8">
+
+        <p class="text-green-200 text-sm font-semibold uppercase">
+            Delivery Management
+        </p>
+
+        <h2 class="text-3xl font-bold mt-2">
+            Riders
+        </h2>
+
+        <p class="text-green-100 mt-2">
+            Manage your delivery riders and their availability.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     MAIN
+====================================================== -->
+
+<main class="max-w-7xl mx-auto px-5 py-8">
+
+
+    <!-- =================================================
+         STATS
+    ================================================== -->
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+
+
+        <div class="bg-white border rounded-2xl p-5">
+
+            <p class="text-sm text-gray-500">
+                Total Riders
+            </p>
+
+            <p id="total-riders"
+               class="text-3xl font-bold mt-2">
+
+                0
+
+            </p>
+
+        </div>
+
+
+        <div class="bg-white border rounded-2xl p-5">
+
+            <p class="text-sm text-gray-500">
+                Available
+            </p>
+
+            <p id="available-riders"
+               class="text-3xl font-bold text-green-600 mt-2">
+
+                0
+
+            </p>
+
+        </div>
+
+
+        <div class="bg-white border rounded-2xl p-5">
+
+            <p class="text-sm text-gray-500">
+                Busy
+            </p>
+
+            <p id="busy-riders"
+               class="text-3xl font-bold text-yellow-600 mt-2">
+
+                0
+
+            </p>
+
+        </div>
+
+
+        <div class="bg-white border rounded-2xl p-5">
+
+            <p class="text-sm text-gray-500">
+                Offline
+            </p>
+
+            <p id="offline-riders"
+               class="text-3xl font-bold text-gray-500 mt-2">
+
+                0
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         ADD RIDER
+    ================================================== -->
+
+    <section class="bg-white border rounded-2xl p-6 mb-8">
+
+        <div class="flex items-center justify-between mb-6">
+
+            <div>
+
+                <h2 class="text-xl font-bold">
+                    Add Rider
+                </h2>
+
+                <p class="text-sm text-gray-500 mt-1">
+                    Add a rider who can deliver Mbogafreshi orders.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form id="rider-form"
+              class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+
+
+            <!-- NAME -->
+
+            <div>
+
+                <label class="block text-sm font-semibold mb-2">
+                    Rider Name
+                </label>
+
+                <input
+                    type="text"
+                    id="rider-name"
+                    required
+                    placeholder="e.g. Ali"
+                    class="w-full border rounded-xl px-4 py-3
+                           focus:outline-none focus:ring-2
+                           focus:ring-green-500">
+
+            </div>
+
+
+
+            <!-- PHONE -->
+
+            <div>
+
+                <label class="block text-sm font-semibold mb-2">
+                    Phone Number
+                </label>
+
+                <input
+                    type="tel"
+                    id="rider-phone"
+                    required
+                    placeholder="e.g. 0712345678"
+                    class="w-full border rounded-xl px-4 py-3
+                           focus:outline-none focus:ring-2
+                           focus:ring-green-500">
+
+            </div>
+
+
+
+            <!-- AREA -->
+
+            <div>
+
+                <label class="block text-sm font-semibold mb-2">
+                    Service Area
+                </label>
+
+                <select
+                    id="rider-area"
+                    required
+                    class="w-full border rounded-xl px-4 py-3
+                           bg-white
+                           focus:outline-none focus:ring-2
+                           focus:ring-green-500">
+
+                    <option value="">
+                        Select area
+                    </option>
+
+                    <option value="Malindi">
+                        Malindi
+                    </option>
+
+                    <option value="Watamu">
+                        Watamu
+                    </option>
+
+                    <option value="Gede">
+                        Gede
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- STATUS -->
+
+            <div>
+
+                <label class="block text-sm font-semibold mb-2">
+                    Availability
+                </label>
+
+                <select
+                    id="rider-status"
+                    required
+                    class="w-full border rounded-xl px-4 py-3
+                           bg-white
+                           focus:outline-none focus:ring-2
+                           focus:ring-green-500">
+
+                    <option value="AVAILABLE">
+                        Available
+                    </option>
+
+                    <option value="BUSY">
+                        Busy
+                    </option>
+
+                    <option value="OFFLINE">
+                        Offline
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- BUTTON -->
+
+            <div class="md:col-span-2 lg:col-span-4">
+
+                <button
+                    type="submit"
+                    class="bg-green-600 hover:bg-green-700
+                           text-white font-bold
+                           px-6 py-3 rounded-xl">
+
+                    + Add Rider
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </section>
+
+
+
+    <!-- =================================================
+         RIDERS LIST
+    ================================================== -->
+
+    <section>
+
+        <div class="flex items-center justify-between mb-5">
+
+            <div>
+
+                <h2 class="text-xl font-bold">
+                    Rider List
+                </h2>
+
+                <p class="text-sm text-gray-500 mt-1">
+                    Manage your current delivery riders.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div id="riders-list"
+             class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+            <!-- Riders inserted here -->
+
+        </div>
+
+
+
+        <!-- EMPTY STATE -->
+
+        <div id="empty-riders"
+             class="hidden bg-white border rounded-2xl
+                    text-center py-16 px-5">
+
+            <div class="text-5xl">
+                🛵
+            </div>
+
+            <h3 class="text-xl font-bold mt-4">
+                No riders yet
+            </h3>
+
+            <p class="text-gray-500 mt-2">
+                Add your first delivery rider above.
+            </p>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<!-- =====================================================
+     EDIT RIDER MODAL
+====================================================== -->
+
+<div id="edit-modal"
+     class="hidden fixed inset-0 bg-black/50
+            z-50 flex items-center justify-center p-5">
+
+
+    <div class="bg-white rounded-2xl w-full max-w-lg p-6">
+
+
+        <div class="flex items-center justify-between mb-6">
+
+            <div>
+
+                <h2 class="text-xl font-bold">
+                    Edit Rider
+                </h2>
+
+                <p class="text-sm text-gray-500 mt-1">
+                    Update rider information.
+                </p>
+
+            </div>
+
+
+            <button
+                onclick="closeEditModal()"
+                class="text-gray-400 hover:text-gray-700 text-xl">
+
+                ✕
+
+            </button>
+
+        </div>
+
+
+
+        <form id="edit-rider-form"
+              class="space-y-4">
+
+
+            <input
+                type="hidden"
+                id="edit-rider-id">
+
+
+
+            <!-- NAME -->
+
+            <div>
+
+                <label class="block text-sm font-semibold mb-2">
+                    Rider Name
+                </label>
+
+                <input
+                    type="text"
+                    id="edit-rider-name"
+                    required
+                    class="w-full border rounded-xl px-4 py-3
+                           focus:outline-none focus:ring-2
+                           focus:ring-green-500">
+
+            </div>
+
+
+
+            <!-- PHONE -->
+
+            <div>
+
+                <label class="block text-sm font-semibold mb-2">
+                    Phone Number
+                </label>
+
+                <input
+                    type="tel"
+                    id="edit-rider-phone"
+                    required
+                    class="w-full border rounded-xl px-4 py-3
+                           focus:outline-none focus:ring-2
+                           focus:ring-green-500">
+
+            </div>
+
+
+
+            <!-- AREA -->
+
+            <div>
+
+                <label class="block text-sm font-semibold mb-2">
+                    Service Area
+                </label>
+
+                <select
+                    id="edit-rider-area"
+                    required
+                    class="w-full border rounded-xl px-4 py-3 bg-white">
+
+                    <option value="Malindi">
+                        Malindi
+                    </option>
+
+                    <option value="Watamu">
+                        Watamu
+                    </option>
+
+                    <option value="Gede">
+                        Gede
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- STATUS -->
+
+            <div>
+
+                <label class="block text-sm font-semibold mb-2">
+                    Availability
+                </label>
+
+                <select
+                    id="edit-rider-status"
+                    required
+                    class="w-full border rounded-xl px-4 py-3 bg-white">
+
+                    <option value="AVAILABLE">
+                        Available
+                    </option>
+
+                    <option value="BUSY">
+                        Busy
+                    </option>
+
+                    <option value="OFFLINE">
+                        Offline
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <div class="flex gap-3 pt-3">
+
+                <button
+                    type="button"
+                    onclick="closeEditModal()"
+                    class="flex-1 border
+                           rounded-xl py-3
+                           font-semibold">
+
+                    Cancel
+
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="flex-1 bg-green-600
+                           hover:bg-green-700
+                           text-white font-bold
+                           rounded-xl py-3">
+
+                    Save Changes
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script>
+
+
+/* =====================================================
+   LOAD RIDERS
+====================================================== */
+
+let riders =
+    JSON.parse(
+        localStorage.getItem("mbogafreshiRiders")
+    ) || [];
+
+
+
+/* =====================================================
+   SAVE RIDERS
+====================================================== */
+
+function saveRiders() {
+
+    localStorage.setItem(
+        "mbogafreshiRiders",
+        JSON.stringify(riders)
+    );
+
+}
+
+
+
+/* =====================================================
+   CREATE RIDER ID
+====================================================== */
+
+function createRiderId() {
+
+    return Date.now();
+
+}
+
+
+
+/* =====================================================
+   STATUS LABEL
+====================================================== */
+
+function getStatusLabel(status) {
+
+    if (status === "AVAILABLE") {
+        return "Available";
+    }
+
+    if (status === "BUSY") {
+        return "Busy";
+    }
+
+    return "Offline";
+
+}
+
+
+
+/* =====================================================
+   STATUS STYLE
+====================================================== */
+
+function getStatusStyle(status) {
+
+    if (status === "AVAILABLE") {
+
+        return "bg-green-100 text-green-700";
+
+    }
+
+    if (status === "BUSY") {
+
+        return "bg-yellow-100 text-yellow-700";
+
+    }
+
+    return "bg-gray-100 text-gray-600";
+
+}
+
+
+
+/* =====================================================
+   DISPLAY RIDERS
+====================================================== */
+
+function displayRiders() {
+
+    const ridersList =
+        document.getElementById("riders-list");
+
+    const emptyRiders =
+        document.getElementById("empty-riders");
+
+
+    ridersList.innerHTML = "";
+
+
+    /* ================================================
+       EMPTY
+    ================================================ */
+
+    if (riders.length === 0) {
+
+        ridersList.classList.add("hidden");
+
+        emptyRiders.classList.remove("hidden");
+
+        updateStats();
+
+        return;
+
+    }
+
+
+    /* ================================================
+       SHOW RIDERS
+    ================================================ */
+
+    ridersList.classList.remove("hidden");
+
+    emptyRiders.classList.add("hidden");
+
+
+    riders.forEach(rider => {
+
+        ridersList.innerHTML += `
+
+            <div class="bg-white border rounded-2xl p-5">
+
+                <div class="flex items-start
+                            justify-between gap-3">
+
+
+                    <div class="flex items-center gap-3">
+
+                        <div class="w-12 h-12
+                                    rounded-full
+                                    bg-green-100
+                                    flex items-center
+                                    justify-center
+                                    text-2xl">
+
+                            🛵
+
+                        </div>
+
+
+                        <div>
+
+                            <h3 class="font-bold">
+                                ${rider.name}
+                            </h3>
+
+                            <p class="text-sm text-gray-500">
+                                ${rider.phone}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <span class="text-xs font-semibold
+                                 px-3 py-1 rounded-full
+                                 ${getStatusStyle(rider.status)}">
+
+                        ${getStatusLabel(rider.status)}
+
+                    </span>
+
+                </div>
+
+
+
+                <div class="border-t my-5"></div>
+
+
+
+                <div class="space-y-3 text-sm">
+
+
+                    <div class="flex justify-between">
+
+                        <span class="text-gray-500">
+                            Service area
+                        </span>
+
+                        <span class="font-semibold">
+                            ${rider.area}
+                        </span>
+
+                    </div>
+
+
+                    <div class="flex justify-between">
+
+                        <span class="text-gray-500">
+                            Deliveries today
+                        </span>
+
+                        <span class="font-semibold">
+                            ${rider.deliveriesToday || 0}
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="flex gap-2 mt-5">
+
+
+                    <button
+                        onclick="openEditModal(${rider.id})"
+                        class="flex-1 border
+                               border-green-600
+                               text-green-600
+                               hover:bg-green-50
+                               rounded-xl py-2
+                               font-semibold">
+
+                        Edit
+
+                    </button>
+
+
+                    <button
+                        onclick="deleteRider(${rider.id})"
+                        class="flex-1 border
+                               border-red-200
+                               text-red-500
+                               hover:bg-red-50
+                               rounded-xl py-2
+                               font-semibold">
+
+                        Delete
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+
+    updateStats();
+
+}
+
+
+
+/* =====================================================
+   UPDATE STATS
+====================================================== */
+
+function updateStats() {
+
+    const total =
+        riders.length;
+
+
+    const available =
+        riders.filter(
+            rider => rider.status === "AVAILABLE"
+        ).length;
+
+
+    const busy =
+        riders.filter(
+            rider => rider.status === "BUSY"
+        ).length;
+
+
+    const offline =
+        riders.filter(
+            rider => rider.status === "OFFLINE"
+        ).length;
+
+
+    document.getElementById("total-riders")
+        .textContent = total;
+
+
+    document.getElementById("available-riders")
+        .textContent = available;
+
+
+    document.getElementById("busy-riders")
+        .textContent = busy;
+
+
+    document.getElementById("offline-riders")
+        .textContent = offline;
+
+}
+
+
+
+/* =====================================================
+   ADD RIDER
+====================================================== */
+
+document
+    .getElementById("rider-form")
+    .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+
+        const name =
+            document.getElementById("rider-name")
+                .value.trim();
+
+
+        const phone =
+            document.getElementById("rider-phone")
+                .value.trim();
+
+
+        const area =
+            document.getElementById("rider-area")
+                .value;
+
+
+        const status =
+            document.getElementById("rider-status")
+                .value;
+
+
+        const rider = {
+
+            id: createRiderId(),
+
+            name: name,
+
+            phone: phone,
+
+            area: area,
+
+            status: status,
+
+            deliveriesToday: 0
+
+        };
+
+
+        riders.push(rider);
+
+
+        saveRiders();
+
+        displayRiders();
+
+
+        this.reset();
+
+
+        document.getElementById("rider-status")
+            .value = "AVAILABLE";
+
+    });
+
+
+
+/* =====================================================
+   OPEN EDIT MODAL
+====================================================== */
+
+function openEditModal(id) {
+
+    const rider =
+        riders.find(
+            rider => rider.id === id
+        );
+
+
+    if (!rider) return;
+
+
+    document.getElementById("edit-rider-id")
+        .value = rider.id;
+
+
+    document.getElementById("edit-rider-name")
+        .value = rider.name;
+
+
+    document.getElementById("edit-rider-phone")
+        .value = rider.phone;
+
+
+    document.getElementById("edit-rider-area")
+        .value = rider.area;
+
+
+    document.getElementById("edit-rider-status")
+        .value = rider.status;
+
+
+    document.getElementById("edit-modal")
+        .classList.remove("hidden");
+
+}
+
+
+
+/* =====================================================
+   CLOSE EDIT MODAL
+====================================================== */
+
+function closeEditModal() {
+
+    document.getElementById("edit-modal")
+        .classList.add("hidden");
+
+}
+
+
+
+/* =====================================================
+   SAVE EDITED RIDER
+====================================================== */
+
+document
+    .getElementById("edit-rider-form")
+    .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+
+        const id =
+            Number(
+                document.getElementById("edit-rider-id")
+                    .value
+            );
+
+
+        const rider =
+            riders.find(
+                rider => rider.id === id
+            );
+
+
+        if (!rider) return;
+
+
+        rider.name =
+            document.getElementById("edit-rider-name")
+                .value.trim();
+
+
+        rider.phone =
+            document.getElementById("edit-rider-phone")
+                .value.trim();
+
+
+        rider.area =
+            document.getElementById("edit-rider-area")
+                .value;
+
+
+        rider.status =
+            document.getElementById("edit-rider-status")
+                .value;
+
+
+        saveRiders();
+
+        displayRiders();
+
+        closeEditModal();
+
+    });
+
+
+
+/* =====================================================
+   DELETE RIDER
+====================================================== */
+
+function deleteRider(id) {
+
+    const rider =
+        riders.find(
+            rider => rider.id === id
+        );
+
+
+    if (!rider) return;
+
+
+    const confirmed =
+        confirm(
+            `Delete ${rider.name} from your rider list?`
+        );
+
+
+    if (!confirmed) return;
+
+
+    riders =
+        riders.filter(
+            rider => rider.id !== id
+        );
+
+
+    saveRiders();
+
+    displayRiders();
+
+}
+
+
+
+/* =====================================================
+   INITIALIZE
+====================================================== */
+
+displayRiders();
+
+
+</script>
+
+
+</body>
+
+</html>
